@@ -1,0 +1,9 @@
+COLOR SCHEME
+[#F2F5F8]- BG gray
+[#E8E9E9]- Active gray
+[#E6E9EC]- Metrics gray
+[#A5A7A9]- Inactive title
+[#28A745]- Green
+[#F41B55]- Red
+[#FEE8EE]- BG red
+[#EAF7ED]- BG green
