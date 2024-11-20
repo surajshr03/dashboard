@@ -1,7 +1,8 @@
 import { AlertCircle, ArrowDown, ArrowUp, DollarSign, ShoppingCart } from 'lucide-react'
 
 const Metrics = () => {
-    return (<div className='flex gap-12'>
+    return (
+    <div className='flex gap-12 my-8'>
         <div className="flex justify-between bg-white rounded-sm min-w-96 p-6 shadow-md ">
             <div className="flex flex-col text-left ">
                 <span className='text-inactive-title text-sm'> Total Bookings</span>
@@ -25,7 +26,7 @@ const Metrics = () => {
         {/* /////////////////////////////////////////////////////// */}
         <div className="flex justify-between bg-white rounded-sm min-w-96 p-6 shadow-md ">
             <div className="flex flex-col text-left ">
-                <span className='text-inactive-title text-sm'> Total Bookings</span>
+                <span className='text-inactive-title text-sm'> Total Revenue</span>
                 <div className="flex gap-3 mt-4">
                     <p className='text-black text-3xl font-semibold'>$12345</p>
                     <div className="flex bg-bg-red justify-center items-center p-2 rounded-full">
@@ -47,7 +48,7 @@ const Metrics = () => {
 
         <div className="flex justify-between bg-white rounded-sm min-w-96 p-6 shadow-md ">
             <div className="flex flex-col text-left ">
-                <span className='text-inactive-title text-sm'> Total Bookings</span>
+                <span className='text-inactive-title text-sm'> Pending</span>
                 <div className="flex gap-3 mt-4">
                     <p className='text-black text-3xl font-semibold'>$12345</p>
                     <div className="flex bg-bg-green justify-center items-center p-2 rounded-full">

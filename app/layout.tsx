@@ -1,21 +1,16 @@
 import NavBar from "@/components/dashboard/NavBar";
 import SideBar from "@/components/dashboard/SideBar";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Inter } from 'next/font/google';
 import "./globals.css";
 
 
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const inter = Inter({
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,14 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={inter.className}
       >
 
-         <div className="flex">
-          <SideBar/>
-          <div className="flex-1 min-h-screen bg-gray-100">
-             <NavBar/>
-            <div className="p-6">{children}</div>
+        <div className="flex  ">
+          <SideBar />
+          <div className="flex-1 min-h-screen   bg-gray-100">
+            <NavBar />
+            <div className="p-6 flex-1 overflow-x-hidden overflow-y-auto">{children}</div>
           </div>
         </div>
       </body>

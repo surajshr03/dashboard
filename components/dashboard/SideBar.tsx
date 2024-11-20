@@ -18,7 +18,7 @@ const SideBar = () => {
   return (
 
     <div className=" text-black h-screen w-64 p-5 border-r-2 border-gray ">
-      <div className="text-2xl font-bold mb-8">KitabYatra</div>
+      <Link href='/'><div className="text-2xl font-bold mb-8">KitabYatra</div></Link>
       <nav>
         <ul>
           <li className="mb-4">
