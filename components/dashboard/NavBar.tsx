@@ -3,7 +3,7 @@ import { Bell, Moon, User } from 'lucide-react'
 const NavBar = () => {
     return (
         <header className="flex  items-center justify-between px-6 py-4 bg-white border-b">
-            <div className="flex w-full gap-7 items-center justify-center">
+            <div className="flex w-full gap-7 items-center justify-left">
                 {/* Hamburger */}
                 <button data-collapse-toggle="navbar-hamburger" type="button" className="inline-flex items-center justify-center p-2 w-8 h-8 text-sm text-nav-icon rounded-lg hover:bg-gray-100 dark:text-nav-icon dark:hover:bg-gray-200 dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
                     <span className="sr-only">Open main menu</span>
@@ -13,7 +13,7 @@ const NavBar = () => {
                 </button>
                 {/* Search */}
 
-                <form className="max-w-md mx-auto">
+                <form className="max-w-md ">
                     <label for="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div className="relative hidden md:block ">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
