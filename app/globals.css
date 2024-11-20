@@ -5,6 +5,17 @@
 :root {
   --background: #ffffff;
   --foreground: #f2f5f8;
+  --background: var(--BgGray);
+  --foreground: #ededed;
+  --BgGray: #f2f5f8;
+  --ActiveGray: #e8e9e9;
+  --MetricsGray: #e6e9ec;
+  --InactiveTitle: #a5a7a9;
+  --MetricsGreen: #28a745;
+  --MetricsRed: #f41b55;
+  --BgRed: #fee8ee;
+  --BgGreen: #eaf7ed;
+  --NavIcon: #22262b;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,7 +31,6 @@
     --BgRed: #fee8ee;
     --BgGreen: #eaf7ed;
     --NavIcon: #22262b;
-    
   }
 }
 
