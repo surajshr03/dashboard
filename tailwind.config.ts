@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import Metrics from "./components/dashboard/Metrics";
 
 export default {
   content: [
@@ -11,6 +12,16 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "bg-gray": "var(--BgGray)",
+        "active-gray": "var(--ActiveGray)",
+        "metrics-gray": "var(--MetricsGray)",
+        "inactive-title": "var(--InactiveTitle)",
+        metricsGreen: "var(--MetricsGreen)",
+        metricesRed: "var(--MetricsRed)",
+        "bg-red": "var(--BgRed)",
+        "bg-green": "var(--BgGreen)",
+        "nav-icon": "var(--NavIcon)",
+        "metrics-icon":"var(--MetricsIcon)",
       },
     },
   },
