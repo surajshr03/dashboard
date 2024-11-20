@@ -5,6 +5,7 @@ import Sidebar from "@/components/dashboard/SideBar";
 import Navbar from "@/components/dashboard/NavBar";
 
 
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+
          <div className="flex">
           <Sidebar/>
           <div className="flex-1 min-h-screen bg-gray-100">
