@@ -17,7 +17,8 @@ const SideBar = () => {
 
   return (
     <div className="hidden lg:block text-black h-screen w-64 p-5 border-r-2 border-gray fixed top-0 left-0 bg-white shadow-md">
-      <div className="text-2xl font-bold mb-8">KitabYatra</div>
+
+      <Link href='/'><div className="text-2xl font-bold mb-8">KitabYatra</div></Link>
       <nav>
         <ul>
           <li className="mb-4">
