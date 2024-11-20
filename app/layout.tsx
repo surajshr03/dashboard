@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Sidebar from "../components/dashboard/Sidebar";
-
 import Navbar from "../components/dashboard/Navbar";
 
 
@@ -33,6 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+
          <div className="flex">
           <Sidebar/>
           <div className="flex-1 min-h-screen bg-gray-100">
