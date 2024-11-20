@@ -37,7 +37,12 @@ const Sidebar = () => {
                 className="flex items-center justify-between w-full p-2 rounded hover:bg-slate-700 hover:text-blue-400 text-sm cursor-pointer"
               >
                 <span>Booking Details</span>
-                <ChevronDown className="ml-2" size={18} />
+                <ChevronDown 
+                  className={`transition-transform duration-300 ${
+                    isDropDownOpen ? "rotate-180" : "rotate-0"
+                  }`}
+                  size={18}
+                />
               </div>
               {/* Dropdown items */}
               {isDropDownOpen && (
@@ -75,7 +80,12 @@ const Sidebar = () => {
                 className="flex items-center justify-between w-full p-2 rounded hover:bg-slate-700 hover:text-blue-400 text-sm cursor-pointer"
               >
                 <span>Booking Details</span>
-                <ChevronDown className="ml-2" size={18} />
+                <ChevronDown 
+                  className={`transition-transform duration-300 ${
+                    isDropDownOpen_2 ? "rotate-180" : "rotate-0"
+                  }`}
+                  size={18}
+                />
               </div>
               {/* Dropdown items */}
               {isDropDownOpen_2 && (
