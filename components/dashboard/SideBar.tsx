@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-const Sidebar = () => {
+const SideBar = () => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   const toggleDropDown = () => {
@@ -121,4 +121,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default SideBar;
