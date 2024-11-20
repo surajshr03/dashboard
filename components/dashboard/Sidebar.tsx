@@ -16,14 +16,15 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="bg-gray-800 text-white h-screen w-64 p-5">
+
+    <div className=" text-black h-screen w-64 p-5 border-r-2 border-gray ">
       <div className="text-2xl font-bold mb-8">KitabYatra</div>
       <nav>
         <ul>
           <li className="mb-4">
             <Link
               href="/"
-              className="block w-full p-2 rounded bg-slate-700 hover:text-blue-400"
+              className="block w-full p-2 rounded bg-neutral-100"
             >
               Dashboard
             </Link>
@@ -34,9 +35,11 @@ const Sidebar = () => {
             <li className="">
             <div
                 onClick={toggleDropDown}
-                className="flex items-center justify-between w-full p-2 rounded hover:bg-slate-700 hover:text-blue-400 text-sm cursor-pointer"
+
+                className="flex items-center justify-between w-full p-2 rounded hover:bg-neutral-100 text-sm cursor-pointer"
               >
                 <span>Booking Details</span>
+
                 <ChevronDown 
                   className={`transition-transform duration-300 ${
                     isDropDownOpen ? "rotate-180" : "rotate-0"
@@ -48,12 +51,14 @@ const Sidebar = () => {
               {isDropDownOpen && (
                 <ul className="ml-4 mt-2 space-y-2">
                   <li>
-                  <Link href="/kitabyatra/booking" className="block w-full p-2 rounded hover:bg-slate-600 hover:text-blue-300 text-sm">
+                  <Link href="/kitabyatra/booking" className="block w-full p-2 rounded hover:bg-neutral-100  text-sm">
                   Booking
                   </Link>
                   </li>
                   <li>
-                  <Link href="/kitabyatra/booking" className="block w-full p-2 rounded hover:bg-slate-600 hover:text-blue-300 text-sm">
+
+                  <Link href="/kitabyatra/booking" className="block w-full p-2 rounded hover:bg-neutral-100  text-sm">
+
                   Booking
                   </Link>
                   </li>
@@ -65,7 +70,9 @@ const Sidebar = () => {
             <li className="">
               <Link
                 href="/kitabyatra"
-                className="block w-full p-2 rounded hover:bg-slate-700 hover:text-blue-400 text-sm"
+
+                className="block w-full p-2 rounded hover:bg-neutral-100 text-sm"
+
               >
                 Title_2
               </Link>
@@ -77,7 +84,9 @@ const Sidebar = () => {
             <li className="">
             <div
                 onClick={toggleDropDown_2}
-                className="flex items-center justify-between w-full p-2 rounded hover:bg-slate-700 hover:text-blue-400 text-sm cursor-pointer"
+
+                className="flex items-center justify-between w-full p-2 rounded hover:bg-neutral-100 text-sm cursor-pointer"
+
               >
                 <span>Booking Details</span>
                 <ChevronDown 
@@ -91,12 +100,16 @@ const Sidebar = () => {
               {isDropDownOpen_2 && (
                 <ul className="ml-4 mt-2 space-y-2">
                   <li>
-                  <Link href="/kitabyatra/booking" className="block w-full p-2 rounded hover:bg-slate-600 hover:text-blue-300 text-sm">
+
+                  <Link href="/kitabyatra/booking" className="block w-full p-2 rounded hover:bg-neutral-100  text-sm">
+
                   Booking
                   </Link>
                   </li>
                   <li>
-                  <Link href="/kitabyatra/booking" className="block w-full p-2 rounded hover:bg-slate-600 hover:text-blue-300 text-sm">
+
+                  <Link href="/kitabyatra/booking" className="block w-full p-2 rounded hover:bg-neutral-100  text-sm">
+
                   Booking
                   </Link>
                   </li>
@@ -108,7 +121,9 @@ const Sidebar = () => {
             <li className="">
               <Link
                 href="/kitabyatra"
-                className="block w-full p-2 rounded hover:bg-slate-700 hover:text-blue-400 text-sm"
+
+                className="block w-full p-2 rounded hover:bg-neutral-100 text-sm"
+
               >
                 Title_2
               </Link>
