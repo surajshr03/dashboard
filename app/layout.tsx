@@ -1,8 +1,8 @@
+import NavBar from "@/components/dashboard/NavBar";
+import SideBar from "@/components/dashboard/SideBar";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Sidebar from "@/components/dashboard/SideBar";
-import Navbar from "@/components/dashboard/NavBar";
 
 
 
@@ -34,9 +34,9 @@ export default function RootLayout({
       >
 
          <div className="flex">
-          <Sidebar/>
+          <SideBar/>
           <div className="flex-1 min-h-screen bg-gray-100">
-             <Navbar/>
+             <NavBar/>
             <div className="p-6">{children}</div>
           </div>
         </div>
