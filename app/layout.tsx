@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Sidebar from "../components/dashboard/Sidebar";
+import Navbar from "../components/dashboard/Navbar";
 
 
 const geistSans = localFont({
@@ -33,6 +34,7 @@ export default function RootLayout({
          <div className="flex">
           <Sidebar/>
           <div className="flex-1 min-h-screen bg-gray-100">
+             <Navbar/>
             <div className="p-6">{children}</div>
           </div>
         </div>
