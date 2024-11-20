@@ -2,10 +2,10 @@ import { Bell, Moon, User } from 'lucide-react'
 
 const NavBar = () => {
     return (
-        <header className="flex items-center justify-between px-6 py-4 bg-white border-b">
-            <div className="flex gap-7 items-center justify-center">
+        <header className="flex  items-center justify-between px-6 py-4 bg-white border-b">
+            <div className="flex w-full gap-7 items-center justify-center">
                 {/* Hamburger */}
-                <button data-collapse-toggle="navbar-hamburger" type="button" className="inline-flex items-center justify-center p-2 w-8 h-8 text-sm text-nav-icon rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-nav-icon dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
+                <button data-collapse-toggle="navbar-hamburger" type="button" className="inline-flex items-center justify-center p-2 w-8 h-8 text-sm text-nav-icon rounded-lg hover:bg-gray-100 dark:text-nav-icon dark:hover:bg-gray-200 dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
                     <span className="sr-only">Open main menu</span>
                     <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
