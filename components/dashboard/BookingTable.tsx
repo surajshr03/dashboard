@@ -3,7 +3,7 @@ import { ContactRound, Trash2, UserRoundPen } from "lucide-react";
 import { useState } from "react";
 // import { Button } from "lucid-react"; // Import Button component from lucid-react
 
-const ManageBookings = () => {
+const BookingTable = () => {
   // Mock data for bookings
   const [bookings, setBookings] = useState([
     {
@@ -103,4 +103,4 @@ const ManageBookings = () => {
   );
 };
 
-export default ManageBookings;
+export default BookingTable;

@@ -7,7 +7,7 @@ const Dashboard = () => {
       <p className='text-3xl font-semibold text-black'>Dashboard Overview</p>
       <div className="">
         <Metrics />      
-        <RecentActivities/>  </div>
+        <RecentActivities/> jhjkhjkh </div>
     </div>
   )
 }

@@ -1,17 +1,15 @@
 import NavBar from "@/components/dashboard/NavBar";
 import SideBar from "@/components/dashboard/SideBar";
 import type { Metadata } from "next";
-import { Inter } from 'next/font/google';
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-
 const inter = Inter({
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  display: 'swap',
-})
-
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,16 +23,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={inter.className}
-      >
-
-        <div className="flex  ">
+      <body className={inter.className}>
+        <div className="flex">
+          {/* Sidebar */}
           <SideBar />
-          <div className="flex-1 min-h-screen   bg-gray-100">
-            <NavBar />
-            <div className="p-6 flex-1 overflow-x-hidden overflow-y-auto">{children}</div>
 
+          {/* Main Content Area */}
+          <div className="flex-1 min-h-screen ml-64 overflow-hidden bg-gray-100">
+            {/* NavBar */}
+            <NavBar />
+
+            {/* Scrollable Page Content */}
+            <div className="p-6 flex-1 overflow-y-auto overflow-x-hidden">
+              {children}
+            </div>
           </div>
         </div>
       </body>
