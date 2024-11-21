@@ -3,21 +3,25 @@ import Link from "next/link";
 import { useState } from "react";
 import { Bell, BookOpen, ChevronDown, FileChartColumn, LayoutDashboard, Settings, ShoppingCart, Users } from "lucide-react";
 
-const SideBar = () => {
+type SideBarProps = {
+  isVisible: boolean;
+};
+
+const SideBar = ({ isVisible }: SideBarProps) => {
   const [isBookingsOpen, setIsBookingsOpen] = useState(false);
+  const [isUserManagementOpen, setIsUserManagementOpen] = useState(false);
 
   const toggleBookings = () => {
     setIsBookingsOpen(!isBookingsOpen);
   };
-
-  const [isUserManagementOpen, setIsUserManagementOpen] = useState(false);
 
   const toggleUserManagement = () => {
     setIsUserManagementOpen(!isUserManagementOpen);
   };
 
   return (
-    <div className="hidden lg:block text-black h-screen w-64 p-5 border-r-2 border-gray fixed top-0 left-0 bg-white shadow-md">
+    <div className={`fixed top-0 left-0 h-screen w-64  p-5 border-r-2 border-gray  bg-white text-black transform ${isVisible ? "translate-x-0" : "-translate-x-full"
+      } transition-transform duration-300`}  >
       {/* Sidebar Header */}
       <Link href="/">
         <div className="text-2xl font-bold mb-8">KitabYatra</div>

@@ -3,7 +3,11 @@ import { Bell, LogOutIcon, Moon, User } from 'lucide-react'
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
-const NavBar = () => {
+type NavBarProps = {
+    onHamburgerClick: () => void;
+    isSidebarVisible: boolean;
+};
+const NavBar = ({ onHamburgerClick, isSidebarVisible }: NavBarProps) => {
     const [isUserToggled, setIsUserToggled] = useState(false);
     const [isNotificationsToggled, setIsNotificationsToggled] = useState(false);
     const userMenuRef = useRef<HTMLDivElement>(null);
@@ -36,10 +40,11 @@ const NavBar = () => {
     }, []);
 
     return (
-        <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-white border-b">
+        <header className={`sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-white border-b ${isSidebarVisible ? "ml-0" : "ml-0"
+            } transition-all duration-300`}>
             <div className="flex w-full gap-7 items-center justify-left">
                 {/* Hamburger */}
-                <button data-collapse-toggle="navbar-hamburger" type="button" className="inline-flex items-center justify-center p-2 w-8 h-8 text-sm text-nav-icon rounded-lg hover:bg-gray-100 dark:text-nav-icon dark:hover:bg-active-gray dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
+                <button onClick={onHamburgerClick} data-collapse-toggle="navbar-hamburger" type="button" className="inline-flex items-center justify-center p-2 w-8 h-8 text-sm text-nav-icon rounded-lg hover:bg-gray-100 dark:text-nav-icon dark:hover:bg-active-gray dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
                     <span className="sr-only">Open main menu</span>
                     <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />

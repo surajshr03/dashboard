@@ -5,9 +5,8 @@ const Dashboard = () => {
   return (
     <div className='py-2 space-y-6'>
       <p className='text-3xl font-semibold text-black'>Dashboard Overview</p>
-      <div className="">
-        <Metrics />      
-        <RecentActivities/> jhjkhjkh </div>
+      <Metrics />
+      <RecentActivities />
     </div>
   )
 }
