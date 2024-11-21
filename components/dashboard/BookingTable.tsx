@@ -1,7 +1,7 @@
 "use client";
-import { ContactRound, Trash2, UserRoundPen } from "lucide-react";
+import { Eye, Trash2, UserRoundPen } from "lucide-react";
 import { useState } from "react";
-// import { Button } from "lucid-react"; // Import Button component from lucid-react
+import "@/components/dashboard/CSS/dashboard.css";
 
 const BookingTable = () => {
   // Mock data for bookings
@@ -29,17 +29,17 @@ const BookingTable = () => {
     },
   ]);
 
-
   return (
     <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black">
+      <h5 className="mb-4 text-4xl font-bold">Manage Bookings</h5>
       {/* Search and Add New Booking Button */}
       <div className="flex justify-between mb-4">
         <input
           type="text"
           placeholder="Search bookings..."
-          className="p-2 border rounded-md w-1/2"
+          className="p-2 border rounded-md w-1/2 bg-gray-100"
         />
-        {/* <Button className="bg-blue-500 text-white">Add New Booking</Button> */}
+        <button className="px-4 bg-black text-white">Add New Booking</button>
       </div>
 
       {/* Table */}
@@ -60,33 +60,55 @@ const BookingTable = () => {
                 <td className="border p-2">{booking.customer}</td>
                 <td className="border p-2">{booking.book}</td>
                 <td className="border p-2">{booking.date}</td>
-                <td className="border p-2">{booking.status}</td>
-                <td className="border p-2 flex space-x-2 justify-between">
-                  {/* <Button onClick={() => handleEdit(booking.id)} className="bg-yellow-500 text-white">
-                    Edit
-                  </Button>
-                  <Button
-                    onClick={() => handleConfirm(booking.id)}
-                    className="bg-green-500 text-white"
+                <td className="border p-2">
+                  <span
+                    className={`px-2 rounded-lg text-white ${
+                      booking.status.toLowerCase() === "confirmed"
+                        ? "bg-btn-confirmed bg-opacity-80"
+                        : booking.status.toLowerCase() === "pending"
+                        ? "bg-btn-pending bg-opacity-80"
+                        : "bg-btn-canceled bg-opacity-80"
+                    }`}
                   >
-                    Confirm
-                  </Button>
-                  <Button
-                    onClick={() => handleCancel(booking.id)}
-                    className="bg-red-500 text-white"
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={() => handleDelete(booking.id)}
-                    className="bg-red-500 text-white"
-                  >
-                    Delete
-                  </Button> */}
-                  <button className="hover:cursor-pointer"><ContactRound/>Detail</button>
-                  <button className="hover:cursor-pointer"><UserRoundPen/> Edit</button>
-                  <button className="hover:cursor-pointer"><Trash2/>Delete</button>
+                    {booking.status}
+                  </span>
+                </td>
 
+                <td className="border p-2 flex space-x-2 justify-between">
+                  <button
+                    className="hover:cursor-pointer text-gray-500 group flex items-center space-x-1"
+                    title="Detail"
+                  >
+                    <span className="group-hover:text-gray-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
+                      <Eye />
+                    </span>
+                    <span className="group-hover:text-gray-700 transition-colors duration-200 ease-in-out">
+                      Detail
+                    </span>
+                  </button>
+                  <button
+                    className="hover:cursor-pointer text-green-500 group flex items-center space-x-1"
+                    title="Edit"
+                  >
+                    <span className="group-hover:text-green-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
+                      <UserRoundPen />
+                    </span>
+                    <span className="group-hover:text-green-700 transition-colors duration-200 ease-in-out">
+                      Edit
+                    </span>
+                  </button>
+
+                  <button
+                    className="hover:cursor-pointer text-red-500 group flex items-center space-x-1"
+                    title="Delete"
+                  >
+                    <span className="group-hover:text-red-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
+                      <Trash2 />
+                    </span>
+                    <span className="group-hover:text-red-700 transition-colors duration-200 ease-in-out">
+                      Delete
+                    </span>
+                  </button>
                 </td>
               </tr>
             ))
