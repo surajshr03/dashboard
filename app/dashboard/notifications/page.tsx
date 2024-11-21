@@ -1,10 +1,10 @@
-import UserTable from '@/components/dashboard/UserTable'
+import Notification from '@/components/dashboard/Notification'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-      <UserTable/>
+        <Notification/>
     </div>
   )
 }
