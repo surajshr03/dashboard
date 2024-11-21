@@ -83,7 +83,7 @@ const SideBar = () => {
           </li>
           <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
           <ShoppingCart className="mr-2" />
-            <Link href="/dashboard/trasactions" className="block w-full">
+            <Link href="/dashboard/transactions" className="block w-full">
               Transactions
             </Link>
           </li>
@@ -131,7 +131,7 @@ const SideBar = () => {
           {/* Remaining Menu Items */}
           <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
           <FileChartColumn className="mr-2"/> 
-            <Link href="//dashboard/reports" className="block w-full">
+            <Link href="/dashboard/reports" className="block w-full">
               <span>Reports</span>
             </Link>
           </li>
