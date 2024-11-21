@@ -4,6 +4,6 @@ COLOR SCHEME
 [#E6E9EC]- Metrics gray
 [#A5A7A9]- Inactive title
 [#28A745]- Green
+[#EAF7ED]- BG green
 [#F41B55]- Red
 [#FEE8EE]- BG red
-[#EAF7ED]- BG green
