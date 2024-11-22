@@ -31,9 +31,9 @@ const BookingTable = () => {
 
   return (
     <>
-   <h5 className="mb-1 text-4xl font-bold">Manage Bookings</h5>
-   <h6 className="mb-6 text-xm text-inactive-title">
-        Manage system users and their roles
+   <h5 className="title">Manage Bookings</h5>
+   <h6 className="sub-title text-inactive-title">
+        Manage amd view bookings
       </h6>
     <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black">
       
@@ -44,7 +44,7 @@ const BookingTable = () => {
           placeholder="Search bookings..."
           className="p-2 border rounded-md w-1/2 bg-gray-100"
         />
-        <button className="px-4 bg-black text-white">Add New Booking</button>
+        <button className="py-2 px-4 bg-black text-white rounded-lg">Add New Booking</button>
       </div>
 
       {/* Table */}

@@ -2,6 +2,7 @@ import BookingTable from "@/components/dashboard/BookingTable";
 import Metrics from "@/components/dashboard/Metrics";
 import RecentActivities from "@/components/dashboard/RecentActivities";
 import Link from "next/link";
+import CustomChart from '@/components/dashboard/GraphData/CustomChart'
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <Metrics />
       <RecentActivities />
       <BookingTable/>
+      <CustomChart/>
     </>
   );
 }

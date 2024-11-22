@@ -1,3 +1,4 @@
+import CustomChart from '@/components/dashboard/GraphData/CustomChart'
 import Metrics from '@/components/dashboard/Metrics'
 import RecentActivities from '@/components/dashboard/RecentActivities'
 import Link from 'next/link'
@@ -23,6 +24,7 @@ const Dashboard = () => {
       <Metrics />
       <RecentActivities />
       <RecentActivities />
+      <CustomChart/>
     </>
   )
 }
