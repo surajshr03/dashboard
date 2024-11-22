@@ -31,8 +31,8 @@ const UserTable = () => {
 
   return (
     <>
-    <h5 className="mb-1 text-4xl font-bold ">Manage Users</h5>
-      <h6 className="mb-6 text-xm text-inactive-title">
+    <h5 className="title ">Manage Users</h5>
+      <h6 className="sub-title text-inactive-title">
         Manage system users and their roles
       </h6>
     <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black">

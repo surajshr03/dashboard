@@ -1,5 +1,6 @@
 "use client";
 import { User } from "lucide-react";
+import "@/components/dashboard/CSS/dashboard.css";
 
 const Reports = () => {
   const reports = [
@@ -25,7 +26,7 @@ const Reports = () => {
 
   return (
     <>
-     <h6 className="mb-6 text-4xl font-bold">
+     <h6 className="title">
         Reports
       </h6>
 
