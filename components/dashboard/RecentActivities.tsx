@@ -33,7 +33,7 @@ const RecentActivities = () => {
             <div className="flex flex-col py-4 gap-4">
                 {activities.map((activity) => {
                     return (<>
-                        <div className="flex justify-between items-center ">
+                        <div className="flex justify-between items-center " key={activity.id}>
                             <p className='text-gray-700'>{activity.description}</p>
                             <p className="text-inactive-title text-sm">{activity.time}</p>
                         </div>
