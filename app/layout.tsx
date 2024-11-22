@@ -22,21 +22,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <body className={'overflow-hidden inter.className'}>
-        <div className="relative w-full h-screen  ">
+      <body className={`${inter.className}`}>
+        <div className="flex w-full h-screen overflow-auto ">
           {/* Sidebar */}
           <SideBar isVisible={isSidebarVisible} />
 
           {/* Main Content Area */}
           <div
-            className={`flex-1 transition-all duration-300 ${isSidebarVisible ? "ml-64" : "ml-0"
+            className={`flex-1 overflow-x-hidden transition-all duration-300 ${isSidebarVisible ? "ml-64" : "ml-0"
               }`}
           >
             {/* Navbar */}
             <NavBar onHamburgerClick={toggleSidebar} isSidebarVisible={isSidebarVisible} />
 
             {/* Page Content */}
-            <div className="p-6">{children}</div>
+            <div className="flex-1 w-screen md:w-full overflow-hidden p-8 ">
+              {children}
+            </div>
           </div>
         </div>
       </body>
