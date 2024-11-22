@@ -68,7 +68,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
                 </li>
                 <li>
                   <Link
-                    href="/dashboard/booking"
+                    href="/dashboard/bookings"
                     className="block p-2 rounded hover:bg-active-gray text-sm"
                   >
                     Booking
