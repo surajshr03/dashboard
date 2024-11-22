@@ -25,7 +25,8 @@ const activities = [
 
 const RecentActivities = () => {
     return (
-        <div className="w-full bg-bg-gray py-6 px-6 mb-4 rounded-xl shadow-lg border-2 border-active-gray">
+        
+        <div className="w-full bg-white py-6 px-6 mb-4 rounded-xl shadow-lg border-2 border-active-gray">
             <p className='text-2xl text-black font-semibold'>Recent Activities</p>
             <p className='my-2 text-sm text-inactive-title font-medium'>You have {activities.length} new activities</p>
 

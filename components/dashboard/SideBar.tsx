@@ -20,7 +20,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
   };
 
   return (
-    <div className={`fixed top-0 left-0 h-screen w-64  p-5 border-r-2 border-gray  bg-white text-black transform ${isVisible ? "translate-x-0" : "-translate-x-full"
+    <div className={`fixed top-0 left-0 h-full w-64  p-5 border-r-2 border-gray  bg-white text-black transform ${isVisible ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300`}  >
       {/* Sidebar Header */}
       <Link href="/">
