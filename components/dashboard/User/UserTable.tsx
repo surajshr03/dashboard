@@ -4,7 +4,7 @@ import { useState } from "react";
 import "@/components/dashboard/CSS/dashboard.css";
 
 const UserTable = () => {
-  // Mock data for bookings
+  // Mock data for users
   const [users, setUsers] = useState([
     {
       id: 1,
@@ -30,122 +30,106 @@ const UserTable = () => {
   ]);
 
   return (
-    
-    <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black">
-    <h5 className="title ">Manage Users</h5>
+    <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black mb-4">
+      <h5 className="title ">Manage Users</h5>
       <h6 className="sub-title text-inactive-title">
         Manage system users and their roles
       </h6>
-      {/* Search and Add New Booking Button */}
-      <div className="flex justify-between mb-4">
-        <input
-          type="text"
-          placeholder="Search bookings..."
-          className="p-2 border rounded-md w-1/2 bg-gray-100"
-        />
-        <button className="px-4 bg-black text-white">Add New User</button>
+      {/* Search and Add New User Button */}
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 mb-4">
+        <div className="lg:col-span-3">
+          <input
+            type="text"
+            placeholder="Search Users..."
+            className="p-2 border rounded-md w-full bg-gray-100"
+          />
+        </div>
+        <div className="lg:col-span-3 flex justify-end">
+          <button className="add-btn">Add New User</button>
+        </div>
       </div>
 
       {/* Table */}
-      <table className="table-auto w-full border-collapse p-4">
-        <thead className="bg-gray-100 text-left">
-          <tr>
-            <th className="border p-2">User ID</th>
-            <th className="border p-2">Name</th>
-            <th className="border p-2">E-mail</th>
-            <th className="border p-2">Role</th>
-            <th className="border p-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.length > 0 ? (
-            users.map((user) => (
-              <tr key={user.id}>
-                <td className="border p-2">{user.id}</td>
-                <td className="border p-2">{user.name}</td>
-                <td className="border p-2">{user.email}</td>
-                <td className="border p-2">
-                  <span
-                    className={`px-2 rounded-lg text-white ${
-                      user.role.toLowerCase() === "superadmin"
-                        ? "bg-btn-confirmed bg-opacity-80"
-                        : user.role.toLowerCase() === "admin"
-                        ? "bg-btn-pending bg-opacity-80"
-                        : "bg-btn-canceled bg-opacity-80"
-                    }`}
-                  >
-                    {user.role}
-                  </span>
-                </td>
-
-                <td className="border p-2 flex space-x-2 justify-between">
-                  <button
-                    className="hover:cursor-pointer text-gray-500 group flex items-center space-x-1"
-                    title="Detail"
-                  >
-                    <span className="group-hover:text-gray-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
-                      <Eye />
-                    </span>
-                    <span className="group-hover:text-gray-700 transition-colors duration-200 ease-in-out">
-                      Detail
-                    </span>
-                  </button>
-                  <button
-                    className="hover:cursor-pointer text-green-500 group flex items-center space-x-1"
-                    title="Edit"
-                  >
-                    <span className="group-hover:text-green-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
-                      <UserRoundPen />
-                    </span>
-                    <span className="group-hover:text-green-700 transition-colors duration-200 ease-in-out">
-                      Edit
-                    </span>
-                  </button>
-
-                  {/* Delete Button */}
-                  <button
-                    className={`group flex items-center space-x-1 ${
-                      user.role.toLowerCase() === "superadmin"
-                        ? "cursor-not-allowed opacity-100 blur-xs"
-                        : "hover:cursor-pointer text-red-500"
-                    }`}
-                    title="Delete"
-                    disabled={user.role.toLowerCase() === "superadmin"}
-                  >
+      <div className="overflow-x-auto max-w-full custom-scrollbar">
+        <table className="table-auto min-w-full p-4">
+          <thead className="bg-gray-100 text-left">
+            <tr>
+              <th className="p-2">User ID</th>
+              <th className="p-2">Name</th>
+              <th className="p-2">E-mail</th>
+              <th className="p-2">Role</th>
+              <th className="p-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.length > 0 ? (
+              users.map((user) => (
+                <tr key={user.id} className="border-b">
+                  <td className="p-2">{user.id}</td>
+                  <td className="p-2">{user.name}</td>
+                  <td className="p-2">{user.email}</td>
+                  <td className="p-2">
                     <span
-                      className={`${
+                      className={`rounded-full text-white ${
                         user.role.toLowerCase() === "superadmin"
-                          ? "text-gray-400"
-                          : "group-hover:text-red-700 group-hover:scale-125"
-                      } transition-transform duration-200 ease-in-out`}
+                          ? "bg-btn-confirmed"
+                          : user.role.toLowerCase() === "admin"
+                          ? "bg-btn-pending"
+                          : "bg-btn-canceled"
+                      }`}
                     >
-                      <Trash2 />
+                      {user.role}
                     </span>
-                    <span
-                      className={`${
+                  </td>
+
+                  <td className="p-2 flex space-x-2 justify-between">
+                    <button className="hover:cursor-pointer text-gray-500 group flex items-center space-x-1">
+                      <Eye className="group-hover:text-gray-700 group-hover:scale-125 transition-transform duration-200 ease-in-out" />
+                      <span className="group-hover:text-gray-700 hidden lg:block">
+                        Detail
+                      </span>
+                    </button>
+                    <button className="hover:cursor-pointer text-green-500 group flex items-center space-x-1">
+                      <UserRoundPen className="group-hover:text-green-700 group-hover:scale-125 transition-transform duration-200 ease-in-out" />
+                      <span className="group-hover:text-green-700 hidden lg:block">
+                        Edit
+                      </span>
+                    </button>
+
+                    <button
+                      className={`group flex items-center space-x-1 ${
                         user.role.toLowerCase() === "superadmin"
-                          ? "text-gray-400"
-                          : "group-hover:text-red-700"
-                      } transition-colors duration-200 ease-in-out`}
+                          ? "cursor-not-allowed opacity-50"
+                          : "hover:cursor-pointer text-red-500"
+                      }`}
+                      title="Delete"
+                      disabled={user.role.toLowerCase() === "superadmin"}
                     >
-                      Delete
-                    </span>
-                  </button>
+                      <Trash2 className="group-hover:text-red-700 group-hover:scale-125 transition-transform duration-200 ease-in-out" />
+                      <span
+                        className={`hidden lg:block ${
+                          user.role.toLowerCase() === "superadmin"
+                            ? "text-gray-400"
+                            : "group-hover:text-red-700"
+                        }`}
+                      >
+                        Delete
+                      </span>
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="p-2 text-center">
+                  No users found.
                 </td>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="5" className="border p-2 text-center">
-                No bookings found.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
-    
-
   );
 };
 

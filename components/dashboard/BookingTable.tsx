@@ -30,101 +30,107 @@ const BookingTable = () => {
   ]);
 
   return (
-    <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black">
-    <h5 className="title">Manage Bookings</h5>
-   <h6 className="sub-title text-inactive-title">
-        Manage amd view bookings
-      </h6> 
-      
+    <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black mb-4">
+      <h5 className="title">Manage Bookings</h5>
+      <h6 className="sub-title text-inactive-title">
+        Manage and view bookings
+      </h6>
+
       {/* Search and Add New Booking Button */}
-      <div className="flex justify-between mb-4">
-        <input
-          type="text"
-          placeholder="Search bookings..."
-          className="p-2 border rounded-md w-1/2 bg-gray-100"
-        />
-        <button className="py-2 px-4 bg-black text-white rounded-lg">Add New Booking</button>
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 mb-4">
+        <div className="lg:col-span-3">
+          <input
+            type="text"
+            placeholder="Search bookings..."
+            className="p-2 border rounded-md w-full bg-gray-100"
+          />
+        </div>
+        <div className="lg:col-span-3 flex justify-end">
+          <button className="add-btn">Add New Booking</button>
+        </div>
       </div>
 
       {/* Table */}
-      <table className="table-auto w-full border-collapse p-4">
-        <thead className="bg-gray-100 text-left">
-          <tr>
-            <th className="border p-2">Customer</th>
-            <th className="border p-2">Book</th>
-            <th className="border p-2">Date</th>
-            <th className="border p-2">Status</th>
-            <th className="border p-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookings.length > 0 ? (
-            bookings.map((booking) => (
-              <tr key={booking.id}>
-                <td className="border p-2">{booking.customer}</td>
-                <td className="border p-2">{booking.book}</td>
-                <td className="border p-2">{booking.date}</td>
-                <td className="border p-2">
-                  <span
-                    className={`px-2 rounded-lg text-white ${
-                      booking.status.toLowerCase() === "confirmed"
-                        ? "bg-btn-confirmed bg-opacity-80"
-                        : booking.status.toLowerCase() === "pending"
-                        ? "bg-btn-pending bg-opacity-80"
-                        : "bg-btn-canceled bg-opacity-80"
-                    }`}
-                  >
-                    {booking.status}
-                  </span>
-                </td>
+      <div className="overflow-x-auto max-w-full custom-scrollbar">
+        <table className="table-auto w-full p-4">
+          <thead className="bg-gray-100 text-left">
+            <tr>
+              <th className="p-2">Customer</th>
+              <th className="p-2">Book</th>
+              <th className="p-2">Date</th>
+              <th className="p-2">Status</th>
+              <th className="p-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.length > 0 ? (
+              bookings.map((booking) => (
+                <tr key={booking.id} className="border-b">
+                  <td className="p-2">{booking.customer}</td>
+                  <td className="p-2">{booking.book}</td>
+                  <td className="p-2">{booking.date}</td>
+                  <td className="p-2">
+                    <span
+                      className={`rounded-full text-white ${
+                        booking.status.toLowerCase() === "confirmed"
+                          ? "bg-btn-confirmed"
+                          : booking.status.toLowerCase() === "pending"
+                          ? "bg-btn-pending"
+                          : "bg-btn-canceled"
+                      }`}
+                    >
+                      {booking.status}
+                    </span>
+                  </td>
 
-                <td className="border p-2 flex space-x-2 justify-between">
-                  <button
-                    className="hover:cursor-pointer text-gray-500 group flex items-center space-x-1"
-                    title="Detail"
-                  >
-                    <span className="group-hover:text-gray-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
-                      <Eye />
-                    </span>
-                    <span className="group-hover:text-gray-700 transition-colors duration-200 ease-in-out">
-                      Detail
-                    </span>
-                  </button>
-                  <button
-                    className="hover:cursor-pointer text-green-500 group flex items-center space-x-1"
-                    title="Edit"
-                  >
-                    <span className="group-hover:text-green-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
-                      <UserRoundPen />
-                    </span>
-                    <span className="group-hover:text-green-700 transition-colors duration-200 ease-in-out">
-                      Edit
-                    </span>
-                  </button>
+                  <td className="p-2 flex space-x-2 justify-between">
+                    <button
+                      className="hover:cursor-pointer text-gray-500 group flex items-center space-x-1"
+                      title="Detail"
+                    >
+                      <span className="group-hover:text-gray-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
+                        <Eye />
+                      </span>
+                      <span className="hidden lg:block group-hover:text-gray-700 transition-colors duration-200 ease-in-out">
+                        Detail
+                      </span>
+                    </button>
+                    <button
+                      className="hover:cursor-pointer text-green-500 group flex items-center space-x-1"
+                      title="Edit"
+                    >
+                      <span className="group-hover:text-green-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
+                        <UserRoundPen />
+                      </span>
+                      <span className="hidden lg:block group-hover:text-green-700 transition-colors duration-200 ease-in-out">
+                        Edit
+                      </span>
+                    </button>
 
-                  <button
-                    className="hover:cursor-pointer text-red-500 group flex items-center space-x-1"
-                    title="Delete"
-                  >
-                    <span className="group-hover:text-red-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
-                      <Trash2 />
-                    </span>
-                    <span className="group-hover:text-red-700 transition-colors duration-200 ease-in-out">
-                      Delete
-                    </span>
-                  </button>
+                    <button
+                      className="hover:cursor-pointer text-red-500 group flex items-center space-x-1"
+                      title="Delete"
+                    >
+                      <span className="group-hover:text-red-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
+                        <Trash2 />
+                      </span>
+                      <span className="hidden lg:block group-hover:text-red-700 transition-colors duration-200 ease-in-out">
+                        Delete
+                      </span>
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="p-2 text-center">
+                  No bookings found.
                 </td>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="5" className="border p-2 text-center">
-                No bookings found.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

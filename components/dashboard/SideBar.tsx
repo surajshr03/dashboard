@@ -1,5 +1,5 @@
 "use client";
-import { BookOpen, ChevronDown, FileChartColumn, LayoutDashboard, Settings, ShoppingCart, Users } from "lucide-react";
+import { BookOpen, ChevronDown, Computer, FileChartColumn, LayoutDashboard, Settings, ShoppingCart, Users } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -81,7 +81,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
 
           {/* Other Menu Items */}
           <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
-          <BookOpen className="mr-2"/> 
+          <Computer className="mr-2"/> 
             <Link href="/dashboard/e-books" className="block w-full">
               <span>E-Books</span>
             </Link>
