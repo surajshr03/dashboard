@@ -60,6 +60,7 @@ const RecentActivities = () => {
             {/* <div className="flex flex-col py-4 gap-4">
                 {activities.map((activity) => {
                     return (<>
+
                         <div className="flex-col justify-between items-center ">
                             <div className="">
                                 <p className='text-darkest-inactive-title'>{activity.description}</p>

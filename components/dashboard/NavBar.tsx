@@ -74,32 +74,33 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
             } transition-all duration-300`}>
             <div className="flex w-full gap-2 items-center justify-left">
                 {/* Hamburger */}
-                <div className="">
-                    <button onClick={onHamburgerClick} data-collapse-toggle="navbar-hamburger" type="button" className="inline-flex items-center justify-center p-2 w-8 h-8 text-sm text-nav-icon rounded-lg hover:bg-gray-100 dark:text-nav-icon dark:hover:bg-active-gray dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
-                        <span className="sr-only">Open main menu</span>
-                        <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
-                        </svg>
-                    </button>
-                </div>
+
+                <button onClick={onHamburgerClick} data-collapse-toggle="navbar-hamburger" type="button" className="inline-flex items-center justify-center p-2 w-8 h-8 text-sm text-nav-icon rounded-lg hover:bg-gray-100 dark:text-nav-icon dark:hover:bg-active-gray dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
+                    <span className="sr-only">Open main menu</span>
+                    <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+
                 {/* Search */}
                 <form className="max-w-md ">
                     <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div className="relative ">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+
                             <svg
                                 className="md:hidden w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                             <svg
                                 className="hidden md:block w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </div>
                         <input

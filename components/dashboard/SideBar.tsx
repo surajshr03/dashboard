@@ -1,7 +1,7 @@
 "use client";
+import { BookOpen, ChevronDown, Computer, FileChartColumn, LayoutDashboard, Settings, ShoppingCart, Users } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { Bell, BookOpen, ChevronDown, FileChartColumn, LayoutDashboard, Settings, ShoppingCart, Users } from "lucide-react";
 
 type SideBarProps = {
   isVisible: boolean;
@@ -78,7 +78,14 @@ const SideBar = ({ isVisible }: SideBarProps) => {
             )}
           </li>
 
+
           {/* Other Menu Items */}
+          <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
+          <Computer className="mr-2"/> 
+            <Link href="/dashboard/e-books" className="block w-full">
+              <span>E-Books</span>
+            </Link>
+          </li>
           <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
           <BookOpen className="mr-2"/> 
             <Link href="/dashboard/books" className="block w-full">
@@ -91,6 +98,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
               Transactions
             </Link>
           </li>
+
 
           {/* User Management Dropdown */}
           <li>
@@ -139,12 +147,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
               <span>Reports</span>
             </Link>
           </li>
-          <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
-          <Bell className="mr-2"/> 
-            <Link href="/dashboard/notifications" className="block w-full">
-              <span>Notifications</span>
-            </Link>
-          </li>
+         
           <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
           <Settings className="mr-2"/> 
             <Link href="/dashboard/settings" className="block w-full">
