@@ -32,9 +32,9 @@ const Transactions = [
 const TransactionTable = () => {
   return (
 
-    <div className="w-full bg-white py-6 px-6 my-6 rounded-xl shadow-lg border-2 border-active-gray">
-      <p className='text-2xl text-black font-semibold'>Transactions</p>
-      <p className='my-2 text-sm text-inactive-title font-medium'>You have {Transactions.length} new Transactions</p>
+    <div className="wrapper">
+      <p className='title'>Transactions</p>
+      <p className='sub-title'>You have {Transactions.length} new Transactions</p>
       <table className="table-auto w-full border-collapse p-4 ">
         <thead className="bg-gray-100 text-left border-b-2">
           <tr>
