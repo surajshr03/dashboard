@@ -15,6 +15,11 @@ const inter = Inter({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarVisible, setSidebarVisible] = useState(true);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen)
+  }
 
   const toggleSidebar = () => {
     setSidebarVisible((prevState) => !prevState);
@@ -33,10 +38,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }`}
           >
             {/* Navbar */}
-            <NavBar onHamburgerClick={toggleSidebar} isSidebarVisible={isSidebarVisible} />
+            <NavBar isSearchOpen={isSearchOpen} onSearchClick={toggleSearch} onHamburgerClick={toggleSidebar} isSidebarVisible={isSidebarVisible} />
 
             {/* Page Content */}
-            <div className="flex-1 w-screen md:w-full overflow-hidden p-8 ">
+            <div className="flex-1 w-screen md:w-full overflow-hidden p-4 md:p-8 ">
               {children}
             </div>
           </div>
