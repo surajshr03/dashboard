@@ -1,4 +1,5 @@
 import React from 'react'
+import "@/components/dashboard/CSS/dashboard.css";
 
 const activities = [
     {
@@ -34,9 +35,9 @@ const activities = [
 const RecentActivities = () => {
     return (
 
-        <div className="w-full bg-white py-6 px-6 my-6 rounded-xl shadow-lg border-2 border-active-gray">
-            <p className='text-2xl text-black font-semibold'>Recent Activities</p>
-            <p className='my-2 text-sm text-inactive-title font-medium'>You have {activities.length} new activities</p>
+        <div className="wrapper">
+            <p className='title'>Recent Activities</p>
+            <p className='sub-title'>You have {activities.length} new activities</p>
             <table className="table-auto w-full border-collapse p-4 ">
                 <thead className="bg-gray-100 text-left border-b-2">
                     <tr>
