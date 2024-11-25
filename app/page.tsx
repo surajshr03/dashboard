@@ -15,10 +15,7 @@ export default function Home() {
             <span className="text-sm text-inactive-title font-medium ">Home &gt;</span>
           </Link>
           <Link href="/dashboard">
-            <span className="text-sm text-inactive-title font-medium">Dashboard &gt;</span>
-          </Link>
-          <Link href="/">
-            <span className="text-sm text-dark-inactive-title font-medium">Metrics </span>
+            <span className="text-sm text-darkest-inactive-title font-medium">Dashboard</span>
           </Link>
         </div>
       </div>
