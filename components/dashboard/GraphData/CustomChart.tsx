@@ -9,13 +9,13 @@ const Chart = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white p-4 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4">Revenue Statistics</h2>
-          {/* <CustomBarChart /> */}
+          <CustomBarChart />
           Chart will be shown here
         </div>
 
         <div className="bg-white p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">er Acquisition</h2>
-          {/* <CustomLineChart /> */}
+          <h2 className="text-xl font-semibold mb-4">Forester Acquisition</h2>
+          <CustomLineChart />
           Chart will be shown here
         </div>
       </div>
