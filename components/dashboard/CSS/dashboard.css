@@ -1,9 +1,12 @@
 /* css here  */
 .title {
   margin-bottom: 0.25rem;
-  font-size: 2.25rem;
+  /* font-size: 2.25rem;
   line-height: 2.5rem;
-  font-weight: 700;
+  font-weight: 700; */
+  font-size: 1.5rem; 
+  color: #000000;   
+  font-weight: 600;
 }
 .sub-title {
     margin-bottom: 1.5rem;

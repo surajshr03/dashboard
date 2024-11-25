@@ -30,13 +30,12 @@ const UserTable = () => {
   ]);
 
   return (
-    <>
+    
+    <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black">
     <h5 className="title ">Manage Users</h5>
       <h6 className="sub-title text-inactive-title">
         Manage system users and their roles
       </h6>
-    <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black">
-      
       {/* Search and Add New Booking Button */}
       <div className="flex justify-between mb-4">
         <input
@@ -145,7 +144,7 @@ const UserTable = () => {
         </tbody>
       </table>
     </div>
-    </>
+    
 
   );
 };

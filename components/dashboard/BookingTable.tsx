@@ -30,12 +30,11 @@ const BookingTable = () => {
   ]);
 
   return (
-    <>
-   <h5 className="title">Manage Bookings</h5>
+    <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black">
+    <h5 className="title">Manage Bookings</h5>
    <h6 className="sub-title text-inactive-title">
         Manage amd view bookings
-      </h6>
-    <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black">
+      </h6> 
       
       {/* Search and Add New Booking Button */}
       <div className="flex justify-between mb-4">
@@ -127,7 +126,6 @@ const BookingTable = () => {
         </tbody>
       </table>
     </div>
-    </>
   );
 };
 
