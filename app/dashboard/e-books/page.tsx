@@ -1,10 +1,10 @@
-import UserTable from '@/components/dashboard/User/UserTable'
+import EBook from '@/components/dashboard/EBook'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-      <UserTable/>
+        <EBook/>
     </div>
   )
 }
