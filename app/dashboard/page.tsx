@@ -20,8 +20,8 @@ const Dashboard = () => {
         </div>
       </div>
       <Metrics />
-      <RecentActivities />
       <CustomChart/>
+      <RecentActivities />
     </>
   )
 }

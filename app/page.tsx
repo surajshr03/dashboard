@@ -11,9 +11,9 @@ export default function Home() {
         <p className='text-3xl font-medium text-darkest-inactive-title'>Dashboard Overview</p >
       </div>
       <Metrics />
+      <CustomChart />
       <RecentActivities />
       <BookingTable />
-      <CustomChart />
     </>
   );
 }

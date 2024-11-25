@@ -1,10 +1,9 @@
-import BookTable from '@/components/dashboard/BookTable'
-import React from 'react'
+import BookingTable from '@/components/dashboard/BookingTable'
 
 const page = () => {
   return (
     <div>
-        <BookTable/>
+        <BookingTable/>
     </div>
   )
 }
