@@ -30,9 +30,9 @@ const UserTable = () => {
   ]);
 
   return (
-    <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black mb-4">
+    <div className="wrapper">
       <h5 className="title ">Manage Users</h5>
-      <h6 className="sub-title text-inactive-title">
+      <h6 className="sub-title">
         Manage system users and their roles
       </h6>
       {/* Search and Add New User Button */}

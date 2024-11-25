@@ -30,14 +30,14 @@ const BookingTable = () => {
   ]);
 
   return (
-    <div className="w-full bg-white p-6 rounded-lg shadow-lg text-black mb-4">
+    <div className="wrapper">
       <h5 className="title">Manage Bookings</h5>
-      <h6 className="sub-title text-inactive-title">
+      <h6 className="sub-title">
         Manage and view bookings
       </h6>
 
       {/* Search and Add New Booking Button */}
-      <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 mb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 my-6">
         <div className="lg:col-span-3">
           <input
             type="text"
@@ -55,21 +55,21 @@ const BookingTable = () => {
         <table className="table-auto w-full p-4">
           <thead className="bg-gray-100 text-left">
             <tr>
-              <th className="p-2">Customer</th>
-              <th className="p-2">Book</th>
-              <th className="p-2">Date</th>
-              <th className="p-2">Status</th>
-              <th className="p-2">Actions</th>
+              <th className="p-2 text-dark-inactive-title">Customer</th>
+              <th className="p-2 text-dark-inactive-title">Book</th>
+              <th className="p-2 text-dark-inactive-title">Date</th>
+              <th className="p-2 text-dark-inactive-title">Status</th>
+              <th className="p-2 text-dark-inactive-title">Actions</th>
             </tr>
           </thead>
           <tbody>
             {bookings.length > 0 ? (
               bookings.map((booking) => (
                 <tr key={booking.id} className="border-b">
-                  <td className="p-2">{booking.customer}</td>
-                  <td className="p-2">{booking.book}</td>
-                  <td className="p-2">{booking.date}</td>
-                  <td className="p-2">
+                  <td className="p-2 text-dark-inactive-title">{booking.customer}</td>
+                  <td className="p-2 text-dark-inactive-title">{booking.book}</td>
+                  <td className="p-2 text-dark-inactive-title">{booking.date}</td>
+                  <td className="p-2 text-dark-inactive-title">
                     <span
                       className={`rounded-full text-white ${
                         booking.status.toLowerCase() === "confirmed"
