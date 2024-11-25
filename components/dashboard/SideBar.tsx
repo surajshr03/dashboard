@@ -24,7 +24,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
       } transition-transform duration-300`}  >
       {/* Sidebar Header */}
       <Link href="/">
-        <div className="text-2xl font-bold mb-8">KitabYatra</div>
+        <div className="text-2xl font-bold mb-8">Kitab<span className="text-[#00BBD4]">Yatra</span></div>
       </Link>
 
       {/* Navigation Menu */}
