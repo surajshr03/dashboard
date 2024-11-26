@@ -1,4 +1,7 @@
 import React from 'react'
+import "@/components/dashboard/CSS/dashboard.css";
+
+
 const Transactions = [
   {
     id: 1,
@@ -28,6 +31,65 @@ const Transactions = [
     date: "2001-12-24",
     type: "Transaction",
   },
+  
+  {
+    id: 5,
+    description: 'New booking: John Doe - "The Great Gatsby"',
+    time: "5 minutes ago",
+    date: "2001-12-24",
+    type: "Booking",
+  },
+  {
+    id: 6,
+    description: 'Transaction completed: $24.99 - "To Kill a Mockingbird"',
+    time: "1 hour ago",
+    date: "2001-12-24",
+    type: "Transaction",
+  },
+  {
+    id: 7,
+    description: "New user registered: Jane Smith",
+    time: "2 hours ago",
+    date: "2001-12-24",
+    type: "Book",
+  },
+  {
+    id: 8,
+    description: 'Book stock update: "1984" - 50 copies added',
+    time: "3 hours ago",
+    date: "2001-12-24",
+    type: "Transaction",
+  },
+  
+  {
+    id: 9,
+    description: 'New booking: John Doe - "The Great Gatsby"',
+    time: "5 minutes ago",
+    date: "2001-12-24",
+    type: "Booking",
+  },
+  {
+    id: 10,
+    description: 'Transaction completed: $24.99 - "To Kill a Mockingbird"',
+    time: "1 hour ago",
+    date: "2001-12-24",
+    type: "Transaction",
+  },
+  {
+    id: 11,
+    description: "New user registered: Jane Smith",
+    time: "2 hours ago",
+    date: "2001-12-24",
+    type: "Book",
+  },
+  {
+    id: 12,
+    description: 'Book stock update: "1984" - 50 copies added',
+    time: "3 hours ago",
+    date: "2001-12-24",
+    type: "Transaction",
+  },
+  
 ];
 const TransactionTable = () => {
   return (
