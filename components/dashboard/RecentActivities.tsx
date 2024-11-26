@@ -48,13 +48,11 @@ const RecentActivities = () => {
                 </thead>
                 <tbody>
                     {activities.map((activity) => (
-                        <>
                             <tr key={activity.id} className='border-b overflow-scroll'>
                                 <td className="p-2 text-dark-inactive-title ">{activity.type.split(' - ')[0]}</td>
                                 <td className="p-2 text-dark-inactive-title">{activity.description.split(' - ')[0]}</td>
                                 <td className="p-2 text-dark-inactive-title">{activity.date.split(' - ')[0]}</td>
                             </tr>
-                        </>
                     ))}
                 </tbody>
             </table>

@@ -168,13 +168,13 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                             <div className="px-2">
                                 <p className="px-2 py-2 text-lg font-medium text-black"> Notifications</p></div>
                             <ul className=" text-xs text-gray-700 dark:text-gray-400" >
-                                {Notifications.map((notifications) => {
-                                    return <>
-                                        <li key={notifications.id} className='px-2  rounded-md border-b-2 border-active-gray  dark:hover:text-white'>
-                                            <p className="block py-2 px-2  rounded-md text-inactive-title ">{notifications.description}</p>
-                                        </li>
-                                    </>
-                                })
+                                {Notifications.map((notifications) =>
+                                (
+                                    <li key={notifications.id} className='px-2  rounded-md border-b-2 border-active-gray  dark:hover:text-white'>
+                                        <p className="block py-2 px-2  rounded-md text-inactive-title ">{notifications.description}</p>
+                                    </li>
+                                )
+                                )
 
                                 }
 
