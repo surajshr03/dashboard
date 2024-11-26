@@ -14,7 +14,7 @@ const Chart = () => {
         </div>
 
         <div className="bg-white p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">Forester Acquisition</h2>
+          <h2 className="text-xl font-semibold mb-4">Customer Acquisition</h2>
           <CustomLineChart />
           Chart will be shown here
         </div>
