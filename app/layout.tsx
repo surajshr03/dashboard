@@ -4,7 +4,9 @@ import NavBar from "@/components/dashboard/NavBar";
 import SideBar from "@/components/dashboard/SideBar";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Loading from "@/components/dashboard/Loading";
 
 const inter = Inter({
   weight: ["400", "700"],
@@ -16,6 +18,20 @@ const inter = Inter({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const pathName = usePathname(); //gets Current path 
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+
+    return () => {
+      clearTimeout(timer)
+    };
+  }, [pathName]);
+
 
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen)
@@ -41,11 +57,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <NavBar isSearchOpen={isSearchOpen} onSearchClick={toggleSearch} onHamburgerClick={toggleSidebar} isSidebarVisible={isSidebarVisible} />
 
             {/* Page Content */}
-            <div className="flex-1 w-screen md:w-full overflow-hidden p-4 md:p-8 ">
-              {children}
-            </div>
+            {isLoading ? <Loading isSidebarVisible={isSidebarVisible} isLoading={isLoading} /> :
+              <div className="flex-1 w-screen md:w-full overflow-hidden p-4 md:p-8 ">
+
+                {children}
+              </div>
+            }
           </div>
         </div>
+
       </body>
     </html>
   );
