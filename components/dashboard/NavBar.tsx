@@ -1,5 +1,5 @@
 'use client'
-import { Bell, LogOutIcon, Moon, User } from 'lucide-react'
+import { Bell, BookmarkPlus, Clipboard, FilePlus, LogOutIcon, Moon, Settings, User, UserRoundPlus } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
@@ -89,14 +89,14 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
 
                             <svg
-                                className="md:hidden w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                className="md:hidden w-4 h-4 text-active-gray dark:text-gray-400" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 20 20">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                             <svg
-                                className="hidden md:block w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                className="hidden md:block w-4 h-4 text-active-gray dark:text-gray-400" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 20 20">
@@ -111,13 +111,12 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                             placeholder="Search "
                             required />
 
-                        {/* Empty placeholder */}
                         {/* POPUP for mobile screen when search clicked */}
                         {isSearchOpen && (
                             <div className=" md:hidden fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
                                 <div className="bg-white rounded-lg shadow-lg p-4 w-4/5 sm:w-3/4">
                                     <div className="flex justify-between items-center mb-4">
-                                        <h2 className="text-lg font-semibold">Search</h2>
+                                        <div className=""></div>
                                         <button
                                             onClick={onSearchClick}
                                             className="text-gray-500 hover:text-gray-700"
@@ -125,14 +124,93 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                                             ✖
                                         </button>
                                     </div>
-                                    <input
-                                        type="text"
-                                        placeholder="Type your search..."
-                                        className="w-full border px-4 py-2 rounded-lg"
-                                    />
+                                    <div className="border-b-2 pb-2">
+                                        <div className="flex items-center w-full border-2 px-4 py-2 rounded-lg gap-2 ">
+                                            <div className="">
+                                                <svg
+                                                    className="md:hidden w-4 h-4 text-active-gray dark:text-gray-400" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                                </svg>
+                                                <svg
+                                                    className="hidden md:block w-4 h-4 text-active-gray dark:text-gray-400" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                                </svg>
+                                            </div>
+                                            {/* INPUT SEARCH */}
+                                                <input
+                                                    type="text"
+                                                    placeholder="Search along dashboard"
+                                                    className="w-full"
+                                                />
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col  items-start border-b-2 pb-2">
+                                        <p className='text-sm text-inactive-title text-left py-2'>Actions</p>
+                                        <div className="flex gap-2 text-darkest-inactive-title  items-center text-sm hover:bg-active-gray w-full p-2">
+                                            <UserRoundPlus size={18} />
+                                            <Link href='/'>
+                                                <p>Register a new user</p>
+                                            </Link>
+                                        </div>
+                                        <div className="flex gap-2 text-darkest-inactive-title  items-center text-sm hover:bg-active-gray w-full p-2">
+                                            <FilePlus size={18} />
+                                            <Link href='/'>
+                                                <p>Make a booking</p>
+                                            </Link>
+                                        </div>
+                                        <div className="flex gap-2 text-darkest-inactive-title  items-center text-sm hover:bg-active-gray w-full p-2">
+                                            <BookmarkPlus size={18} />
+                                            <Link href='/'>
+                                                <p>Add a new book</p>
+                                            </Link>
+                                        </div>
+
+                                    </div>
+                                    <div className="flex flex-col  items-start border-b-2 pb-2">
+                                        <p className='text-sm text-inactive-title text-left py-2'>Quick Links</p>
+                                        <div className="flex gap-2 text-darkest-inactive-title  items-center text-sm hover:bg-active-gray w-full p-2">
+                                            <BookmarkPlus size={18} />
+                                            <Link href='/'>
+                                                <p>User Management</p>
+                                            </Link>
+                                        </div>
+                                        <div className="flex gap-2 text-darkest-inactive-title  items-center text-sm hover:bg-active-gray w-full p-2">
+                                            <UserRoundPlus size={18} />
+                                            <Link href='/'>
+                                                <p>Manage Books</p>
+                                            </Link>
+                                        </div>
+                                        <div className="flex gap-2 text-darkest-inactive-title  items-center text-sm hover:bg-active-gray w-full p-2">
+                                            <FilePlus size={18} />
+                                            <Link href='/'>
+                                                <p>Manage Transactions</p>
+                                            </Link>
+                                        </div>
+                                        
+                                        <div className="flex gap-2 text-darkest-inactive-title  items-center text-sm hover:bg-active-gray w-full p-2">
+                                            <Clipboard size={18} />
+                                            <Link href='/'>
+                                                <p>Reports</p>
+                                            </Link>
+                                        </div>
+                                        <div className="flex gap-2 text-darkest-inactive-title  items-center text-sm hover:bg-active-gray w-full p-2">
+                                            <Settings size={18} />
+                                            <Link href='/'>
+                                                <p>Settings</p>
+                                            </Link>
+                                        </div>
+
+                                    </div>
+                                    {/* Search BUtton in OverLay */}
                                     <button
                                         onClick={onSearchClick}
-                                        className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+                                        className="mt-4 w-full bg-[#00BBD4] text-white py-2 rounded-lg hover:bg-blue-600"
                                     >
                                         Search
                                     </button>
