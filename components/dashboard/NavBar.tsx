@@ -48,7 +48,7 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                 userMenuRef.current &&
                 event.target instanceof Node &&
                 !userMenuRef.current.contains(event.target)
-                &&
+                ||
                 notificationRef.current &&
                 event.target instanceof Node &&
                 !notificationRef.current.contains(event.target)
@@ -143,11 +143,11 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                                                 </svg>
                                             </div>
                                             {/* INPUT SEARCH */}
-                                                <input
-                                                    type="text"
-                                                    placeholder="Search along dashboard"
-                                                    className="w-full"
-                                                />
+                                            <input
+                                                type="text"
+                                                placeholder="Search along dashboard"
+                                                className="w-full"
+                                            />
                                         </div>
                                     </div>
                                     <div className="flex flex-col  items-start border-b-2 pb-2">
@@ -192,7 +192,7 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                                                 <p>Manage Transactions</p>
                                             </Link>
                                         </div>
-                                        
+
                                         <div className="flex gap-2 text-darkest-inactive-title  items-center text-sm hover:bg-active-gray w-full p-2">
                                             <Clipboard size={18} />
                                             <Link href='/'>
@@ -279,14 +279,14 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                             role="menu">
                             <ul className="py-2 text-sm text-gray-700 dark:text-gray-400" >
                                 <li className='px-2 pb-3 rounded-md border-b-2 border-active-gray  dark:hover:text-white'>
-                                    <Link href="#" className="block pt-2 text-black">Username</Link>
+                                    <p className="block pt-2 text-black">Username</p>
                                     <p className=' text-xs text-inactive-title'>username@gmail.com</p>
                                 </li>
                                 <li>
-                                    <Link href="#" className="block py-2 px-2  rounded-md text-black hover:bg-active-gray">Profile</Link>
+                                    <Link href="/" className="block py-2 px-2  rounded-md text-black hover:bg-active-gray">Profile</Link>
                                 </li>
                                 <li>
-                                    <Link href="#" className="block  py-2 px-2 text-black rounded-md  hover:bg-active-gray">Settings</Link>
+                                    <Link href="/dashboard/settings" className="block  py-2 px-2 text-black rounded-md  hover:bg-active-gray">Settings</Link>
                                 </li>
                                 <li>
                                     <Link
