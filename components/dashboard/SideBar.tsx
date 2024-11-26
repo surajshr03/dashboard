@@ -24,7 +24,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
       } transition-transform duration-300`}  >
       {/* Sidebar Header */}
       <Link href="/">
-        <div className="text-2xl font-bold mb-8">Kitab<span className="text-[#00BBD4]">Yatra</span></div>
+        <div className="text-2xl font-bold mb-8">Kitab<span className="text-brand">Yatra</span></div>
       </Link>
 
       {/* Navigation Menu */}
@@ -49,9 +49,8 @@ const SideBar = ({ isVisible }: SideBarProps) => {
                 <span>Manage Bookings</span>
               </div>
               <ChevronDown
-                className={`transition-transform duration-300 ${
-                  isBookingsOpen ? "rotate-180" : "rotate-0"
-                }`}
+                className={`transition-transform duration-300 ${isBookingsOpen ? "rotate-180" : "rotate-0"
+                  }`}
                 size={18}
               />
             </div>
@@ -66,14 +65,14 @@ const SideBar = ({ isVisible }: SideBarProps) => {
                     Booking
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     href="/dashboard/bookings"
                     className="block p-2 rounded hover:bg-active-gray text-sm"
                   >
                     Booking
                   </Link>
-                </li>
+                </li> */}
               </ul>
             )}
           </li>
@@ -81,19 +80,19 @@ const SideBar = ({ isVisible }: SideBarProps) => {
 
           {/* Other Menu Items */}
           <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
-          <Computer className="mr-2"/> 
+            <Computer className="mr-2" />
             <Link href="/dashboard/e-books" className="block w-full">
               <span>E-Books</span>
             </Link>
           </li>
           <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
-          <BookOpen className="mr-2"/> 
+            <BookOpen className="mr-2" />
             <Link href="/dashboard/books" className="block w-full">
-            <span>Manage Books</span>
+              <span>Manage Books</span>
             </Link>
           </li>
           <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
-          <ShoppingCart className="mr-2" />
+            <ShoppingCart className="mr-2" />
             <Link href="/dashboard/transactions" className="block w-full">
               Transactions
             </Link>
@@ -111,9 +110,8 @@ const SideBar = ({ isVisible }: SideBarProps) => {
                 <span>User Management</span>
               </div>
               <ChevronDown
-                className={`transition-transform duration-300 ${
-                  isUserManagementOpen ? "rotate-180" : "rotate-0"
-                }`}
+                className={`transition-transform duration-300 ${isUserManagementOpen ? "rotate-180" : "rotate-0"
+                  }`}
                 size={18}
               />
             </div>
@@ -128,28 +126,28 @@ const SideBar = ({ isVisible }: SideBarProps) => {
                     User List
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     href="/dashboard/users"
                     className="block p-2 rounded hover:bg-active-gray text-sm"
                   >
                     Add New User
                   </Link>
-                </li>
+                </li> */}
               </ul>
             )}
           </li>
 
           {/* Remaining Menu Items */}
           <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
-          <FileChartColumn className="mr-2"/> 
+            <FileChartColumn className="mr-2" />
             <Link href="/dashboard/reports" className="block w-full">
               <span>Reports</span>
             </Link>
           </li>
-         
+
           <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
-          <Settings className="mr-2"/> 
+            <Settings className="mr-2" />
             <Link href="/dashboard/settings" className="block w-full">
               <span>Settings</span>
             </Link>

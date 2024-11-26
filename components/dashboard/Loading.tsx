@@ -13,7 +13,7 @@ const Loading = ({ isLoading, isSidebarVisible }: ILoadingProps) => {
         <div className={`fixed inset-0 z-10 flex items-center justify-center bg-white/70 backdrop-blur-sm ${isSidebarVisible ? " ml-64" : "ml - 0"} transition-all duration - 300`}>
             <div className="flex flex-col items-center justify-center" >
                 <Loader2
-                    className="animate-spin text-[#00BBD4]"
+                    className="animate-spin text-brand"
                     size={64}
                     strokeWidth={2}
                 />

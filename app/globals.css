@@ -17,6 +17,7 @@
   --BgRed: #fee8ee;
   --BgGreen: #eaf7ed;
   --NavIcon: #22262b;
+  --Brand: #00bbd4;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -32,6 +33,7 @@
     --BgRed: #fee8ee;
     --BgGreen: #eaf7ed;
     --NavIcon: #22262b;
+    --Brand: #00bbd4;
   }
 }
 
@@ -39,7 +41,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-  color:black;
+  color: black;
 }
 
 @layer utilities {

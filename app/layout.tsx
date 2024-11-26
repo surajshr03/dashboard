@@ -1,12 +1,12 @@
 'use client';
-
+import Loading from "@/components/dashboard/Loading";
 import NavBar from "@/components/dashboard/NavBar";
 import SideBar from "@/components/dashboard/SideBar";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import Loading from "@/components/dashboard/Loading";
+import { useEffect, useState } from "react";
+import "./globals.css";
+import { Metadata } from "@/components/Metadata"
 
 const inter = Inter({
   weight: ["400", "700"],
@@ -14,6 +14,8 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
+
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarVisible, setSidebarVisible] = useState(true);
@@ -43,6 +45,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
+      {/* <Head>
+        <title>KitabYatra</title>
+        <link type="image/ico" rel="icon" href="/favicon.ico" />
+      </Head> */}
       <body className={`${inter.className}`}>
         <div className="flex w-full h-screen overflow-auto ">
           {/* Sidebar */}
