@@ -210,7 +210,7 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                                     {/* Search BUtton in OverLay */}
                                     <button
                                         onClick={onSearchClick}
-                                        className="mt-4 w-full bg-[#00BBD4] text-white py-2 rounded-lg hover:bg-blue-600"
+                                        className="mt-4 w-full bg-brand text-white py-2 rounded-lg hover:bg-blue-600"
                                     >
                                         Search
                                     </button>

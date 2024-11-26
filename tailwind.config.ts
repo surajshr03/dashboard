@@ -20,10 +20,10 @@ export default {
         metricsGreen: "var(--MetricsGreen)",
         metricsRed: "var(--MetricsRed)",
         "bg-red": "var(--BgRed)",
+        brand: "var(--Brand)",
         "bg-green": "var(--BgGreen)",
         "nav-icon": "var(--NavIcon)",
         "metrics-icon": "var(--MetricsIcon)",
-      
       },
     },
   },
