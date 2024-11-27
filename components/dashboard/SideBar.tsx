@@ -1,5 +1,5 @@
 "use client";
-import { BookOpen, ChevronDown, Computer, FileChartColumn, LayoutDashboard, Settings, ShoppingCart, Users } from "lucide-react";
+import { BadgeDollarSign, BookOpen, Calendar, CheckCheckIcon, ChevronDown, ClipboardCopy, Computer, FileChartColumn, LayoutDashboard, List, Settings, Users } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -45,7 +45,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
               className="flex items-center justify-between w-full p-2 rounded hover:bg-active-gray cursor-pointer text-sm"
             >
               <div className="flex items-center">
-                <ShoppingCart className="mr-2" />
+                <Calendar className="mr-2" />
                 <span>Manage Bookings</span>
               </div>
               <ChevronDown
@@ -57,7 +57,8 @@ const SideBar = ({ isVisible }: SideBarProps) => {
             {/* Dropdown Items for "Manage Bookings" */}
             {isBookingsOpen && (
               <ul className="pl-8 mt-2 space-y-2">
-                <li>
+                  <li className="flex items-center px-2 rounded hover:bg-active-gray text-sm">
+                    <ClipboardCopy size={20} className="mr-2" />
                   <Link
                     href="/dashboard/bookings"
                     className="block p-2 rounded hover:bg-active-gray text-sm"
@@ -92,7 +93,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
             </Link>
           </li>
           <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
-            <ShoppingCart className="mr-2" />
+            <BadgeDollarSign className="mr-2" />
             <Link href="/dashboard/transactions" className="block w-full">
               Transactions
             </Link>
@@ -118,7 +119,8 @@ const SideBar = ({ isVisible }: SideBarProps) => {
             {/* Dropdown Items for "User Management" */}
             {isUserManagementOpen && (
               <ul className="pl-8 mt-2 space-y-2">
-                <li>
+                <li className="flex items-center px-2 rounded hover:bg-active-gray text-sm">
+                  <List size={20} className="mr-2" />
                   <Link
                     href="/dashboard/users"
                     className="block p-2 rounded hover:bg-active-gray text-sm"

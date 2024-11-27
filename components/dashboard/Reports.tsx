@@ -1,69 +1,94 @@
 "use client";
+import { useState } from "react";
+import { format, addDays } from "date-fns";
 import "@/components/dashboard/CSS/dashboard.css";
-import { GitGraphIcon } from "lucide-react";
+import Link from "next/link";
+import { ClipboardCheck } from "lucide-react";
 
 const Reports = () => {
-  const reports = [
-    {
-      id: 1,
-      name: "Booking Reports",
-      img: "", 
-      report: "Completed 10 bookings this week with excellent reviews.",
-    },
-    {
-      id: 2,
-      name: "Sales Report",
-      img: "", 
-      report: "Achieved the highest revenue among all users this month.",
-    },
-    {
-      id: 3,
-      name: "User Activity",
-      img: "", 
-      report: "Pending 5 bookings with high customer expectations.",
-    },
-  ];
+  const [reportType, setReportType] = useState<string>("bookings");
+  const [dateRange, setDateRange] = useState({
+    from: new Date(),
+    to: addDays(new Date(), 7),
+  });
+
+  const handleGenerateReport = () => {
+    console.log(`Generating ${reportType} report for date range:`, dateRange);
+    // Simulated report generation logic
+  };
 
   return (
-    <>
-     <h6 className="title">
-        Reports
-      </h6>
+    <div className="space-y-6">
+      <h2 className="title">Reports</h2>
+      {/* Generate Report Section */}
+      <div className="wrapper space-y-4 ">
+        <div>
+          <p className="title text-lg font-medium">Generate Report</p>
+          <p className="sub-title text-sm text-gray-600">Select the type of report and date range</p>
+        </div>
 
-    <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
-      
-      {reports.map((user) => (
-        <div
-          key={user.id}
-          className="flex flex-col bg-white rounded-md p-6 shadow-md hover:shadow-lg transition-shadow duration-200"
-        >
-          {/* User Image */}
-          <div className="w-16 h-16 flex items-center justify-center overflow-hidden">
-            {user.img ? (
-              <img
-                src={user.img}
-                alt={`${user.name}'s profile`}
-                className="object-cover w-full h-full"
-              />
-            ) : (
-              <GitGraphIcon className="text-gray-400" size={400} />
-            )}
+        <div className="space-y-4">
+          {/* Report Type */}
+          <div className="space-y-2">
+            <label className="text-sm font-semibold">Report Type</label>
+            <select
+              value={reportType}
+              onChange={(e) => setReportType(e.target.value)}
+              className="w-full p-2 border rounded-md text-dark-inactive-title text-sm "
+            >
+              <option value="bookings">Booking Report</option>
+              <option value="sales">Sales Report</option>
+              <option value="user-activity">User Activity Report</option>
+            </select>
           </div>
 
-          {/* User Name */}
-          <h5 className="mt-4 text-xl font-semibold  text-black">
-            {user.name}
-          </h5>
+          {/* Date Range */}
+          <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold">Start Date</label>
+                <input
+                  type="date"
+                  value={format(dateRange.from, "yyyy-MM-dd")}
+                  onChange={(e) =>
+                    setDateRange((prev) => ({ ...prev, from: new Date(e.target.value) }))
+                  }
+                  className="text-dark-inactive-title text-sm w-full p-2 border rounded-md"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-semibold">End Date</label>
+                <input
+                  type="date"
+                  value={format(dateRange.to, "yyyy-MM-dd")}
+                  onChange={(e) =>
+                    setDateRange((prev) => ({ ...prev, to: new Date(e.target.value) }))
+                  }
+                  className="text-dark-inactive-title text-sm w-full p-2 border rounded-md"
+                />
+              </div>
+            </div>
+          </div>
 
-          {/* User Report */}
-          <p className="mt-2 text-sm  text-gray-600">{user.report}</p>
-          <button className="bg-black text-white p-3 w-max text-center my-3 rounded-md">Download {`${user.name}`}</button>
+          {/* Generate Report Button */}
+          <button
+            onClick={handleGenerateReport}
+            className="bg-brand text-white px-4 py-2 rounded-md hover:bg-black"
+          >
+            Generate Report
+          </button>
         </div>
-      ))}
+      </div>
+      {/* Recent Reports Section */}
+      <div className="wrapper flex flex-col gap-4">
+        <p className="text-lg font-semibold">Your Report</p>
+        <div className="reportDownload flex gap-2 bg-active-gray px-2 py-4 rounded-md">
+          <ClipboardCheck />
+          <Link href='/'>1st Report.pdf</Link>
+        </div>
+        <button className="btn bg-black text-white">Download Report</button>
+      </div>
     </div>
-
-    </>
-
   );
 };
 

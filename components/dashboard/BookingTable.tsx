@@ -113,86 +113,86 @@ const BookingTable = () => {
 
      
       {/* Search and Filter Section */}
-      <div className="grid grid-cols-6 gap-4 my-6">
+        <div className="grid grid-cols-6 gap-4 my-6">
 
-        {/* Search Input */}
-        <div className="col-span-6 lg:col-span-4 relative">
-          <input
-            type="text"
-            placeholder="Search bookings..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-            className="p-2 pl-10 pr-4 border rounded-md w-full bg-gray-100"
-          />
-          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-            <Search />
-          </span>
+          {/* Search Input */}
+          <div className="col-span-6 lg:col-span-4 relative">
+            <input
+              type="text"
+              placeholder="Search bookings..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="p-2 pl-10 pr-4 border rounded-md w-full bg-gray-100"
+            />
+            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+              <Search />
+            </span>
+          </div>
+
+          {/* Date Range Filter */}
+          <div className="col-span-6 md:col-span-3 lg:col-span-1  relative">
+            <select
+              value={filterDateRange}
+              onChange={handleDateRangeChange}
+              className="p-2 border rounded-md w-full bg-gray-100"
+            >
+              <option value="All">All Dates</option>
+              <option value="Before 2010">Before 2010</option>
+              <option value="2011-2015">2011-2015</option>
+              <option value="2016-2020">2016-2020</option>
+              <option value="2021-2025">2021-2025</option>
+              <option value="2026-2030">2026-2030</option>
+            </select>
+          </div>
+
+          {/* Filter Button */}
+          <div className="col-span-6 md:col-span-3 lg:col-span-1 flex justify-end relative">
+            <button
+              className="filter-btn flex items-center justify-start px-4 py-2 border w-full"
+              onClick={toggleFilter}
+            >
+              {/* Filter label */}
+              <p className="font-bold text-white">Filter</p>
+              {/* Selected status */}
+              <p className="ml-2 text-sm font-light text-white">
+                (&nbsp;{filterStatus}&nbsp;)
+              </p>
+            </button>
+
+            {/* Filter Dropdown */}
+            {isFilterOpen && (
+              <div className="absolute right-0 mt-2 bg-white border rounded shadow-lg z-10">
+                <ul className="py-2">
+                  <li
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-200"
+                    onClick={() => handleFilterChange("All")}
+                  >
+                    All
+                  </li>
+                  <li
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-200"
+                    onClick={() => handleFilterChange("Confirmed")}
+                  >
+                    Confirmed
+                  </li>
+                  <li
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-200"
+                    onClick={() => handleFilterChange("Pending")}
+                  >
+                    Pending
+                  </li>
+                  <li
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-200"
+                    onClick={() => handleFilterChange("Canceled")}
+                  >
+                    Canceled
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+
         </div>
-
-        {/* Date Range Filter */}
-        <div className="col-span-6 md:col-span-3 lg:col-span-1  relative">
-          <select
-            value={filterDateRange}
-            onChange={handleDateRangeChange}
-            className="p-2 border rounded-md w-full bg-gray-100"
-          >
-            <option value="All">All Dates</option>
-            <option value="Before 2010">Before 2010</option>
-            <option value="2011-2015">2011-2015</option>
-            <option value="2016-2020">2016-2020</option>
-            <option value="2021-2025">2021-2025</option>
-            <option value="2026-2030">2026-2030</option>
-          </select>
-        </div>
-
-        {/* Filter Button */}
-        <div className="col-span-6 md:col-span-3 lg:col-span-1 flex justify-end relative">
-          <button
-            className="filter-btn flex items-center justify-start px-4 py-2 border w-full"
-            onClick={toggleFilter}
-          >
-            {/* Filter label */}
-            <p className="font-bold text-white">Filter</p>
-            {/* Selected status */}
-            <p className="ml-2 text-sm font-light text-white">
-              (&nbsp;{filterStatus}&nbsp;)
-            </p>
-          </button>
-
-          {/* Filter Dropdown */}
-          {isFilterOpen && (
-            <div className="absolute right-0 mt-2 bg-white border rounded shadow-lg z-10">
-              <ul className="py-2">
-                <li
-                  className="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleFilterChange("All")}
-                >
-                  All
-                </li>
-                <li
-                  className="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleFilterChange("Confirmed")}
-                >
-                  Confirmed
-                </li>
-                <li
-                  className="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleFilterChange("Pending")}
-                >
-                  Pending
-                </li>
-                <li
-                  className="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleFilterChange("Canceled")}
-                >
-                  Canceled
-                </li>
-              </ul>
-            </div>
-          )}
-        </div>
-
-      </div>
 
       {/* Table */}
       <div className="overflow-x-auto max-w-full custom-scrollbar">
@@ -240,9 +240,9 @@ const BookingTable = () => {
                       <span className="group-hover:text-gray-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
                         <Eye />
                       </span>
-                      <span className="hidden lg:block group-hover:text-gray-700 transition-colors duration-200 ease-in-out">
+                      {/* <span className="hidden lg:block group-hover:text-gray-700 transition-colors duration-200 ease-in-out">
                         View
-                      </span>
+                      </span> */}
                     </button>
                     <button
                       className="hover:cursor-pointer text-green-500 group flex items-center space-x-1"
@@ -251,9 +251,9 @@ const BookingTable = () => {
                       <span className="group-hover:text-green-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
                         <UserRoundPen />
                       </span>
-                      <span className="hidden lg:block group-hover:text-green-700 transition-colors duration-200 ease-in-out">
+                      {/* <span className="hidden lg:block group-hover:text-green-700 transition-colors duration-200 ease-in-out">
                         Edit
-                      </span>
+                      </span> */}
                     </button>
 
                     <button
@@ -263,9 +263,9 @@ const BookingTable = () => {
                       <span className="group-hover:text-red-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
                         <Trash2 />
                       </span>
-                      <span className="hidden lg:block group-hover:text-red-700 transition-colors duration-200 ease-in-out">
+                      {/* <span className="hidden lg:block group-hover:text-red-700 transition-colors duration-200 ease-in-out">
                         Delete
-                      </span>
+                      </span> */}
                     </button>
                   </td>
                 </tr>
