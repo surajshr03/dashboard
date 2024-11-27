@@ -71,6 +71,7 @@ const Setting = () => {
               </div>
           </div>
         </div>
+        <button className="flex mt-2 justify-start items-center bg-black text-sm text-white px-4 py-3 shadow-md rounded-lg max-w-36">Save all changes</button>
       </div>
     </>
   )
