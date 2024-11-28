@@ -1,7 +1,10 @@
 "use client";
 import { Eye, Trash2, UserRoundPen, Search } from "lucide-react"; // Import the Search icon
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import "@/components/dashboard/CSS/dashboard.css";
+
+import { Users } from "@/data/data";
+import { UserProps } from "@/data/type";
 
 const UserTable = () => {
   // State for filter dropdown visibility
@@ -9,51 +12,8 @@ const UserTable = () => {
   const [filterRole, setFilterRole] = useState("All");
   const [searchQuery, setSearchQuery] = useState(""); // Search state
 
-  // Mock data for users
-  const [users] = useState([
-    {
-      id: 1,
-      name: "John Doe",
-      email: "user@gmail.com",
-      date: "2023-05-01",
-      role: "admin",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane@gmail.com",
-      date: "2023-05-02",
-      role: "superadmin",
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      email: "bob@gmail.com",
-      date: "2023-05-03",
-      role: "customer",
-    },
-    {
-      id: 4,
-      name: "John Doe",
-      email: "user@gmail.com",
-      date: "2023-05-01",
-      role: "admin",
-    },
-    {
-      id: 5,
-      name: "Jane Smith",
-      email: "jane@gmail.com",
-      date: "2023-05-02",
-      role: "customer",
-    },
-    {
-      id: 6,
-      name: "Bob Johnson",
-      email: "bob@gmail.com",
-      date: "2023-05-03",
-      role: "customer",
-    },
-  ]);
+  const [selectedUser, setSelectedUser]=useState<UserProps | null>(null);
+
 
   // Toggle filter dropdown
   const toggleFilter = () => {
@@ -61,18 +21,20 @@ const UserTable = () => {
   };
 
   // Function to handle filter change
-  const handleFilterChange = (role) => {
+  const handleFilterChange = (role: SetStateAction<string>) => {
     setFilterRole(role);
     setFilterOpen(false); // Close the dropdown after selection
   };
 
   // Function to handle search input change
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
     setSearchQuery(e.target.value);
   };
 
   // Function to filter users based on selected filter (role) and search query
-  const filteredUsers = users.filter((user) => {
+  const filteredUsers = Users.filter((user) => {
     const matchesRole = filterRole === "All" || user.role === filterRole;
 
     const matchesSearch = user.name
@@ -82,15 +44,20 @@ const UserTable = () => {
     return matchesRole && matchesSearch;
   });
 
+  //function to show popUp overlay for user details and close it 
+  const handleViewDetails = (user:UserProps)=>{
+    setSelectedUser(user)
+  };
+  const closePopup=()=>{
+    setSelectedUser(null);
+  }
+
   return (
     <div className="wrapper">
       <h5 className="title ">Manage Users</h5>
-      <h6 className="sub-title">
-        Manage system users and their roles
-      </h6>
+      <h6 className="sub-title">Manage system users and their roles</h6>
       {/* Search and Filter Section */}
       <div className="grid grid-cols-6 gap-4 my-6">
-
         {/* Search Input */}
         <div className="col-span-6 lg:col-span-4 relative">
           <input
@@ -151,7 +118,6 @@ const UserTable = () => {
             </div>
           )}
         </div>
-
       </div>
 
       {/* Table */}
@@ -188,17 +154,17 @@ const UserTable = () => {
                   </td>
 
                   <td className="p-2 flex space-x-2 justify-between">
-                    <button className="hover:cursor-pointer text-gray-500 group flex items-center space-x-1">
+                    <button onClick={()=>{handleViewDetails(user)}} className="hover:cursor-pointer text-gray-500 group flex items-center space-x-1">
                       <Eye className="group-hover:text-gray-700 group-hover:scale-125 transition-transform duration-200 ease-in-out" />
-                      <span className="group-hover:text-gray-700 hidden lg:block">
+                      {/* <span className="group-hover:text-gray-700 hidden lg:block">
                         Detail
-                      </span>
+                      </span> */}
                     </button>
                     <button className="hover:cursor-pointer text-green-500 group flex items-center space-x-1">
                       <UserRoundPen className="group-hover:text-green-700 group-hover:scale-125 transition-transform duration-200 ease-in-out" />
-                      <span className="group-hover:text-green-700 hidden lg:block">
+                      {/* <span className="group-hover:text-green-700 hidden lg:block">
                         Edit
-                      </span>
+                      </span> */}
                     </button>
 
                     <button
@@ -211,7 +177,7 @@ const UserTable = () => {
                       disabled={user.role.toLowerCase() === "superadmin"}
                     >
                       <Trash2 className="group-hover:text-red-700 group-hover:scale-125 transition-transform duration-200 ease-in-out" />
-                      <span
+                      {/* <span
                         className={`hidden lg:block ${
                           user.role.toLowerCase() === "superadmin"
                             ? "text-gray-400"
@@ -219,19 +185,61 @@ const UserTable = () => {
                         }`}
                       >
                         Delete
-                      </span>
+                      </span> */}
                     </button>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="p-2 text-center">No users found</td>
+                <td colSpan="5" className="p-2 text-center">
+                  No users found
+                </td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
+      {/* POP UP OVERLAY */}
+      {selectedUser && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
+            <h2 className="text-2xl font-bold mb-4 text-center">
+              User Details
+            </h2>
+            <div className="flex flex-col">
+              <strong className="text-lg">ID:</strong>
+              <p>{selectedUser.id}</p>
+            </div>
+            <div className="flex flex-col">
+              <strong className="text-lg">Name:</strong>
+              <p> {selectedUser.name}</p>
+            </div>
+
+            <div className="flex flex-col">
+              <strong className="text-lg">Email:</strong>
+              <p>{selectedUser.email}</p>
+            </div>
+            <div className="flex flex-col">
+              <strong className="text-lg">Date:</strong>
+              <p>{selectedUser.date}</p>
+            </div>
+            <div className="flex flex-col">
+              <strong className="text-lg">Role:</strong>
+              <p>{selectedUser.role}</p>
+            </div>
+
+            <div className="mt-6 flex flex-col justify-center items-center">
+              <button
+                className=" px-4 py-2  bg-gray-300 text-gray-800 rounded-md"
+                onClick={closePopup}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

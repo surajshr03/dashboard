@@ -7,3 +7,19 @@ export type TransactionProps = {
   type:string;
   status: string;
 };
+
+export type UserProps ={
+  id: number,
+  name: string,
+  email: string,
+  date: string,
+  role: string,
+};
+
+export type BookingProps ={
+  id: number,
+  name: string,
+  book: string,
+  date: string,
+  status: string,
+}

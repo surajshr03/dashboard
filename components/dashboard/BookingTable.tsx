@@ -1,7 +1,9 @@
 "use client";
 import { Eye, Search, Trash2, UserRoundPen } from "lucide-react";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import "@/components/dashboard/CSS/dashboard.css";
+import { Bookings } from "@/data/data";
+import { BookingProps } from "@/data/type";
 
 const BookingTable = () => {
   // State for filter dropdown visibility
@@ -10,51 +12,7 @@ const BookingTable = () => {
   const [searchQuery, setSearchQuery] = useState(""); // Search state
   const [filterDateRange, setFilterDateRange] = useState("All"); // State for selected date range filter
 
-  // Mock data for bookings
-  const [bookings] = useState([
-    {
-      id: 1,
-      customer: "John Doe",
-      book: "The Great Gatsby",
-      date: "2005-05-01",
-      status: "Confirmed",
-    },
-    {
-      id: 2,
-      customer: "Jane Smith",
-      book: "To Kill a Mockingbird",
-      date: "2012-05-02",
-      status: "Pending",
-    },
-    {
-      id: 3,
-      customer: "Bob Johnson",
-      book: "1984",
-      date: "2018-05-03",
-      status: "Canceled",
-    },
-    {
-      id: 4,
-      customer: "Emilia",
-      book: "The Awakening",
-      date: "2020-05-01",
-      status: "Confirmed",
-    },
-    {
-      id: 5,
-      customer: "Suraj",
-      book: "Fifty Shades Of Gray",
-      date: "2015-05-02",
-      status: "Pending",
-    },
-    {
-      id: 6,
-      customer: "Paulo",
-      book: "In Winter",
-      date: "2022-05-03",
-      status: "Canceled",
-    },
-  ]);
+ const [selectedBooking, setSelectedBooking]= useState<BookingProps | null>(null);
 
   // Toggle filter dropdown
   const toggleFilter = () => {
@@ -62,23 +20,31 @@ const BookingTable = () => {
   };
 
   // Function to handle filter change
-  const handleFilterChange = (status) => {
+  const handleFilterChange = (status: SetStateAction<string>) => {
     setFilterStatus(status);
     setFilterOpen(false); // Close the dropdown after selection
   };
 
   // Function to handle search input change
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     setSearchQuery(e.target.value);
   };
 
   // Function to handle date range filter change
-  const handleDateRangeChange = (e) => {
+  const handleDateRangeChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     setFilterDateRange(e.target.value);
   };
 
+  //function for popup detail display and close it
+  const handleViewDetails = (booking:BookingProps)=>{
+   setSelectedBooking(booking);
+  };
+  const closePopup =()=>{
+    setSelectedBooking(null);
+  }
+
   // Function to filter bookings based on selected filter (status, date range) and search query
-  const filteredBookings = bookings.filter((booking) => {
+  const filteredBookings = Bookings.filter((booking) => {
     const matchesStatus =
       filterStatus === "All" || booking.status === filterStatus;
 
@@ -106,8 +72,9 @@ const BookingTable = () => {
     return matchesStatus && matchesSearch && matchesDateRange;
   });
 
+
   return (
-    <div className="wrapper">
+    <div className="wrapper" >
       <h5 className="title">Manage Bookings</h5>
       <h6 className="sub-title">Manage and view bookings</h6>
 
@@ -211,7 +178,7 @@ const BookingTable = () => {
               filteredBookings.map((booking) => (
                 <tr key={booking.id} className="border-b">
                   <td className="p-2 text-dark-inactive-title">
-                    {booking.customer}
+                    {booking.id}
                   </td>
                   <td className="p-2 text-dark-inactive-title">
                     {booking.book}
@@ -234,6 +201,9 @@ const BookingTable = () => {
                   </td>
                   <td className="p-2 flex space-x-2 justify-between">
                     <button
+                    onClick={()=>{
+                      handleViewDetails(booking)
+                    }}
                       className="hover:cursor-pointer text-gray-500 group flex items-center space-x-1"
                       title="Detail"
                     >
@@ -280,6 +250,47 @@ const BookingTable = () => {
           </tbody>
         </table>
       </div>
+      
+      {/* View Detail PopUp */}
+      {selectedBooking && 
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+      <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          User Details
+        </h2>
+        <div className="flex flex-col">
+          <strong className="text-lg">ID:</strong>
+          <p>{selectedBooking.id}</p>
+        </div>
+        <div className="flex flex-col">
+          <strong className="text-lg">Customer Name:</strong>
+          <p> {selectedBooking.name}</p>
+        </div>
+
+        <div className="flex flex-col">
+          <strong className="text-lg">Book:</strong>
+          <p>{selectedBooking.book}</p>
+        </div>
+        <div className="flex flex-col">
+          <strong className="text-lg">Date:</strong>
+          <p>{selectedBooking.date}</p>
+        </div>
+        <div className="flex flex-col">
+          <strong className="text-lg">Status:</strong>
+          <p>{selectedBooking.status}</p>
+        </div>
+
+        <div className="mt-6 flex flex-col justify-center items-center">
+          <button
+            className=" px-4 py-2  bg-gray-300 text-gray-800 rounded-md"
+            onClick={closePopup}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+      }
     </div>
   );
 };
