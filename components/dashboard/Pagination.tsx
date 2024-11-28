@@ -8,7 +8,7 @@ const Pagination = ({ items, pageSize, currentPage, onPageChange }:PaginationPro
     const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
 
     return (
-        <div className="flex justify-between items-center p-6 bg-gray-50">
+        <div className="flex w-max md:w-full justify-between items-center p-6 bg-gray-50">
             <p className="text-sm font-medium text-gray-500 ">
                 Showing {pageSize * (currentPage - 1) + 1} -{" "}
                 {Math.min(pageSize * currentPage, items)} of {items} results
@@ -51,6 +51,7 @@ const Pagination = ({ items, pageSize, currentPage, onPageChange }:PaginationPro
                             }`}
                     >
                         {page}
+                        
                     </button>
                 ))}
 

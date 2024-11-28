@@ -31,7 +31,6 @@ export const Activities = [
     type: "Transaction",
   },
 ];
-
 export const Transaction: TransactionProps[] = [
   {
     id: 1,
@@ -222,7 +221,6 @@ export const Transaction: TransactionProps[] = [
     status: "Confirmed",
   },
 ];
-
 export const Users :UserProps[]=[
     {
       id: 1,
@@ -354,3 +352,77 @@ export const Bookings:BookingProps[] = [
     },
 
 ]
+export const Notifications = [
+  {
+    id: 1,
+    description: "Your payment of Rs. 5,000 has been successfully processed.",
+    date: "2024-11-27",
+    time: "10:45 AM",
+    type: "Confirmed", // Types: Confirmed, Pending, Canceled
+  },
+  {
+    id: 2,
+    description: "Your refund request for Order #12345 is pending.",
+    date: "2024-11-27",
+    time: "02:15 PM",
+    type: "Pending",  
+  },
+  {
+    id: 3,
+    description:
+      "Your subscription renewal was canceled due to a payment failure.",
+    date: "2024-11-26",
+    time: "09:30 AM",
+    type: "Canceled",
+  },
+  {
+    id: 4,
+    description: "Your booking for Hotel Sunshine has been confirmed.",
+    date: "2024-11-25",
+    time: "08:00 AM",
+    type: "Confirmed",
+  },
+  {
+    id: 5,
+    description: "The delivery of your order #78965 is pending.",
+    date: "2024-11-25",
+    time: "05:20 PM",
+    type: "Pending",
+  },
+  {
+    id: 6,
+    description: "Your ride to the airport was canceled by the driver.",
+    date: "2024-11-24",
+    time: "03:10 PM",
+    type: "Canceled",
+  },
+  {
+    id: 7,
+    description:
+      "Your table reservation for 2 at The Italian Bistro is confirmed.",
+    date: "2024-11-24",
+    time: "11:50 PM",
+    type: "Confirmed",
+  },
+  {
+    id: 8,
+    description: "Your request to change the delivery address is pending.",
+    date: "2024-11-23",
+    time: "06:40 AM",
+    type: "Pending",
+  },
+  {
+    id: 9,
+    description: "The scheduled meeting for Project X has been canceled.",
+    date: "2024-11-23",
+    time: "01:15 PM",
+    type: "Canceled",
+  },
+  {
+    id: 10,
+    description: "Your appointment with Dr. Smith on Nov 30 is confirmed.",
+    date: "2024-11-22",
+    time: "04:30 PM",
+    type: "Confirmed",
+  },
+];

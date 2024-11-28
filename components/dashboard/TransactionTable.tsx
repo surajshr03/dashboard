@@ -179,7 +179,7 @@ const TransactionTable = () => {
 
       </div>
       {/* TransactionTable */}
-      <div className="thisistableDIV">
+      <div className="overflow-x-auto max-w-full custom-scrollbar">
         <table className="table-auto w-full border-collapse p-4 ">
           <thead className="bg-gray-100 text-left border-b-2">
             <tr>
@@ -209,6 +209,7 @@ const TransactionTable = () => {
                 <td className="p-2 text-dark-inactive-title">{transaction.date}</td>
                 <td className="p-2 text-dark-inactive-title">Rs. {transaction.amount}</td>
                 <td className="flex gap-6 p-2 text-dark-inactive-title ">
+
                   <button onClick={() => handleViewDetails(transaction)} className="btn bg-active-gray text-sm hover:cursor-pointer text-darkest-inactive-title group flex items-center space-x-1">
                     View Details
                   </button>
@@ -219,12 +220,14 @@ const TransactionTable = () => {
           </tbody>
         </table>
         {/* Pagination */}
-        <Pagination
-          items={filteredTransactions.length} // 100
-          currentPage={currentPage} // 1
-          pageSize={pageSize} // 10
-          onPageChange={onPageChange}
-        />
+        <div className="w-full ">
+          <Pagination
+            items={filteredTransactions.length} // 100
+            currentPage={currentPage} // 1
+            pageSize={pageSize} // 10
+            onPageChange={onPageChange}
+          />
+        </div>
       </div>
       {/* POPUP OverLAy */}
       {selectedTransaction &&
