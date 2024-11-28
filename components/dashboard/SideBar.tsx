@@ -1,6 +1,20 @@
 "use client";
-import { BadgeDollarSign, BookOpen, Calendar, CheckCheckIcon, ChevronDown, ClipboardCopy, Computer, FileChartColumn, LayoutDashboard, List, Settings, Users } from "lucide-react";
+import {
+  BadgeDollarSign,
+  BellRing,
+  BookOpen,
+  Calendar,
+  ChevronDown,
+  ClipboardCopy,
+  Computer,
+  FileChartColumn,
+  LayoutDashboard,
+  List,
+  Settings,
+  Users,
+} from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 type SideBarProps = {
@@ -8,6 +22,9 @@ type SideBarProps = {
 };
 
 const SideBar = ({ isVisible }: SideBarProps) => {
+  const pathname = usePathname();
+  // console.log(pathname);
+
   const [isBookingsOpen, setIsBookingsOpen] = useState(false);
   const [isUserManagementOpen, setIsUserManagementOpen] = useState(false);
 
@@ -20,138 +37,163 @@ const SideBar = ({ isVisible }: SideBarProps) => {
   };
 
   return (
-    <div className={`fixed top-0 left-0 z-20 h-full w-64  p-5 border-r-2 border-gray  bg-white text-black transform ${isVisible ? "translate-x-0" : "-translate-x-full"
-      } transition-transform duration-300`}  >
+    <div
+      className={`fixed top-0 left-0 z-20 h-full w-64 p-5 border-r-2 border-gray bg-white text-black transform ${
+        isVisible ? "translate-x-0" : "-translate-x-full"
+      } transition-transform duration-300`}
+    >
       {/* Sidebar Header */}
       <Link href="/">
-        <div className="text-2xl font-bold mb-8">Kitab<span className="text-brand">Yatra</span></div>
+        <div className="text-2xl font-bold mb-8">
+          Kitab<span className="text-brand">Yatra</span>
+        </div>
       </Link>
 
       {/* Navigation Menu */}
       <nav>
         <ul className="space-y-2">
           {/* Dashboard Link */}
-          <li className="flex items-center p-2 bg-active-gray rounded">
+          <li
+            className="flex items-center p-2 rounded text-sm bg-active-gray">
             <LayoutDashboard className="mr-2" />
-            <Link href="/dashboard" className="block w-full rounded text-sm">
+            <Link href="/dashboard" className="block w-full rounded">
               Dashboard
             </Link>
           </li>
 
           {/* Manage Bookings Dropdown */}
-          <li>
+          <li className="cursor-pointer">
             <div
               onClick={toggleBookings}
-              className="flex items-center justify-between w-full p-2 rounded hover:bg-active-gray cursor-pointer text-sm"
+              className="flex items-center justify-between w-full p-2 rounded text-sm hover:bg-active-gray"
             >
               <div className="flex items-center">
                 <Calendar className="mr-2" />
                 <span>Manage Bookings</span>
               </div>
               <ChevronDown
-                className={`transition-transform duration-300 ${isBookingsOpen ? "rotate-180" : "rotate-0"
-                  }`}
+                className={`transition-transform duration-300 ${
+                  isBookingsOpen ? "rotate-180" : "rotate-0"
+                }`}
                 size={18}
               />
             </div>
-            {/* Dropdown Items for "Manage Bookings" */}
             {isBookingsOpen && (
               <ul className="pl-8 mt-2 space-y-2">
-                  <li className="flex items-center px-2 rounded hover:bg-active-gray text-sm">
-                    <ClipboardCopy size={20} className="mr-2" />
+                <li
+                  className={`flex items-center px-2 rounded text-sm ${
+                    pathname === "/dashboard/bookings" ? "bg-active-gray" : "hover:bg-active-gray"
+                  }`}
+                >
+                  <ClipboardCopy size={20} className="mr-2" />
                   <Link
                     href="/dashboard/bookings"
-                    className="block p-2 rounded hover:bg-active-gray text-sm grow"
+                    className="block p-2 rounded text-sm grow"
                   >
                     Booking
                   </Link>
                 </li>
-                {/* <li>
-                  <Link
-                    href="/dashboard/bookings"
-                    className="block p-2 rounded hover:bg-active-gray text-sm"
-                  >
-                    Booking
-                  </Link>
-                </li> */}
               </ul>
             )}
           </li>
 
-
           {/* Other Menu Items */}
-          <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
+          <li
+            className={`flex items-center p-2 rounded text-sm ${
+              pathname === "/dashboard/e-books" ? "bg-active-gray" : "hover:bg-active-gray"
+            }`}
+          >
             <Computer className="mr-2" />
             <Link href="/dashboard/e-books" className="block w-full">
-              <span>E-Books</span>
+              E-Books
             </Link>
           </li>
-          <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
+          <li
+            className={`flex items-center p-2 rounded text-sm ${
+              pathname === "/dashboard/books" ? "bg-active-gray" : "hover:bg-active-gray"
+            }`}
+          >
             <BookOpen className="mr-2" />
             <Link href="/dashboard/books" className="block w-full">
-              <span>Manage Books</span>
+              Manage Books
             </Link>
           </li>
-          <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
+          <li
+            className={`flex items-center p-2 rounded text-sm ${
+              pathname === "/dashboard/transactions" ? "bg-active-gray" : "hover:bg-active-gray"
+            }`}
+          >
             <BadgeDollarSign className="mr-2" />
             <Link href="/dashboard/transactions" className="block w-full">
               Transactions
             </Link>
           </li>
 
-
           {/* User Management Dropdown */}
-          <li>
+          <li className="cursor-pointer">
             <div
               onClick={toggleUserManagement}
-              className="flex items-center justify-between w-full p-2 rounded hover:bg-active-gray cursor-pointer text-sm"
+              className="flex items-center justify-between w-full p-2 rounded text-sm hover:bg-active-gray"
             >
               <div className="flex items-center">
                 <Users className="mr-2" />
                 <span>User Management</span>
               </div>
               <ChevronDown
-                className={`transition-transform duration-300 ${isUserManagementOpen ? "rotate-180" : "rotate-0"
-                  }`}
+                className={`transition-transform duration-300 ${
+                  isUserManagementOpen ? "rotate-180" : "rotate-0"
+                }`}
                 size={18}
               />
             </div>
-            {/* Dropdown Items for "User Management" */}
             {isUserManagementOpen && (
               <ul className="pl-8 mt-2 space-y-2">
-                <li className="flex items-center px-2 rounded hover:bg-active-gray text-sm">
+                <li
+                  className={`flex items-center px-2 rounded text-sm ${
+                    pathname === "/dashboard/users" ? "bg-active-gray" : "hover:bg-active-gray"
+                  }`}
+                >
                   <List size={20} className="mr-2" />
                   <Link
                     href="/dashboard/users"
-                    className="block p-2 rounded hover:bg-active-gray text-sm grow"
+                    className="block p-2 rounded text-sm grow"
                   >
                     User List
                   </Link>
                 </li>
-                {/* <li>
-                  <Link
-                    href="/dashboard/users"
-                    className="block p-2 rounded hover:bg-active-gray text-sm"
-                  >
-                    Add New User
-                  </Link>
-                </li> */}
               </ul>
             )}
           </li>
 
-          {/* Remaining Menu Items */}
-          <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
+          <li
+            className={`flex items-center p-2 rounded text-sm ${
+              pathname === "/dashboard/notifications" ? "bg-active-gray" : "hover:bg-active-gray"
+            }`}
+          >
+            <BellRing className="mr-2" />
+            <Link href="/dashboard/notifications" className="block w-full">
+              Notifications
+            </Link>
+          </li>
+          <li
+            className={`flex items-center p-2 rounded text-sm ${
+              pathname === "/dashboard/reports" ? "bg-active-gray" : "hover:bg-active-gray"
+            }`}
+          >
             <FileChartColumn className="mr-2" />
             <Link href="/dashboard/reports" className="block w-full">
-              <span>Reports</span>
+              Reports
             </Link>
           </li>
 
-          <li className="flex items-center p-2 rounded hover:bg-active-gray text-sm">
+          <li
+            className={`flex items-center p-2 rounded text-sm ${
+              pathname === "/dashboard/settings" ? "bg-active-gray" : "hover:bg-active-gray"
+            }`}
+          >
             <Settings className="mr-2" />
             <Link href="/dashboard/settings" className="block w-full">
-              <span>Settings</span>
+              Settings
             </Link>
           </li>
         </ul>
