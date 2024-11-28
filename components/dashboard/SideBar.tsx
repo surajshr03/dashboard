@@ -61,7 +61,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
                     <ClipboardCopy size={20} className="mr-2" />
                   <Link
                     href="/dashboard/bookings"
-                    className="block p-2 rounded hover:bg-active-gray text-sm"
+                    className="block p-2 rounded hover:bg-active-gray text-sm grow"
                   >
                     Booking
                   </Link>
@@ -123,7 +123,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
                   <List size={20} className="mr-2" />
                   <Link
                     href="/dashboard/users"
-                    className="block p-2 rounded hover:bg-active-gray text-sm"
+                    className="block p-2 rounded hover:bg-active-gray text-sm grow"
                   >
                     User List
                   </Link>

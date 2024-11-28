@@ -1,4 +1,4 @@
-import { TransactionProps } from "./type";
+import { BookingProps, TransactionProps, UserProps } from "./type";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const Activities = [
@@ -222,3 +222,135 @@ export const Transaction: TransactionProps[] = [
     status: "Confirmed",
   },
 ];
+
+export const Users :UserProps[]=[
+    {
+      id: 1,
+      name: "John Doe",
+      email: "user@gmail.com",
+      date: "2023-05-01",
+      role: "admin",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      email: "jane@gmail.com",
+      date: "2023-05-02",
+      role: "superadmin",
+    },
+    {
+      id: 3,
+      name: "Bob Johnson",
+      email: "bob@gmail.com",
+      date: "2023-05-03",
+      role: "customer",
+    },
+    {
+      id: 4,
+      name: "John Doe",
+      email: "user@gmail.com",
+      date: "2023-05-01",
+      role: "admin",
+    },
+    {
+      id: 5,
+      name: "Jane Smith",
+      email: "jane@gmail.com",
+      date: "2023-05-02",
+      role: "customer",
+    },
+    {
+      id: 6,
+      name: "Bob Johnson",
+      email: "bob@gmail.com",
+      date: "2023-05-03",
+      role: "customer",
+    }
+]
+export const Bookings:BookingProps[] = [
+    {
+      id: 1,
+      name: "John Doe",
+      book: "The Great Gatsby",
+      date: "2005-05-01",
+      status: "Confirmed",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      book: "To Kill a Mockingbird",
+      date: "2012-05-02",
+      status: "Pending",
+    },
+    {
+      id: 3,
+      name: "Bob Johnson",
+      book: "1984",
+      date: "2018-05-03",
+      status: "Canceled",
+    },
+    {
+      id: 4,
+      name: "Emilia",
+      book: "The Awakening",
+      date: "2020-05-01",
+      status: "Confirmed",
+    },
+    {
+      id: 5,
+      name: "Suraj",
+      book: "Fifty Shades Of Gray",
+      date: "2015-05-02",
+      status: "Pending",
+    },
+    {
+      id: 6,
+      name: "Paulo",
+      book: "In Winter",
+      date: "2022-05-03",
+      status: "Canceled",
+    },
+    {
+      id: 11,
+      name: "John Doe",
+      book: "The Great Gatsby",
+      date: "2005-05-01",
+      status: "Confirmed",
+    },
+    {
+      id: 12,
+      name: "Jane Smith",
+      book: "To Kill a Mockingbird",
+      date: "2012-05-02",
+      status: "Pending",
+    },
+    {
+      id: 13,
+      name: "Bob Johnson",
+      book: "1984",
+      date: "2018-05-03",
+      status: "Canceled",
+    },
+    {
+      id: 14,
+      name: "Emilia",
+      book: "The Awakening",
+      date: "2020-05-01",
+      status: "Confirmed",
+    },
+    {
+      id: 15,
+      name: "Suraj",
+      book: "Fifty Shades Of Gray",
+      date: "2015-05-02",
+      status: "Pending",
+    },
+    {
+      id: 16,
+      name: "Paulo",
+      book: "In Winter",
+      date: "2022-05-03",
+      status: "Canceled",
+    },
+
+]
