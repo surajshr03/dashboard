@@ -152,6 +152,75 @@ export const Transaction: TransactionProps[] = [
     type: "Transaction",
     status: "Pending",
   },
+  {
+    id: 13,
+    amount: "2500",
+
+    description: 'Book stock update: "1984" - 50 copies added',
+    time: "3 hours ago",
+    date: "2024-12-24",
+    type: "Transaction",
+    status: "Canceled",
+  },
+  {
+    id: 14,
+    amount: "2000",
+    description: 'Book stock update: "1984" - 50 copies added',
+    time: "3 hours ago",
+    date: "2024-12-24",
+    type: "Transaction",
+    status: "Confirmed",
+  },
+  {
+    id: 15,
+    amount: "12500",
+
+    description: 'Book stock update: "1984" - 50 copies added',
+    time: "3 hours ago",
+    date: "2024-12-24",
+    type: "Transaction",
+    status: "Pending",
+  },
+  {
+    id: 16,
+    amount: "4500",
+
+    description: 'Book stock update: "1984" - 50 copies added',
+    time: "3 hours ago",
+    date: "2012-12-24",
+    type: "Transaction",
+    status: "Canceled",
+  },
+  {
+    id: 17,
+    amount: "4900",
+
+    description: 'Book stock update: "1984" - 50 copies added',
+    time: "3 hours ago",
+    date: "2017-12-24",
+    type: "Transaction",
+    status: "Pending",
+  },
+  {
+    id: 18,
+    amount: "49000",
+
+    description: 'Book stock update: "1984" - 50 copies added',
+    time: "3 hours ago",
+    date: "2022-12-24",
+    type: "Transaction",
+    status: "Confirmed",
+  },
+  {
+    id: 19,
+    amount: "100",
+
+    description: 'Book stock update: "1984" - 50 copies added',
+    time: "3 hours ago",
+    date: "2022-12-24",
+    type: "Transaction",
+    status: "Confirmed",
+  },
 ];
 
 export const Users :UserProps[]=[

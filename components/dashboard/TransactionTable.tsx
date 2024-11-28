@@ -1,9 +1,10 @@
 'use client'
 import "@/components/dashboard/CSS/dashboard.css";
-import { Search } from 'lucide-react';
-import React, { useState } from 'react';
 import { Transaction } from "@/data/data";
 import { TransactionProps } from "@/data/type";
+import { Search } from 'lucide-react';
+import React, { useState } from 'react';
+import Pagination from "./Pagination";
 
 
 
@@ -14,6 +15,14 @@ const TransactionTable = () => {
   const [filterDateRange, setFilterDateRange] = useState({ start: "", end: "" });
   const [filterAmountRange, setFilterAmountRange] = useState({ min: "", max: "" });
   const [selectedTransaction, setSelectedTransaction] = useState<TransactionProps | null>(null);
+
+  const pageSize = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const onPageChange = (page: React.SetStateAction<number>) => {
+    setCurrentPage(page);
+  };
+
 
   const handleViewDetails = (transaction: TransactionProps) => {
     setSelectedTransaction(transaction);
@@ -50,6 +59,11 @@ const TransactionTable = () => {
 
     return matchesStatus && matchesSearch && matchesAmount && matchesDate;
   });
+
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const currentItems = filteredTransactions.slice(startIndex, startIndex + pageSize);
+
 
   return (
     <div className="wrapper">
@@ -176,8 +190,8 @@ const TransactionTable = () => {
               <th className=" p-2 text-dark-inactive-title">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {filteredTransactions.map((transaction) => (
+          <tbody >
+            {currentItems.map((transaction) => (
               <tr key={transaction.id} className="border-b">
                 <td className="p-2 text-dark-inactive-title">{transaction.description.split(' - ')[0]}</td>
                 <td className="p-2 text-dark-inactive-title">
@@ -203,8 +217,14 @@ const TransactionTable = () => {
             ))}
 
           </tbody>
-
         </table>
+        {/* Pagination */}
+        <Pagination
+          items={filteredTransactions.length} // 100
+          currentPage={currentPage} // 1
+          pageSize={pageSize} // 10
+          onPageChange={onPageChange}
+        />
       </div>
       {/* POPUP OverLAy */}
       {selectedTransaction &&
@@ -219,7 +239,7 @@ const TransactionTable = () => {
               <strong className="text-lg">Status:</strong>
               <p> {selectedTransaction.status}</p>
             </div>
-            
+
             <div className="flex flex-col">
               <strong className="text-lg">Date:</strong>
               <p>{selectedTransaction.date}</p>
