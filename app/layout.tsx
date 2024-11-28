@@ -16,23 +16,23 @@ const inter = Inter({
 });
 
 
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const pathName = usePathname(); //gets Current path 
 
-  useEffect(() => {
-    setIsLoading(true);
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 400);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   const timer = setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 100);
 
-    return () => {
-      clearTimeout(timer)
-    };
-  }, [pathName]);
+  //   return () => {
+  //     clearTimeout(timer)
+  //   };
+  // }
+  // , [pathName]);
 
 
   const toggleSearch = () => {
