@@ -13,16 +13,16 @@ const Setting = () => {
           <div className="flex-1 p-6">
             <p className="text-xl font-semibold mb-4">General Settings</p>
             <div className="flex flex-col  py-3 ">
-              <div className="flex  p-3 rounded-md justify-between items-center cursor-pointer hover:bg-active-gray hover:text-black">
+              <div className="flex  text-sm p-3 rounded-md justify-between items-center cursor-pointer hover:bg-active-gray hover:text-black">
                 <p className=''>Booking Policies</p>
                 <ChevronRight size={20} />
               </div>
-              <div className="flex  p-3 rounded-md justify-between items-center cursor-pointer hover:bg-active-gray hover:text-black">
-                <p className=''>Notification preferences
+              <div className="flex  text-sm  p-3 rounded-md justify-between items-center cursor-pointer hover:bg-active-gray hover:text-black">
+                <p className=''>Notification Preferences
                 </p>
                 <ChevronRight size={20} />
               </div>
-              <div className="flex  p-3 rounded-md justify-between items-center cursor-pointer hover:bg-active-gray hover:text-black">
+              <div className="flex  text-sm  p-3 rounded-md justify-between items-center cursor-pointer hover:bg-active-gray hover:text-black">
                 <p className=' '>Dark Mode</p>
                 {
                   <label className="inline-flex items-center cursor-pointer">
@@ -39,7 +39,7 @@ const Setting = () => {
             <p className="text-xl font-semibold mb-4">Security Settings</p>
             <div className="flex flex-col gap-4 py-3">
               <div className="flex  p-3 rounded-md justify-between items-center cursor-pointer hover:bg-active-gray hover:text-black">
-                <p className=''>Two factor authentication(2FA)</p>
+                <p className=' text-sm '>Two factor authentication(2FA)</p>
                 {<>
                   <label className="inline-flex items-center cursor-pointer">
                     <input type="checkbox" value="" className="sr-only peer" />
@@ -57,17 +57,17 @@ const Setting = () => {
             <p className="text-xl font-semibold mb-4">System Settings</p>
             <div className="flex flex-col py-3">
               <div className="flex  p-3 rounded-md justify-between items-center cursor-pointer hover:bg-active-gray hover:text-black">
-                <p className=''>Manage Passwords and Policies</p>
+                <p className=' text-sm '>Manage Passwords and Policies</p>
                 <ChevronRight size={20} />
               </div>
               <div className="flex  p-3 rounded-md justify-between items-center cursor-pointer hover:bg-active-gray hover:text-black">
-                <p className=''>View login logs</p>
+                <p className=' text-sm '>View login logs</p>
                 <ChevronRight size={20} />
               </div>
             </div>
             <div className="flex gap-2 cursor-pointer items-center border-t-2 py-3 border-active-gray   p-3 rounded-md  hover:bg-active-gray hover:text-black">
                 <LogOutIcon size={20} />
-                <p className=''>Logout</p>
+              <p className=' text-sm '>Logout</p>
               </div>
           </div>
         </div>

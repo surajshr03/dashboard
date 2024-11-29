@@ -16,9 +16,11 @@ const Breadcrumbs = () => {
       accumulatedPath += "/" + part;  // Build the path incrementally
       return (
         <span key={accumulatedPath} className="flex items-center">
-          {index > 0 && <span className="mx-2 text-gray-500"> &gt; </span>}  {/* Separator */}
-          <Link href={accumulatedPath} className="text-sm text-darkest-inactive-title font-medium hover:underline">
-            {part.charAt(0).toUpperCase() + part.slice(1)}  {/* Capitalize the first letter */}
+          {index > 0 && 
+            <span className=" text-gray-500 text-sm  text-darkest-inactive-title font-medium hover:text-dark-inactive-title">&gt;</span>}
+          {/* Separator */}  
+          <Link href={accumulatedPath} className="text-sm  text-darkest-inactive-title font-medium hover:text-dark-inactive-title">
+           &nbsp;{part.charAt(0).toUpperCase()+part.slice(1)}{/* Capitalize the first letter */}
           </Link>
         </span>
       );
@@ -28,8 +30,7 @@ const Breadcrumbs = () => {
   return (
     <div className="flex items-center justify-end gap-2 ">
       <Link href="/" className="text-sm text-inactive-title font-medium ">
-      Home &nbsp; &gt;
-      </Link>
+      Home &gt;</Link>
       
       {buildBreadcrumbs()}
     </div>
