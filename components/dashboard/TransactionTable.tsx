@@ -3,7 +3,7 @@ import "@/components/dashboard/CSS/dashboard.css";
 import { Transaction } from "@/data/data";
 import { TransactionProps } from "@/data/type";
 import { Search } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Pagination from "./Pagination";
 
 
@@ -60,9 +60,25 @@ const TransactionTable = () => {
     return matchesStatus && matchesSearch && matchesAmount && matchesDate;
   });
 
-
   const startIndex = (currentPage - 1) * pageSize;
   const currentItems = filteredTransactions.slice(startIndex, startIndex + pageSize);
+
+  // Close popup on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closePopup();
+      }
+    }; 
+    if (selectedTransaction) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedTransaction]);
+
 
 
   return (
