@@ -5,8 +5,8 @@ import SideBar from "@/components/dashboard/SideBar";
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Metadata } from "@/components/Metadata";
 import "./globals.css";
-import { Metadata } from "@/components/Metadata"
 
 const inter = Inter({
   weight: ["400", "700"],
@@ -15,42 +15,26 @@ const inter = Inter({
   display: "swap",
 });
 
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const pathName = usePathname(); //gets Current path 
+  const pathName = usePathname();
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   const timer = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 100);
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 300); // Smooth loading delay
+    setIsLoading(true); // Trigger loading state on path change
 
-  //   return () => {
-  //     clearTimeout(timer)
-  //   };
-  // }
-  // , [pathName]);
+    return () => clearTimeout(timer);
+  }, [pathName]);
 
-
-  const toggleSearch = () => {
-    setIsSearchOpen(!isSearchOpen)
-  }
-
-  const toggleSidebar = () => {
-    setSidebarVisible((prevState) => !prevState);
-  };
+  const toggleSearch = () => setIsSearchOpen((prev) => !prev);
+  const toggleSidebar = () => setSidebarVisible((prev) => !prev);
 
   return (
     <html lang="en">
-      {/* <Head>
-        <title>KitabYatra</title>
-        <link type="image/ico" rel="icon" href="/favicon.ico" />
-      </Head> */}
       <body className={`${inter.className}`}>
-        <div className="flex w-full h-screen overflow-auto ">
+        <div className="flex w-full h-screen overflow-auto">
           {/* Sidebar */}
           <SideBar isVisible={isSidebarVisible} />
 
@@ -60,18 +44,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }`}
           >
             {/* Navbar */}
-            <NavBar isSearchOpen={isSearchOpen} onSearchClick={toggleSearch} onHamburgerClick={toggleSidebar} isSidebarVisible={isSidebarVisible} />
+            <NavBar
+              isSearchOpen={isSearchOpen}
+              onSearchClick={toggleSearch}
+              onHamburgerClick={toggleSidebar}
+              isSidebarVisible={isSidebarVisible}
+            />
 
             {/* Page Content */}
-            {isLoading ? <Loading isSidebarVisible={isSidebarVisible} isLoading={isLoading} /> :
-              <div className="flex-1 w-screen md:w-full overflow-hidden p-4 md:p-8 ">
-
-                {children}
-              </div>
-            }
+            <div className="flex-1 w-screen md:w-full overflow-hidden p-4 md:p-8">
+              {isLoading ? (
+                <Loading isSidebarVisible={isSidebarVisible} isLoading={isLoading} />
+              ) : (
+                children
+              )}
+            </div>
           </div>
         </div>
-
       </body>
     </html>
   );

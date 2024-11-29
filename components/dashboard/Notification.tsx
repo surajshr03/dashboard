@@ -14,12 +14,17 @@ const Notification = () => {
   }
   return (
     <div className="">
-      <div className="mb-6">
-        <p className="mb-6 text-3xl font-bold">
-          Notifications
-        </p>
-        <Breadcrumbs />
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-2 mb-6">
+        <div>
+          <p className="text-3xl font-bold">
+            Notifications
+          </p>
+        </div>
+        <div>
+          <Breadcrumbs />
+        </div>
       </div>
+
 
       <div className="bg-white border border-active-gray rounded-md shadow-sm">
         <div className="flex-1 p-6">
@@ -31,7 +36,7 @@ const Notification = () => {
             ) :
               notifications.slice(0, 7).map((data) => {
                 return (
-                  <div key={data.id} className='flex justify-between items-center bg-gray-50 p-4 rounded-md'>
+                  <div key={data.id} className='flex flex-col md:flex-row gap-3 justify-between items-center bg-gray-50 p-4 rounded-md'>
                     <div className="flex items-center gap-3">
                       {data.type === 'Confirmed' ?
                         <div className={` ${data.type.toLowerCase() === "confirmed"
@@ -66,7 +71,7 @@ const Notification = () => {
                         </div>
                       </div>
                     </div>
-                    <button onClick={() => handleDismiss(data.id)} className=''>Dismiss</button>
+                    <button onClick={() => handleDismiss(data.id)} className='text-sm hover:bg-bg-gray font-medium p-2 rounded-sm'>Dismiss</button>
                   </div>)
               })}
           </div>
