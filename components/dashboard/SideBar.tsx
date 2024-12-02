@@ -96,7 +96,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
           </li>
 
           {/* Other Menu Items */}
-          <li
+          {/* <li
             className={`flex items-center p-2 rounded text-sm ${pathname === "/dashboard/e-books" ? "bg-active-gray" : "hover:bg-active-gray"
               }`}
           >
@@ -104,7 +104,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
             <Link href="/dashboard/e-books" className="block w-full">
               E-Books
             </Link>
-          </li>
+          </li> */}
           <li
             className={`flex items-center p-2 rounded text-sm ${pathname === "/dashboard/books" ? "bg-active-gray" : "hover:bg-active-gray"
               }`}
@@ -131,7 +131,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
               className="flex items-center justify-between w-full p-2 rounded text-sm hover:bg-active-gray"
             >
               <div className="flex items-center">
-                <Users className="mr-2" />
+                <Users size={20} className="mr-2" />
                 <span>User Management</span>
               </div>
               <ChevronDown

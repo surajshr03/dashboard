@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
-import { format, addDays } from "date-fns";
+import Breadcrumbs from "@/app/dashboard/Breadcrumbs/BreadCrumbs";
 import "@/components/dashboard/CSS/dashboard.css";
-import Link from "next/link";
+import { addDays, format } from "date-fns";
 import { ClipboardCheck } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 const Reports = () => {
   const [reportType, setReportType] = useState<string>("bookings");
@@ -19,12 +20,22 @@ const Reports = () => {
 
   return (
     <div className="space-y-6">
-      <h2 className="title">Reports</h2>
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-2 mb-6">
+        <div>
+          <p className="text-3xl font-bold">
+            Reports
+          </p>
+        </div>
+        <div>
+          <Breadcrumbs />
+        </div>
+      </div>
+
       {/* Generate Report Section */}
       <div className="wrapper space-y-4 ">
         <div>
-          <p className="title text-lg font-medium">Generate Report</p>
-          <p className="sub-title text-sm text-gray-600">Select the type of report and date range</p>
+          <p className="text-xl font-semibold mb-2">Generate Report</p>
+          <p className="sub-title">Select the type of report and date range</p>
         </div>
 
         <div className="space-y-4">

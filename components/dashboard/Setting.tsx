@@ -1,12 +1,18 @@
+import Breadcrumbs from "@/app/dashboard/Breadcrumbs/BreadCrumbs"
 import { ChevronRight, LogOutIcon } from "lucide-react"
 
 const Setting = () => {
   return (
     <>
-      <div className="mb-6">
-        <p className="mb-6 text-3xl font-bold">
-          Settings
-        </p>
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-2 mb-6">
+        <div>
+          <p className="text-3xl font-bold">
+            Settings
+          </p>
+        </div>
+        <div>
+          <Breadcrumbs />
+        </div>
       </div>
       <div className="flex flex-col gap-4 ">
         <div className="bg-white border border-active-gray rounded-md shadow-sm">
@@ -66,9 +72,9 @@ const Setting = () => {
               </div>
             </div>
             <div className="flex gap-2 cursor-pointer items-center border-t-2 py-3 border-active-gray   p-3 rounded-md  hover:bg-active-gray hover:text-black">
-                <LogOutIcon size={20} />
+              <LogOutIcon size={20} />
               <p className=' text-sm '>Logout</p>
-              </div>
+            </div>
           </div>
         </div>
         <button className="flex mt-2 justify-start items-center bg-black text-sm text-white px-4 py-3 shadow-md rounded-lg max-w-36">Save all changes</button>
