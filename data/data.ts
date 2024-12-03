@@ -263,7 +263,49 @@ export const Users :UserProps[]=[
       email: "bob@gmail.com",
       date: "2023-05-03",
       role: "customer",
-    }
+    },
+    {
+      id: 1,
+      name: "John ",
+      email: "j@gmail.com",
+      date: "2023-05-01",
+      role: "admin",
+    },
+    {
+      id: 2,
+      name: "Jane ",
+      email: "jane@gmail.com",
+      date: "2023-05-02",
+      role: "superadmin",
+    },
+    {
+      id: 3,
+      name: "Bob ",
+      email: "bob@gmail.com",
+      date: "2023-05-03",
+      role: "customer",
+    },
+    {
+      id: 4,
+      name: " Doe",
+      email: "user@gmail.com",
+      date: "2023-05-01",
+      role: "admin",
+    },
+    {
+      id: 5,
+      name: "Jane ",
+      email: "jane@gmail.com",
+      date: "2023-05-02",
+      role: "customer",
+    },
+    {
+      id: 6,
+      name: " Johnson",
+      email: "bob@gmail.com",
+      date: "2023-05-03",
+      role: "customer",
+    },
 ]
 export const Bookings:BookingProps[] = [
     {
