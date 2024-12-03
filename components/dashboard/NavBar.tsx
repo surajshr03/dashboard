@@ -1,4 +1,5 @@
 'use client'
+import { Notifications } from '@/data/data';
 import { Bell, BookmarkPlus, Clipboard, FilePlus, LogOutIcon, Moon, Settings, User, UserRoundPlus } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
@@ -10,23 +11,6 @@ type NavBarProps = {
     onSearchClick: () => void;
 };
 
-const Notifications = [{
-    id: 1,
-    title: "Notification 1",
-    description: "This is the description of the first notification.",
-    date: "2023-02-20"
-}, {
-    id: 2,
-    title: "Notification 2",
-    description: "This is the description of the second notification.",
-    date: "2023-02-21"
-},
-{
-    id: 3,
-    title: "Notification 3",
-    description: "This is the description of the third notification.",
-    date: "2023-02-22"
-}]
 const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisible }: NavBarProps) => {
     const [isUserToggled, setIsUserToggled] = useState(false);
     const [isNotificationsToggled, setIsNotificationsToggled] = useState(false);
@@ -50,10 +34,7 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                 !userMenuRef.current.contains(event.target)
                 ||
                 notificationRef.current &&
-                event.target instanceof Node &&
-                !notificationRef.current.contains(event.target)
-
-
+                !notificationRef.current.contains(event.target as Node)
             ) {
                 setIsUserToggled(false);
                 setIsNotificationsToggled(false);
@@ -231,8 +212,7 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                 {/* MOBILE -Notifications*/}
                 <div
                     ref={userMenuRef}
-                    className="relative"
-                >
+                    className="relative">
                     <div
                         onClick={toggleNotifications}
                         className="flex relative items-center  space-x-2 border-none hover:rounded-full hover:bg-active-gray focus:scale-50 cursor-pointer">
@@ -241,12 +221,14 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                         </div>
                     </div>
                     {isNotificationsToggled &&
-                        <div className="absolute right-0 top-full mt-2 z-10 bg-white border border-active-gray shadow-lg w-52 md:w-96 py-2 px-2 rounded-md  "
+                        <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="absolute right-0 top-full mt-2 z-10 bg-white border border-active-gray shadow-lg w-52 md:w-96 py-2 px-2 rounded-md  "
                             role="menu">
                             <div className="px-2">
-                                <p className="px-2 py-2 text-lg font-medium text-black"> Notifications</p></div>
-                            <ul className=" text-xs text-gray-700 dark:text-gray-400" >
-                                {Notifications.map((notifications) =>
+                                <p className="px-2 py-2 text-lg font-medium text-black">Latest Notifications</p></div>
+                            <ul className=" text-sm text-gray-700 dark:text-gray-400" >
+                                {Notifications.slice(0, 5).map((notifications) =>
                                 (
                                     <li key={notifications.id} className='px-2  rounded-md border-b-2 border-active-gray  dark:hover:text-white'>
                                         <p className="block py-2 px-2  rounded-md text-inactive-title ">{notifications.description}</p>
@@ -255,8 +237,16 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                                 )
 
                                 }
-
                             </ul>
+                            <Link
+                                href="/dashboard/notifications"
+
+                                className='font-semibold text-xs text-dark-inactive-title flex justify-center py-2 px-1 hover:text-darkest-inactive-title hover:bg-slate-300'>
+                                <div className="">
+                                    <p>See all notifications</p>
+                                </div>
+                            </Link>
+
                         </div>
                     }
                 </div>

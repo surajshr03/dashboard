@@ -212,7 +212,7 @@ const TransactionTable = () => {
                 <td className="p-2 text-dark-inactive-title">{transaction.description.split(' - ')[0]}</td>
                 <td className="p-2 text-dark-inactive-title">
                   <span
-                    className={`rounded-full text-white text-sm ${transaction.status.toLowerCase() === "confirmed"
+                    className={`rounded-full text-sm ${transaction.status.toLowerCase() === "confirmed"
                       ? "bg-btn-confirmed"
                       : transaction.status.toLowerCase() === "pending"
                         ? "bg-btn-pending"

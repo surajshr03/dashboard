@@ -54,8 +54,8 @@ const SideBar = ({ isVisible }: SideBarProps) => {
         <ul className="space-y-2">
           {/* Dashboard Link */}
           <li
-            className="flex items-center p-2 rounded text-sm hover:bg-active-gray">
-            <LayoutDashboard className="mr-2" />
+            className="text-base flex items-center p-2 rounded  hover:bg-active-gray">
+            <LayoutDashboard size={20} className="mr-2" />
             <Link href="/dashboard" className="block w-full rounded">
               Dashboard
             </Link>
@@ -65,10 +65,10 @@ const SideBar = ({ isVisible }: SideBarProps) => {
           <li className="cursor-pointer">
             <div
               onClick={toggleBookings}
-              className="flex items-center justify-between w-full p-2 rounded text-sm hover:bg-active-gray"
+              className="flex items-center justify-between w-full p-2 rounded text-base hover:bg-active-gray"
             >
               <div className="flex items-center">
-                <Calendar className="mr-2" />
+                <Calendar size={20} className="mr-2" />
                 <span>Manage Bookings</span>
               </div>
               <ChevronDown
@@ -80,7 +80,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
             {isBookingsOpen && (
               <ul className="pl-8 mt-2 space-y-2">
                 <li
-                  className={`flex items-center px-2 rounded text-sm ${pathname === "/dashboard/bookings" ? "bg-active-gray" : "hover:bg-active-gray"
+                  className={`flex items-center px-2 rounded text-base ${pathname === "/dashboard/bookings" ? "bg-active-gray" : "hover:bg-active-gray"
                     }`}
                 >
                   <ClipboardCopy size={20} className="mr-2" />
@@ -106,19 +106,19 @@ const SideBar = ({ isVisible }: SideBarProps) => {
             </Link>
           </li> */}
           <li
-            className={`flex items-center p-2 rounded text-sm ${pathname === "/dashboard/books" ? "bg-active-gray" : "hover:bg-active-gray"
+            className={`flex items-center p-2 rounded text-base ${pathname === "/dashboard/books" ? "bg-active-gray" : "hover:bg-active-gray"
               }`}
           >
-            <BookOpen className="mr-2" />
+            <BookOpen size={20} className="mr-2" />
             <Link href="/dashboard/books" className="block w-full">
               Manage Books
             </Link>
           </li>
           <li
-            className={`flex items-center p-2 rounded text-sm ${pathname === "/dashboard/transactions" ? "bg-active-gray" : "hover:bg-active-gray"
+            className={`flex items-center p-2 rounded text-base ${pathname === "/dashboard/transactions" ? "bg-active-gray" : "hover:bg-active-gray"
               }`}
           >
-            <BadgeDollarSign className="mr-2" />
+            <BadgeDollarSign size={20} className="mr-2" />
             <Link href="/dashboard/transactions" className="block w-full">
               Transactions
             </Link>
@@ -128,7 +128,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
           <li className="cursor-pointer">
             <div
               onClick={toggleUserManagement}
-              className="flex items-center justify-between w-full p-2 rounded text-sm hover:bg-active-gray"
+              className="flex items-center justify-between w-full p-2 rounded text-base hover:bg-active-gray"
             >
               <div className="flex items-center">
                 <Users size={20} className="mr-2" />
@@ -143,13 +143,13 @@ const SideBar = ({ isVisible }: SideBarProps) => {
             {isUserManagementOpen && (
               <ul className="pl-8 mt-2 space-y-2">
                 <li
-                  className={`flex items-center px-2 rounded text-sm ${pathname === "/dashboard/users" ? "bg-active-gray" : "hover:bg-active-gray"
+                  className={`flex items-center px-2 rounded text-base ${pathname === "/dashboard/users" ? "bg-active-gray" : "hover:bg-active-gray"
                     }`}
                 >
                   <List size={20} className="mr-2" />
                   <Link
                     href="/dashboard/users"
-                    className="block p-2 rounded text-sm grow"
+                    className="block p-2 rounded text-base grow"
                   >
                     User List
                   </Link>
@@ -159,29 +159,29 @@ const SideBar = ({ isVisible }: SideBarProps) => {
           </li>
 
           <li
-            className={`flex items-center p-2 rounded text-sm ${pathname === "/dashboard/notifications" ? "bg-active-gray" : "hover:bg-active-gray"
+            className={`flex items-center p-2 rounded text-base ${pathname === "/dashboard/notifications" ? "bg-active-gray" : "hover:bg-active-gray"
               }`}
           >
-            <BellRing className="mr-2" />
+            <BellRing size={20} className="mr-2" />
             <Link href="/dashboard/notifications" className="block w-full">
               Notifications
             </Link>
           </li>
           <li
-            className={`flex items-center p-2 rounded text-sm ${pathname === "/dashboard/reports" ? "bg-active-gray" : "hover:bg-active-gray"
+            className={`flex items-center p-2 rounded text-base ${pathname === "/dashboard/reports" ? "bg-active-gray" : "hover:bg-active-gray"
               }`}
           >
-            <FileChartColumn className="mr-2" />
+            <FileChartColumn size={20} className="mr-2" />
             <Link href="/dashboard/reports" className="block w-full">
               Reports
             </Link>
           </li>
 
           <li
-            className={`flex items-center p-2 rounded text-sm ${pathname === "/dashboard/settings" ? "bg-active-gray" : "hover:bg-active-gray"
+            className={`flex items-center p-2 rounded text-base ${pathname === "/dashboard/settings" ? "bg-active-gray" : "hover:bg-active-gray"
               }`}
           >
-            <Settings className="mr-2" />
+            <Settings size={20} className="mr-2" />
             <Link href="/dashboard/settings" className="block w-full">
               Settings
             </Link>

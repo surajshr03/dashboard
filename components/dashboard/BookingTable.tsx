@@ -1,5 +1,6 @@
 "use client";
-import { Eye, Search, Trash2, UserRoundPen } from "lucide-react";
+import { Cross, Eye, Search, Trash2, UserRoundPen, X } from "lucide-react";
+
 import { SetStateAction, useEffect, useState } from "react";
 import "@/components/dashboard/CSS/dashboard.css";
 import { Bookings } from "@/data/data";
@@ -16,6 +17,7 @@ const BookingTable = () => {
   const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [deleteSelected, setDeleteSelected] = useState<BookingProps | null>(null);
   const onPageChange = (page: React.SetStateAction<number>) => {
     setCurrentPage(page);
   };
@@ -53,6 +55,31 @@ const BookingTable = () => {
   const handleViewDetails = (booking: BookingProps) => {
     setSelectedBooking(booking);
   };
+  const handleDelete = (booking: BookingProps) => {
+    setDeleteSelected(booking);
+  };
+  const closeDeletePopup = () => {
+    setDeleteSelected(null);
+  }
+  const closePopup = () => {
+    setSelectedBooking(null);
+  }
+  // Close popup on Escape key press
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closePopup();
+        closeDeletePopup();
+      }
+    };
+    if (deleteSelected) {
+      window.addEventListener("keydown", handleEscape);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [deleteSelected]);
   const closePopup = () => {
     setSelectedBooking(null);
   };
@@ -110,6 +137,7 @@ const BookingTable = () => {
       <h5 className="title">Manage Bookings</h5>
       <h6 className="sub-title">Manage and view bookings</h6>
 
+
       {/* Search and Filter Section */}
       <div className="grid grid-cols-6 gap-4 my-6">
         {/* Search Input */}
@@ -155,6 +183,7 @@ const BookingTable = () => {
               (&nbsp;{filterStatus}&nbsp;)
             </p>
           </button>
+
           {/* Filter Dropdown */}{" "}
           {isFilterOpen && (
             <div className="absolute right-0 mt-2 bg-white border rounded shadow-lg z-10">
@@ -180,6 +209,8 @@ const BookingTable = () => {
         </div>
       </div>
 
+      </div>
+
       {/* Table */}
       <div className="overflow-x-auto max-w-full custom-scrollbar">
         <table className="table-auto w-full p-4">
@@ -203,14 +234,14 @@ const BookingTable = () => {
                     {booking.book}
                   </td>
                   <td className="p-2 text-dark-inactive-title">
+
                     <span
-                      className={`rounded-full text-white ${
-                        booking.status.toLowerCase() === "confirmed"
-                          ? "bg-btn-confirmed"
-                          : booking.status.toLowerCase() === "pending"
+                      className={`rounded-full w-full text-sm ${booking.status.toLowerCase() === "confirmed"
+                        ? "bg-btn-confirmed"
+                        : booking.status.toLowerCase() === "pending"
                           ? "bg-btn-pending"
                           : "bg-btn-canceled"
-                      }`}
+                        }`}
                     >
                       {booking.status}
                     </span>
@@ -221,12 +252,13 @@ const BookingTable = () => {
                   <td className="p-2 flex space-x-2 justify-between">
                     <button
                       onClick={() => {
-                        handleViewDetails(booking);
+                        handleViewDetails(booking)
+
                       }}
                       className="hover:cursor-pointer text-gray-500 group flex items-center space-x-1"
                       title="Detail"
                     >
-                      <span className="group-hover:text-gray-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
+                      <span className="group-hover:text-gray-600 group-hover:scale-100 transition-transform duration-200 ease-in-out">
                         <Eye />
                       </span>
                       {/* <span className="hidden lg:block group-hover:text-gray-700 transition-colors duration-200 ease-in-out">
@@ -237,7 +269,7 @@ const BookingTable = () => {
                       className="hover:cursor-pointer text-green-500 group flex items-center space-x-1"
                       title="Edit"
                     >
-                      <span className="group-hover:text-green-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
+                      <span className="group-hover:text-green-600 group-hover:scale-100 transition-transform duration-200 ease-in-out">
                         <UserRoundPen />
                       </span>
                       {/* <span className="hidden lg:block group-hover:text-green-700 transition-colors duration-200 ease-in-out">
@@ -248,8 +280,9 @@ const BookingTable = () => {
                     <button
                       className="hover:cursor-pointer text-red-500 group flex items-center space-x-1"
                       title="Delete"
+                      onClick={() => handleDelete(booking)}
                     >
-                      <span className="group-hover:text-red-700 group-hover:scale-125 transition-transform duration-200 ease-in-out">
+                      <span className="group-hover:text-red-600 group-hover:scale-100 transition-transform duration-200 ease-in-out">
                         <Trash2 />
                       </span>
                       {/* <span className="hidden lg:block group-hover:text-red-700 transition-colors duration-200 ease-in-out">
@@ -261,7 +294,7 @@ const BookingTable = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="p-2 text-center">
+                <td className="p-2 text-center">
                   No bookings found.
                 </td>
               </tr>
@@ -279,6 +312,7 @@ const BookingTable = () => {
       </div>
 
       {/* View Detail PopUp */}
+
       {selectedBooking && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
@@ -317,7 +351,24 @@ const BookingTable = () => {
             </div>
           </div>
         </div>
-      )}
+      }
+      {deleteSelected &&
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
+            <h2 className="text-2xl  text-center cursor-pointer justify-end flex text-inactive-title font-semibold" onClick={closeDeletePopup}><X /></h2>
+            <h2 className="text-2xl font-bold mb-4 text-center">
+              Are you sure you want to delete this entry?
+            </h2>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+              <button onClick={closeDeletePopup} className="bg-metricsRed p-3 py-2 w-28 rounded-sm text-lg text-white">Delete</button>
+              <button onClick={closeDeletePopup} className="bg-inactive-title p-3 py-2 w-28 rounded-sm text-lg text-white">Cancel</button>
+            </div>
+
+
+          </div>
+        </div>
+      }
+
     </div>
   );
 };
