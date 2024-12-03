@@ -160,7 +160,7 @@ const UserTable = () => {
               {currentItems.length > 0 ? (
                 currentItems.map((user) => (
                   <tr key={user.id} className="border-b">
-                    <td className="p-2">{user.id}</td>
+                    {/* <td className="p-2">{user.id}</td> */}
                     <td className="p-2">{user.name}</td>
                     <td className="p-2">{user.email}</td>
                     <td className="p-2">
