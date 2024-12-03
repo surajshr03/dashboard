@@ -1,10 +1,10 @@
 "use client";
-import { Cross, Eye, Search, Trash2, UserRoundPen, X } from "lucide-react";
+import { Eye, Search, Trash2, UserRoundPen, X } from "lucide-react";
 
-import { SetStateAction, useEffect, useState } from "react";
 import "@/components/dashboard/CSS/dashboard.css";
 import { Bookings } from "@/data/data";
 import { BookingProps } from "@/data/type";
+import { SetStateAction, useEffect, useState } from "react";
 import Pagination from "./Pagination";
 
 const BookingTable = () => {
@@ -13,7 +13,7 @@ const BookingTable = () => {
   const [filterStatus, setFilterStatus] = useState("All");
   const [searchQuery, setSearchQuery] = useState(""); // Search state
   const [filterDateRange, setFilterDateRange] = useState("All"); // State for selected date range filter
-  
+
   const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -31,11 +31,11 @@ const BookingTable = () => {
     setFilterOpen(!isFilterOpen);
   };
 
-  // Function to handle filter change
-  const handleFilterChange = (status: SetStateAction<string>) => {
-    setFilterStatus(status);
-    setFilterOpen(false); // Close the dropdown after selection
-  };
+  // // Function to handle filter change
+  // const handleFilterChange = (status: SetStateAction<string>) => {
+  //   setFilterStatus(status);
+  //   setFilterOpen(false); // Close the dropdown after selection
+  // };
 
   // Function to handle search input change
   const handleSearchChange = (e: {
@@ -80,9 +80,7 @@ const BookingTable = () => {
       window.removeEventListener("keydown", handleEscape);
     };
   }, [deleteSelected]);
-  const closePopup = () => {
-    setSelectedBooking(null);
-  };
+
 
   // Function to filter bookings based on selected filter (status, date range) and search query
   const filteredBookings = Bookings.filter((booking) => {
@@ -122,7 +120,7 @@ const BookingTable = () => {
       if (event.key === "Escape") {
         closePopup();
       }
-    }; 
+    };
     if (filteredBookings) {
       window.addEventListener("keydown", handleKeyDown);
     }
@@ -209,7 +207,6 @@ const BookingTable = () => {
         </div>
       </div>
 
-      </div>
 
       {/* Table */}
       <div className="overflow-x-auto max-w-full custom-scrollbar">
@@ -351,7 +348,8 @@ const BookingTable = () => {
             </div>
           </div>
         </div>
-      }
+      )}
+      {/* Delete Popup */}
       {deleteSelected &&
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
@@ -360,8 +358,8 @@ const BookingTable = () => {
               Are you sure you want to delete this entry?
             </h2>
             <div className="flex flex-col md:flex-row justify-center items-center gap-8">
-              <button onClick={closeDeletePopup} className="bg-metricsRed p-3 py-2 w-28 rounded-sm text-lg text-white">Delete</button>
-              <button onClick={closeDeletePopup} className="bg-inactive-title p-3 py-2 w-28 rounded-sm text-lg text-white">Cancel</button>
+              <button onClick={closeDeletePopup} className="Delbtn Delbtn-delete">Delete</button>
+              <button onClick={closeDeletePopup} className="Delbtn Delbtn-cancel">Cancel</button>
             </div>
 
 

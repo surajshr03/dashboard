@@ -6,12 +6,11 @@ import {
   Calendar,
   ChevronDown,
   ClipboardCopy,
-  Computer,
   FileChartColumn,
   LayoutDashboard,
   List,
   Settings,
-  Users,
+  Users
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

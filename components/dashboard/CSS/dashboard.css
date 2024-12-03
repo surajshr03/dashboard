@@ -101,6 +101,23 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+/* DELETE */
+.Delbtn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.Delbtn-delete {
+  background-color: #dc2626;
+  color: #fff;
+}
+
+.Delbtn-cancel {
+  background-color: #4b5563;
+  color: #fff;
+}
 
 /* Ensure the horizontal scrollbar is always visible when needed */
 .custom-scrollbar {

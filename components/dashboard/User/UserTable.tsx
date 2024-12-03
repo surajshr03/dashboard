@@ -3,7 +3,6 @@ import "@/components/dashboard/CSS/dashboard.css";
 import { Eye, Search, Trash2, UserRoundPen } from "lucide-react"; // Import the Search icon
 import { SetStateAction, useState } from "react";
 
-import Breadcrumbs from "@/app/dashboard/Breadcrumbs/BreadCrumbs";
 import { Users } from "@/data/data";
 import { UserProps } from "@/data/type";
 import Pagination from "../Pagination";
@@ -165,7 +164,7 @@ const UserTable = () => {
                     <td className="p-2">{user.email}</td>
                     <td className="p-2">
                       <span
-                        className={`rounded-full text-white ${user.role.toLowerCase() === "superadmin"
+                        className={`rounded-full ${user.role.toLowerCase() === "superadmin"
                             ? "bg-btn-confirmed"
                             : user.role.toLowerCase() === "admin"
                               ? "bg-btn-pending"
