@@ -52,20 +52,32 @@
 }
 
 /* Status roles color */
+
 .bg-btn-confirmed {
-  background-color: #4caf50; /* Green for SuperAdmin */
+  background-color: var(--btn-confirmed-bg);
+  color: var(--btn-confirmed-border); /* Font color matches border */
   padding: 0.25rem 1rem;
+  border: 2px solid var(--btn-confirmed-border);
+  font-weight: 400; /* Optional: Emphasize text */
+  transition: background-color 0.2s ease, color 0.2s ease; /* Smooth hover effect */
 }
 
 .bg-btn-pending {
-  background-color: #3b82f6; /* Blue for Admin */
+  background-color: var(--btn-pending-bg);
+  color: var(--btn-pending-border); /* Font color matches border */
   padding: 0.25rem 1rem;
+  border: 2px solid var(--btn-pending-border);
+  font-weight: 400;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .bg-btn-canceled {
-  /* background-color: var(--BgRed);  */
-  background-color: #f44336; /* Red for Customer */
+  background-color: var(--btn-canceled-bg);
+  color: var(--btn-canceled-border); /* Font color matches border */
   padding: 0.25rem 1rem;
+  border: 2px solid var(--btn-canceled-border);
+  font-weight: 400;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .text-white {

@@ -18,6 +18,14 @@
   --BgGreen: #eaf7ed;
   --NavIcon: #22262b;
   --Brand: #00bbd4;
+  --btn-confirmed-bg: #a5e6a7; /* Green for SuperAdmin */
+  --btn-confirmed-border: #39ae3d;
+
+  --btn-pending-bg: #b4ccf1; /* Blue for Admin */
+  --btn-pending-border: #3559a1;
+
+  --btn-canceled-bg: #fbbeb9; /* Red for Customer */
+  --btn-canceled-border: #d42f28;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,6 +42,15 @@
     --BgGreen: #eaf7ed;
     --NavIcon: #22262b;
     --Brand: #00bbd4;
+
+    --btn-confirmed-bg: #f4faf5; /* Green for SuperAdmin/Confirmed */
+    --btn-confirmed-border: #43A745;
+
+    --btn-pending-bg: #f2faff; /* Blue for Admin/Pending */
+    --btn-pending-border: #27aaff;
+
+    --btn-canceled-bg: #fef3f6; /* Red for Customer/Canceled */
+    --btn-canceled-border: #f5124e;
   }
 }
 
