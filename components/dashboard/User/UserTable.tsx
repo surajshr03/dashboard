@@ -3,7 +3,6 @@ import "@/components/dashboard/CSS/dashboard.css";
 import { Eye, Search, Trash2, UserRoundPen } from "lucide-react"; // Import the Search icon
 import { SetStateAction, useState } from "react";
 
-import Breadcrumbs from "@/app/dashboard/Breadcrumbs/BreadCrumbs";
 import { Users } from "@/data/data";
 import { UserProps } from "@/data/type";
 
