@@ -268,7 +268,7 @@ export const Users :UserProps[]=[
 export const Bookings:BookingProps[] = [
     {
       id: 1,
-      name: "John Doe",
+      name: "John Doe 1",
       book: "The Great Gatsby",
       date: "2005-05-01",
       status: "Confirmed",
