@@ -6,12 +6,19 @@ import { SetStateAction, useState } from "react";
 import Breadcrumbs from "@/app/dashboard/Breadcrumbs/BreadCrumbs";
 import { Users } from "@/data/data";
 import { UserProps } from "@/data/type";
+import Pagination from "../Pagination";
 
 const UserTable = () => {
   // State for filter dropdown visibility
   const [isFilterOpen, setFilterOpen] = useState(false);
   const [filterRole, setFilterRole] = useState("All");
   const [searchQuery, setSearchQuery] = useState(""); // Search state
+
+  const pageSize = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+  const onPageChange = (page: React.SetStateAction<number>) => {
+    setCurrentPage(page);
+  };
 
   const [selectedUser, setSelectedUser] = useState<UserProps | null>(null);
 
@@ -52,6 +59,9 @@ const UserTable = () => {
   const closePopup = () => {
     setSelectedUser(null);
   }
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const currentItems = filteredUsers.slice(startIndex, startIndex + pageSize);
 
   return (
     <>
@@ -127,7 +137,7 @@ const UserTable = () => {
                     onClick={() => handleFilterChange("customer")}
                   >
                     Customer
-                  </li>
+                  </li>a
                 </ul>
               </div>
             )}
@@ -139,7 +149,7 @@ const UserTable = () => {
           <table className="table-auto min-w-full p-4">
             <thead className="bg-gray-100 text-left">
               <tr>
-                <th className="p-2">User ID</th>
+                {/* <th className="p-2">User ID</th> */}
                 <th className="p-2">Name</th>
                 <th className="p-2">E-mail</th>
                 <th className="p-2">Role</th>
@@ -147,8 +157,8 @@ const UserTable = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredUsers.length > 0 ? (
-                filteredUsers.map((user) => (
+              {currentItems.length > 0 ? (
+                currentItems.map((user) => (
                   <tr key={user.id} className="border-b">
                     <td className="p-2">{user.id}</td>
                     <td className="p-2">{user.name}</td>
@@ -211,6 +221,15 @@ const UserTable = () => {
               )}
             </tbody>
           </table>
+
+          <div className="w-full ">
+          <Pagination
+            items={filteredUsers.length} // 100
+            currentPage={currentPage} // 1
+            pageSize={pageSize} // 10
+            onPageChange={onPageChange}
+          />
+        </div>
         </div>
         {/* POP UP OVERLAY */}
         {selectedUser && (
