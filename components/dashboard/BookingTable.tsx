@@ -1,9 +1,11 @@
 "use client";
 import { Cross, Eye, Search, Trash2, UserRoundPen, X } from "lucide-react";
+
 import { SetStateAction, useEffect, useState } from "react";
 import "@/components/dashboard/CSS/dashboard.css";
 import { Bookings } from "@/data/data";
 import { BookingProps } from "@/data/type";
+import Pagination from "./Pagination";
 
 const BookingTable = () => {
   // State for filter dropdown visibility
@@ -11,9 +13,18 @@ const BookingTable = () => {
   const [filterStatus, setFilterStatus] = useState("All");
   const [searchQuery, setSearchQuery] = useState(""); // Search state
   const [filterDateRange, setFilterDateRange] = useState("All"); // State for selected date range filter
+  
+  const pageSize = 6;
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [deleteSelected, setDeleteSelected] = useState<BookingProps | null>(null);
-  const [selectedBooking, setSelectedBooking] = useState<BookingProps | null>(null);
+  const onPageChange = (page: React.SetStateAction<number>) => {
+    setCurrentPage(page);
+  };
+
+  const [selectedBooking, setSelectedBooking] = useState<BookingProps | null>(
+    null
+  );
 
   // Toggle filter dropdown
   const toggleFilter = () => {
@@ -27,12 +38,16 @@ const BookingTable = () => {
   };
 
   // Function to handle search input change
-  const handleSearchChange = (e: { target: { value: SetStateAction<string>; }; }) => {
+  const handleSearchChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
     setSearchQuery(e.target.value);
   };
 
   // Function to handle date range filter change
-  const handleDateRangeChange = (e: { target: { value: SetStateAction<string>; }; }) => {
+  const handleDateRangeChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
     setFilterDateRange(e.target.value);
   };
 
@@ -65,6 +80,9 @@ const BookingTable = () => {
       window.removeEventListener("keydown", handleEscape);
     };
   }, [deleteSelected]);
+  const closePopup = () => {
+    setSelectedBooking(null);
+  };
 
   // Function to filter bookings based on selected filter (status, date range) and search query
   const filteredBookings = Bookings.filter((booking) => {
@@ -95,16 +113,33 @@ const BookingTable = () => {
     return matchesStatus && matchesSearch && matchesDateRange;
   });
 
+  const startIndex = (currentPage - 1) * pageSize;
+  const currentItems = filteredBookings.slice(startIndex, startIndex + pageSize);
+
+  // Close popup on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closePopup();
+      }
+    }; 
+    if (filteredBookings) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [filteredBookings]);
 
   return (
-    <div className="wrapper" >
+    <div className="wrapper">
       <h5 className="title">Manage Bookings</h5>
       <h6 className="sub-title">Manage and view bookings</h6>
 
 
       {/* Search and Filter Section */}
       <div className="grid grid-cols-6 gap-4 my-6">
-
         {/* Search Input */}
         <div className="col-span-6 lg:col-span-4 relative">
           <input
@@ -149,38 +184,30 @@ const BookingTable = () => {
             </p>
           </button>
 
-          {/* Filter Dropdown */}
+          {/* Filter Dropdown */}{" "}
           {isFilterOpen && (
             <div className="absolute right-0 mt-2 bg-white border rounded shadow-lg z-10">
+              {" "}
               <ul className="py-2">
-                <li
-                  className="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleFilterChange("All")}
-                >
-                  All
-                </li>
-                <li
-                  className="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleFilterChange("Confirmed")}
-                >
-                  Confirmed
-                </li>
-                <li
-                  className="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleFilterChange("Pending")}
-                >
-                  Pending
-                </li>
-                <li
-                  className="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleFilterChange("Canceled")}
-                >
-                  Canceled
-                </li>
-              </ul>
+                {" "}
+                {["All", "Confirmed", "Pending", "Canceled"].map((status) => (
+                  <li
+                    key={status}
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-200"
+                    onClick={() => {
+                      setFilterStatus(status);
+                      setFilterOpen(false);
+                    }}
+                  >
+                    {" "}
+                    {status}{" "}
+                  </li>
+                ))}{" "}
+              </ul>{" "}
             </div>
           )}
         </div>
+      </div>
 
       </div>
 
@@ -189,27 +216,25 @@ const BookingTable = () => {
         <table className="table-auto w-full p-4">
           <thead className="bg-gray-100 text-left">
             <tr>
-              <th className="p-2 text-dark-inactive-title">Customer</th>
-              <th className="p-2 text-dark-inactive-title">Book</th>
-              <th className="p-2 text-dark-inactive-title">Date</th>
+              <th className="p-2 text-dark-inactive-title">Customer Name</th>
+              <th className="p-2 text-dark-inactive-title">Book Title</th>
               <th className="p-2 text-dark-inactive-title">Status</th>
+              <th className="p-2 text-dark-inactive-title">Date</th>
               <th className="p-2 text-dark-inactive-title">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {filteredBookings.length > 0 ? (
-              filteredBookings.map((booking) => (
+            {currentItems.length > 0 ? (
+              currentItems.map((booking) => (
                 <tr key={booking.id} className="border-b">
                   <td className="p-2 text-dark-inactive-title">
-                    {booking.id}
+                    {booking.name}
                   </td>
                   <td className="p-2 text-dark-inactive-title">
                     {booking.book}
                   </td>
                   <td className="p-2 text-dark-inactive-title">
-                    {booking.date}
-                  </td>
-                  <td className="p-2 text-dark-inactive-title ">
+
                     <span
                       className={`rounded-full w-full text-sm ${booking.status.toLowerCase() === "confirmed"
                         ? "bg-btn-confirmed"
@@ -221,10 +246,14 @@ const BookingTable = () => {
                       {booking.status}
                     </span>
                   </td>
+                  <td className="p-2 text-dark-inactive-title">
+                    {booking.date}
+                  </td>
                   <td className="p-2 flex space-x-2 justify-between">
                     <button
                       onClick={() => {
                         handleViewDetails(booking)
+
                       }}
                       className="hover:cursor-pointer text-gray-500 group flex items-center space-x-1"
                       title="Detail"
@@ -272,10 +301,19 @@ const BookingTable = () => {
             )}
           </tbody>
         </table>
+        <div className="w-full ">
+          <Pagination
+            items={filteredBookings.length} // 100
+            currentPage={currentPage} // 1
+            pageSize={pageSize} // 10
+            onPageChange={onPageChange}
+          />
+        </div>
       </div>
 
       {/* View Detail PopUp */}
-      {selectedBooking &&
+
+      {selectedBooking && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
             <h2 className="text-2xl font-bold mb-4 text-center">
@@ -330,6 +368,7 @@ const BookingTable = () => {
           </div>
         </div>
       }
+
     </div>
   );
 };
