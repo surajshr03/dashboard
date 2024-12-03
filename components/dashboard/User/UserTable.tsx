@@ -154,7 +154,7 @@ const UserTable = () => {
                     <td className="p-2">{user.email}</td>
                     <td className="p-2">
                       <span
-                        className={`rounded-full text-white ${user.role.toLowerCase() === "superadmin"
+                        className={`rounded-full ${user.role.toLowerCase() === "superadmin"
                             ? "bg-btn-confirmed"
                             : user.role.toLowerCase() === "admin"
                               ? "bg-btn-pending"
