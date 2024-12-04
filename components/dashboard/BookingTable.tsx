@@ -131,7 +131,7 @@ const BookingTable = () => {
   }, [filteredBookings]);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper my-4">
       <h5 className="title">Manage Bookings</h5>
       <h6 className="sub-title">Manage and view bookings</h6>
 

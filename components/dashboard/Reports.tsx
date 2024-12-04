@@ -20,12 +20,8 @@ const Reports = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-2 mb-6">
-        <div>
-          <p className="text-3xl font-bold">
-            Reports
-          </p>
-        </div>
+      <div className="flex flex-col lg:flex-row justify-end items-start lg:items-center gap-2 mb-6">
+
         <div>
           <Breadcrumbs />
         </div>
@@ -90,14 +86,18 @@ const Reports = () => {
           </button>
         </div>
       </div>
-      {/* Recent Reports Section */}
+      {/* YOUR Report Section */}
       <div className="wrapper flex flex-col gap-4">
         <p className="text-lg font-semibold">Your Report</p>
-        <div className="reportDownload flex gap-2 bg-active-gray px-2 py-4 rounded-md">
-          <ClipboardCheck />
-          <Link href='/'>1st Report.pdf</Link>
+        <div className="flex justify-between gap-4 items-center">
+          <div className="reportDownload w-full flex gap-2 p-2 bg-active-gray rounded-md">
+            <div className="flex justify-between items-center">
+              <ClipboardCheck />
+            <Link href='/'>1st Report.pdf</Link>
+            </div>
+          </div>
+          <button className="btn bg-black text-white">Download </button>
         </div>
-        <button className="btn bg-black text-white">Download Report</button>
       </div>
     </div>
   );

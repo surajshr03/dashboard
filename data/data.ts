@@ -1,4 +1,4 @@
-import { BookingProps, TransactionProps, UserProps } from "./type";
+import { BookingProps, BookProps, TransactionProps, UserProps } from "./type";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const Activities = [
@@ -466,5 +466,97 @@ export const Notifications = [
     date: "2024-11-22",
     time: "04:30 PM",
     type: "Confirmed",
+  },
+];
+export const Books: BookProps[] = [
+  {
+    id: 1,
+    title: "The Great Gatsby",
+    author: "F. Scott Fitzgerald",
+    genre: "Classic",
+    price: 15.99,
+    status: "Available",
+    quantity: 10,
+  },
+  {
+    id: 2,
+    title: "To Kill a Mockingbird",
+    author: "Harper Lee",
+    genre: "Classic",
+    price: 12.99,
+    status: "Unavailable",
+    quantity: 8,
+  },
+  {
+    id: 3,
+    title: "1984",
+    author: "George Orwell",
+    genre: "Dystopian",
+    price: 10.99,
+    status: "Unavailable",
+    quantity: 5,
+  },
+  {
+    id: 4,
+    title: "The Awakening",
+    author: "Kate Chopin",
+    genre: "Fiction",
+    price: 14.99,
+    status: "Available",
+    quantity: 12,
+  },
+  {
+    id: 5,
+    title: "Fifty Shades of Grey",
+    author: "E. L. James",
+    genre: "Romance",
+    price: 9.99,
+    status: "Unavailable",
+    quantity: 20,
+  },
+  {
+    id: 6,
+    title: "In Winter",
+    author: "William Somerset",
+    genre: "Drama",
+    price: 11.99,
+    status: "Unavailable",
+    quantity: 6,
+  },
+  {
+    id: 7,
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    genre: "Philosophy",
+    price: 13.99,
+    status: "Available",
+    quantity: 15,
+  },
+  {
+    id: 8,
+    title: "Brave New World",
+    author: "Aldous Huxley",
+    genre: "Science Fiction",
+    price: 16.99,
+    status: "Unavailable",
+    quantity: 9,
+  },
+  {
+    id: 9,
+    title: "Pride and Prejudice",
+    author: "Jane Austen",
+    genre: "Classic",
+    price: 12.49,
+    status: "Unavailable",
+    quantity: 7,
+  },
+  {
+    id: 10,
+    title: "The Catcher in the Rye",
+    author: "J.D. Salinger",
+    genre: "Classic",
+    price: 14.99,
+    status: "Available",
+    quantity: 18,
   },
 ];

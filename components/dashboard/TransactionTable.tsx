@@ -2,7 +2,7 @@
 import "@/components/dashboard/CSS/dashboard.css";
 import { Transaction } from "@/data/data";
 import { TransactionProps } from "@/data/type";
-import { Search } from 'lucide-react';
+import { Eye, Search } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Pagination from "./Pagination";
 
@@ -69,7 +69,7 @@ const TransactionTable = () => {
       if (event.key === "Escape") {
         closePopup();
       }
-    }; 
+    };
     if (selectedTransaction) {
       window.addEventListener("keydown", handleKeyDown);
     }
@@ -82,7 +82,7 @@ const TransactionTable = () => {
 
 
   return (
-    <div className="wrapper">
+    <div className="wrapper my-4">
       <p className='title'>Transactions</p>
       <p className='sub-title'>You have {Transaction.length} new Transactions</p>
 
@@ -227,7 +227,7 @@ const TransactionTable = () => {
                 <td className="flex gap-6 p-2 text-dark-inactive-title ">
 
                   <button onClick={() => handleViewDetails(transaction)} className="btn bg-active-gray text-sm hover:cursor-pointer text-darkest-inactive-title group flex items-center space-x-1">
-                    View Details
+                    <Eye />
                   </button>
                 </td>
               </tr>

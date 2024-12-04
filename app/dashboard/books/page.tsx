@@ -1,9 +1,11 @@
-import BookingTable from '@/components/dashboard/BookingTable'
+import BookTable from '@/components/dashboard/BookTable'
+import Breadcrumbs from '../Breadcrumbs/BreadCrumbs'
 
 const page = () => {
   return (
     <div>
-        <BookingTable/>
+      <Breadcrumbs />
+      <BookTable />
     </div>
   )
 }
