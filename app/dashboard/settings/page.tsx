@@ -1,10 +1,14 @@
 import Setting from '@/components/dashboard/Setting'
 import React from 'react'
+import Breadcrumbs from '../Breadcrumbs/BreadCrumbs'
 
 const page = () => {
   return (
     <div>
-      <Setting/>
+      <div>
+        <Breadcrumbs />
+      </div>
+      <Setting />
     </div>
   )
 }

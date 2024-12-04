@@ -14,12 +14,8 @@ const Notification = () => {
   }
   return (
     <div className="">
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-2 mb-6">
-        <div>
-          <p className="text-3xl font-bold">
-            Notifications
-          </p>
-        </div>
+      <div className="flex flex-col lg:flex-row justify-end items-start lg:items-center gap-2 mb-6">
+        
         <div>
           <Breadcrumbs />
         </div>

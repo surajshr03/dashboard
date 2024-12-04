@@ -1,18 +1,11 @@
-import Breadcrumbs from "@/app/dashboard/Breadcrumbs/BreadCrumbs"
 import { ChevronRight, LogOutIcon } from "lucide-react"
 
 const Setting = () => {
   return (
     <>
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-2 mb-6">
-        <div>
-          <p className="text-3xl font-bold">
-            Settings
-          </p>
-        </div>
-        <div>
-          <Breadcrumbs />
-        </div>
+        
+        
       </div>
       <div className="flex flex-col gap-4 ">
         <div className="bg-white border border-active-gray rounded-md shadow-sm">

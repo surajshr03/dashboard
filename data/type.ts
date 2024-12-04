@@ -8,22 +8,30 @@ export type TransactionProps = {
   status: string;
 };
 
-
-export type UserProps ={
-  id: number,
-  name: string,
-  email: string,
-  date: string,
-  role: string,
+export type UserProps = {
+  id: number;
+  name: string;
+  email: string;
+  date: string;
+  role: string;
 };
 
-export type BookingProps ={
-  id: number,
-  name: string,
-  book: string,
-  date: string,
-  status: string,
-}
+export type BookingProps = {
+  id: number;
+  name: string;
+  book: string;
+  date: string;
+  status: string;
+};
+export type BookProps = {
+  id: number;
+  title: string;
+  genre: string;
+  author: string;
+  price: number;
+  quantity: number;
+  status: string;
+};
 
 export type PaginationProps = {
   items: number;
@@ -31,4 +39,3 @@ export type PaginationProps = {
   currentPage: number;
   onPageChange: (page: number) => void;
 };
-

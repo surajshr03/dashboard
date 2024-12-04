@@ -74,7 +74,7 @@ const UserTable = () => {
           <Breadcrumbs />
         </div>
       </div> */}
-      <div className="wrapper">
+      <div className="wrapper my-4">
         <div>
           <p className="text-xl font-semibold mb-2">Manage Users</p>
           <p className="sub-title">Manage system users and their roles</p>
@@ -165,10 +165,10 @@ const UserTable = () => {
                     <td className="p-2">
                       <span
                         className={`rounded-full ${user.role.toLowerCase() === "superadmin"
-                            ? "bg-btn-confirmed"
-                            : user.role.toLowerCase() === "admin"
-                              ? "bg-btn-pending"
-                              : "bg-btn-canceled"
+                          ? "bg-btn-confirmed"
+                          : user.role.toLowerCase() === "admin"
+                            ? "bg-btn-pending"
+                            : "bg-btn-canceled"
                           }`}
                       >
                         {user.role}
@@ -191,8 +191,8 @@ const UserTable = () => {
 
                       <button
                         className={`group flex items-center space-x-1 ${user.role.toLowerCase() === "superadmin"
-                            ? "cursor-not-allowed opacity-50"
-                            : "hover:cursor-pointer text-red-500"
+                          ? "cursor-not-allowed opacity-50"
+                          : "hover:cursor-pointer text-red-500"
                           }`}
                         title="Delete"
                         disabled={user.role.toLowerCase() === "superadmin"}
@@ -222,13 +222,13 @@ const UserTable = () => {
           </table>
 
           <div className="w-full ">
-          <Pagination
-            items={filteredUsers.length} // 100
-            currentPage={currentPage} // 1
-            pageSize={pageSize} // 10
-            onPageChange={onPageChange}
-          />
-        </div>
+            <Pagination
+              items={filteredUsers.length} // 100
+              currentPage={currentPage} // 1
+              pageSize={pageSize} // 10
+              onPageChange={onPageChange}
+            />
+          </div>
         </div>
         {/* POP UP OVERLAY */}
         {selectedUser && (
