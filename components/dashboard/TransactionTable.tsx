@@ -31,7 +31,7 @@ const TransactionTable = () => {
       ...prev,
       [transactionID]: !prev[transactionID],
     }));
-    const transaction = Transaction.find((t) => t.id === transactionID)
+    const transaction = Transaction.find((t) => t.id === transactionID) || null
     setSelectedTransaction(transaction); // Toggle the state for the specific transaction ID
   };
 
@@ -297,8 +297,8 @@ const TransactionTable = () => {
       {/* POPUP OverLAy */}
       {selectedTransaction &&
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
-            <h2 className="text-2xl font-bold mb-4 text-center">Transaction Details</h2>
+          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-2">
+            <h2 className="text-2xl font-bold mb-3 text-left">Transaction Details</h2>
             <div className="flex flex-col">
               <strong className="text-lg">Remarks:</strong>
               <p>{selectedTransaction.description}</p>
@@ -316,9 +316,9 @@ const TransactionTable = () => {
               <strong className="text-lg">Amount:</strong>
               <p>{selectedTransaction.amount}</p>
             </div>
-            <div className="mt-6 flex flex-col justify-center items-center">
+            <div className="mt-3 flex flex-col justify-center items-center">
               <button
-                className=" px-4 py-2  bg-gray-300 text-gray-800 rounded-md"
+                className=" px-4 py-2 w-full bg-gray-300 text-gray-800 rounded-md"
                 onClick={closePopup}
               >
                 Close

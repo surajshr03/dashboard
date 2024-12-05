@@ -14,6 +14,9 @@ const BookingTable = () => {
   const [searchQuery, setSearchQuery] = useState(""); // Search state
   const [filterDateRange, setFilterDateRange] = useState("All"); // State for selected date range filter
 
+  const [editDetails, setEditDetails] = useState<BookingProps | null>(null);
+  const [isBookingUpdated, setIsBookingUpdated] = useState(false);
+
   const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -25,6 +28,31 @@ const BookingTable = () => {
   const [selectedBooking, setSelectedBooking] = useState<BookingProps | null>(
     null
   );
+  // EDIT DETAILS
+  const handleEditDetails = (Booking: BookingProps) => {
+    setEditDetails(Booking);
+  };
+  const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, field: string) => {
+    if (editDetails) {
+      setEditDetails({
+        ...editDetails,
+        [field]: e.target.value, // Dynamically update the specific field
+      });
+    }
+  };
+  const closeEditPopup = () => {
+    setEditDetails(null);
+  }
+  // After UPDATED
+
+  const handleUpdated = () => {
+    setIsBookingUpdated(true);
+  };
+  const closeUpdated = () => {
+    setIsBookingUpdated(false);
+    setEditDetails(null);
+
+  };
 
   // Toggle filter dropdown
   const toggleFilter = () => {
@@ -119,6 +147,7 @@ const BookingTable = () => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         closePopup();
+        closeEditPopup();
       }
     };
     if (filteredBookings) {
@@ -265,6 +294,7 @@ const BookingTable = () => {
                     <button
                       className="hover:cursor-pointer text-green-500 group flex items-center space-x-1"
                       title="Edit"
+                      onClick={() => handleEditDetails(booking)}
                     >
                       <span className="group-hover:text-green-600 group-hover:scale-100 transition-transform duration-200 ease-in-out">
                         <UserRoundPen />
@@ -309,17 +339,12 @@ const BookingTable = () => {
       </div>
 
       {/* View Detail PopUp */}
-
       {selectedBooking && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
-            <h2 className="text-2xl font-bold mb-4 text-center">
+          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-2">
+            <h2 className="text-2xl font-bold mb-3 text-left">
               User Details
             </h2>
-            <div className="flex flex-col">
-              <strong className="text-lg">ID:</strong>
-              <p>{selectedBooking.id}</p>
-            </div>
             <div className="flex flex-col">
               <strong className="text-lg">Customer Name:</strong>
               <p> {selectedBooking.name}</p>
@@ -338,9 +363,9 @@ const BookingTable = () => {
               <p>{selectedBooking.status}</p>
             </div>
 
-            <div className="mt-6 flex flex-col justify-center items-center">
+            <div className="mt-3 flex flex-col justify-center items-center">
               <button
-                className=" px-4 py-2  bg-gray-300 text-gray-800 rounded-md"
+                className=" px-4 py-2 w-full bg-gray-300 text-gray-800 rounded-md"
                 onClick={closePopup}
               >
                 Close
@@ -349,17 +374,97 @@ const BookingTable = () => {
           </div>
         </div>
       )}
+
+      {/* Edit Popup */}
+      {editDetails &&
+        (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
+              {/* Check if new book has been added */}
+              {isBookingUpdated ? (
+                // Show  message after new book added
+                <>
+                  <div className="flex flex-col bg-white items-center gap-2 justify-center">
+                    <p className="w-full text-xl font-bold text-center">Updated Successfully.</p>
+                  </div>
+
+                  {/* Displays additional information like the book title or a button to add another book */}
+                  <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+                    <button
+                      onClick={() => closeUpdated()}
+                      className="Delbtn w-full bg-inactive-title text-white"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </>
+              ) : (
+                // Show form to add new book before it's added
+                <>
+                  <div className="flex bg-white items-center justify-between">
+                    <h2 className="text-2xl font-bold  text-center">
+                      Edit book
+                    </h2>
+                    <h2 className="text-2xl  text-center cursor-pointer justify-end flex text-inactive-title font-semibold" onClick={closeEditPopup}><X /></h2>
+                  </div>
+                  <div className="flex flex-col">
+                    <input type="text"
+                      placeholder="Name"
+                      value={editDetails.name}
+                      onChange={(e) => handleEditInputChange(e, 'name')}
+                      className="border-2 text-sm rounded-md p-2"></input>
+                  </div>
+                  <div
+                    className="flex flex-col">
+                    <input type="text"
+                      placeholder="Book"
+                      value={editDetails.book}
+                      onChange={(e) => handleEditInputChange(e, 'book')}
+                      className="border-2 text-sm rounded-md p-2"></input>
+                  </div>
+
+                  <div className="flex flex-col">
+                    <select
+                      value={editDetails.status}
+                      onChange={(e) => handleEditInputChange(e, 'status')}
+                      className="border-2 text-sm rounded-md p-2"
+                    >
+                      <option value="Confirmed">Confirmed</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Canceled">Canceled</option>
+                    </select>
+                  </div>
+
+                  <button
+                    className="btn bg-metricsGreen flex items-center justify-center px-4 py-2 border w-full"
+                    onClick={() => handleUpdated()}
+                  >
+                    <p className="font-bold text-base text-white">Update Changes</p>
+
+                  </button>
+
+                </>
+              )}
+
+
+
+
+            </div>
+          </div>
+        )
+      }
+
       {/* Delete Popup */}
       {deleteSelected &&
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
+          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-3">
             <h2 className="text-2xl  text-center cursor-pointer justify-end flex text-inactive-title font-semibold" onClick={closeDeletePopup}><X /></h2>
             <h2 className="text-2xl font-bold mb-4 text-center">
               Are you sure you want to delete this entry?
             </h2>
-            <div className="flex flex-col md:flex-row justify-center items-center gap-8">
-              <button onClick={closeDeletePopup} className="Delbtn Delbtn-delete">Delete</button>
-              <button onClick={closeDeletePopup} className="Delbtn Delbtn-cancel">Cancel</button>
+            <div className="flex flex-col md:flex-row justify-center items-center mb-2 gap-5">
+              <button onClick={closeDeletePopup} className="Delbtn Delbtn-delete w-full text-base">Delete</button>
+              <button onClick={closeDeletePopup} className="Delbtn Delbtn-cancel w-full text-base">Cancel</button>
             </div>
 
 
