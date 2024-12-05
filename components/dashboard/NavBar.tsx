@@ -1,6 +1,6 @@
 'use client'
 import { Notifications } from '@/data/data';
-import { Bell, BookmarkPlus, Clipboard, FilePlus, LogOutIcon, Moon, Settings, User, UserRoundPlus } from 'lucide-react';
+import { Bell, BookmarkPlus, Clipboard, FilePlus, LogOutIcon, Moon, Settings, Sun, User, UserRoundPlus } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
@@ -12,41 +12,52 @@ type NavBarProps = {
 };
 
 const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisible }: NavBarProps) => {
+    const [isThemeToggled, setIsThemeToggled] = useState(false);
     const [isUserToggled, setIsUserToggled] = useState(false);
     const [isNotificationsToggled, setIsNotificationsToggled] = useState(false);
+
     const userMenuRef = useRef<HTMLDivElement>(null);
     const notificationRef = useRef<HTMLDivElement>(null);
 
-    const toggleUser = () => {
-        setIsUserToggled(!isUserToggled);
-        setIsNotificationsToggled(false)
+    const toggleTheme = () => {
+        setTimeout(() => {
+            setIsThemeToggled((prev) => !prev);
+        }, 150);
     }
     const toggleNotifications = () => {
-        setIsNotificationsToggled(!isNotificationsToggled);
+        setIsNotificationsToggled((prev) => !prev);
         setIsUserToggled(false);
+    }
+    const toggleUser = () => {
+        setIsUserToggled((prev) => !prev);
+        setIsNotificationsToggled(false)
     }
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (
                 userMenuRef.current &&
-                event.target instanceof Node &&
-                !userMenuRef.current.contains(event.target)
-                ||
-                notificationRef.current &&
-                !notificationRef.current.contains(event.target as Node)
+                notificationRef.current
             ) {
-                setIsUserToggled(false);
-                setIsNotificationsToggled(false);
+                const isClickInsideUserMenu = userMenuRef.current.contains(event.target as Node);
+                const isClickInsideNotificationMenu = notificationRef.current.contains(event.target as Node);
+
+                // Close menus if click is outside
+                if (
+                    !isClickInsideUserMenu &&
+                    !isClickInsideNotificationMenu
+                ) {
+                    setIsUserToggled(false);
+                    setIsNotificationsToggled(false);
+                }
             }
         };
 
-        // Type casting for addEventListener
-        const handleClick = handleClickOutside as (event: MouseEvent) => void;
 
-        document.addEventListener('mousedown', handleClick);
+
+        document.addEventListener('mousedown', handleClickOutside);
         return () => {
-            document.removeEventListener('mousedown', handleClick);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
 
@@ -88,7 +99,7 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                             onClick={onSearchClick}
                             type="search"
                             id="default-search"
-                            className="block w-full px-2 py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50 dark:bg-white dark:border-gray-300 dark:placeholder-gray-400 dark:text-white"
+                            className="block w-full md:w-96  px-2 py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50 dark:bg-white dark:border-gray-300 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Search "
                             required />
 
@@ -206,8 +217,8 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
             </div>
             {/* RHS of navbar */}
             <div className="flex items-center md:space-x-2">
-                <div className="cursor-pointer border-none hover:rounded-full hover:bg-active-gray p-2">
-                    <Moon className='text-nav-icon ' size={20} />
+                <div onClick={toggleTheme} className="cursor-pointer border-none hover:rounded-full hover:bg-active-gray p-2">
+                    {isThemeToggled ? <Moon className='text-nav-icon ' size={20} /> : <Sun className='text-nav-icon ' size={20} />}
                 </div>
                 {/* MOBILE -Notifications*/}
                 <div
@@ -217,16 +228,16 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                         onClick={toggleNotifications}
                         className="flex relative items-center  space-x-2 border-none hover:rounded-full hover:bg-active-gray focus:scale-50 cursor-pointer">
                         <div className="cursor-pointer border-none hover:rounded-full hover:bg-active-gray focus:bg-active-gray p-2">
+                            <div className="absolute bg-red-600 rounded-full w-2 h-2 ml-3"></div>
                             <Bell className='text-nav-icon ' size={20} />
                         </div>
                     </div>
                     {isNotificationsToggled &&
                         <div
-                            onClick={(e) => e.stopPropagation()}
                             className="absolute right-0 top-full mt-2 z-10 bg-white border border-active-gray shadow-lg w-52 md:w-96 py-2 px-2 rounded-md  "
                             role="menu">
                             <div className="px-2">
-                                <p className="px-2 py-2 text-lg font-medium text-black">Latest Notifications</p></div>
+                                <p className="px-2 py-2 text-lg font-semibold text-black">Latest Notifications</p></div>
                             <ul className=" text-sm text-gray-700 dark:text-gray-400" >
                                 {Notifications.slice(0, 5).map((notifications) =>
                                 (
@@ -240,10 +251,10 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                             </ul>
                             <Link
                                 href="/dashboard/notifications"
-
+                                onClick={()=>setIsNotificationsToggled(false)}
                                 className='font-semibold text-xs text-dark-inactive-title flex justify-center py-2 px-1 hover:text-darkest-inactive-title hover:bg-slate-300'>
                                 <div className="">
-                                    <p>See all notifications</p>
+                                    <p >See all notifications</p>
                                 </div>
                             </Link>
 

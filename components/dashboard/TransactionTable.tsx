@@ -2,7 +2,7 @@
 import "@/components/dashboard/CSS/dashboard.css";
 import { Transaction } from "@/data/data";
 import { TransactionProps } from "@/data/type";
-import { Eye, Search } from 'lucide-react';
+import { Eye, EyeClosed, Search } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Pagination from "./Pagination";
 
@@ -12,6 +12,8 @@ const TransactionTable = () => {
   const [isFilterOpen, setFilterOpen] = useState(false);
   const [filterStatus, setFilterStatus] = useState("All");
   const [searchQuery, setSearchQuery] = useState(""); // Search state
+  const [viewDetails, setViewDetails] = useState<{ [key: number]: boolean }>({});
+
   const [filterDateRange, setFilterDateRange] = useState({ start: "", end: "" });
   const [filterAmountRange, setFilterAmountRange] = useState({ min: "", max: "" });
   const [selectedTransaction, setSelectedTransaction] = useState<TransactionProps | null>(null);
@@ -24,12 +26,23 @@ const TransactionTable = () => {
   };
 
 
-  const handleViewDetails = (transaction: TransactionProps) => {
-    setSelectedTransaction(transaction);
+  const handleViewDetails = (transactionID: number) => {
+    setViewDetails((prev) => ({
+      ...prev,
+      [transactionID]: !prev[transactionID],
+    }));
+    const transaction = Transaction.find((t) => t.id === transactionID)
+    setSelectedTransaction(transaction); // Toggle the state for the specific transaction ID
   };
 
   // Toggle ViewDetails popup
   const closePopup = () => {
+    if (selectedTransaction) {
+      setViewDetails((prev) => ({
+        ...prev,
+        [selectedTransaction.id]: false, // Set the Eye state to closed for the current transaction
+      }));
+    }
     setSelectedTransaction(null);
   };
 
@@ -80,6 +93,37 @@ const TransactionTable = () => {
   }, [selectedTransaction]);
 
 
+  useEffect(() => {
+    if (selectedTransaction) {
+      const focusableElements = document.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0] as HTMLElement;
+      const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+      const handleTabKey = (e: KeyboardEvent) => {
+        if (e.key === 'Tab') {
+          if (e.shiftKey) { // Shift + Tab
+            if (document.activeElement === firstElement) {
+              e.preventDefault();
+              lastElement.focus();
+            }
+          } else { // Tab
+            if (document.activeElement === lastElement) {
+              e.preventDefault();
+              firstElement.focus();
+            }
+          }
+        }
+      };
+
+      window.addEventListener('keydown', handleTabKey);
+
+      return () => {
+        window.removeEventListener('keydown', handleTabKey);
+      };
+    }
+  }, [selectedTransaction]);
 
   return (
     <div className="wrapper my-4">
@@ -138,6 +182,7 @@ const TransactionTable = () => {
           <input
             type="text"
             placeholder="Search transaction..."
+            aria-label="Search transactions"
             value={searchQuery}
             onChange={handleSearchChange}
             className="p-2 pl-10 pr-4 border rounded-md w-full bg-gray-100"
@@ -225,10 +270,14 @@ const TransactionTable = () => {
                 <td className="p-2 text-dark-inactive-title">{transaction.date}</td>
                 <td className="p-2 text-dark-inactive-title">Rs. {transaction.amount}</td>
                 <td className="flex gap-6 p-2 text-dark-inactive-title ">
-
-                  <button onClick={() => handleViewDetails(transaction)} className="btn bg-active-gray text-sm hover:cursor-pointer text-darkest-inactive-title group flex items-center space-x-1">
-                    <Eye />
-                  </button>
+                  {viewDetails[transaction.id] ?
+                    <button onClick={() => handleViewDetails(transaction.id)} className="btn bg-active-gray text-sm hover:cursor-pointer text-darkest-inactive-title group flex items-center space-x-1">
+                      <Eye />
+                    </button> :
+                    <button onClick={() => handleViewDetails(transaction.id)} className="btn bg-active-gray text-sm hover:cursor-pointer text-darkest-inactive-title group flex items-center space-x-1">
+                      <EyeClosed />
+                    </button>
+                  }
                 </td>
               </tr>
             ))}
