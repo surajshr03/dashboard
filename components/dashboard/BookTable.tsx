@@ -13,10 +13,10 @@ const BookTable = () => {
   const [filterStatus, setFilterStatus] = useState("All");
   const [searchQuery, setSearchQuery] = useState(""); // Search state
 
-
+  const [isAddNewBookOpen, setIsAddNewBookOpen] = useState(false);
+  const [isNewBookAdded, setIsNewBookAdded] = useState(false);
   const [editDetails, setEditDetails] = useState<BookProps | null>(null);
   const [deleteSelected, setDeleteSelected] = useState<BookProps | null>(null);
-
 
   const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,13 +36,35 @@ const BookTable = () => {
   }) => {
     setSearchQuery(e.target.value);
   };
-
+  // EDIT 
   const handleEditDetails = (Book: BookProps) => {
     setEditDetails(Book);
+  };
+  const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
+    if (editDetails) {
+      setEditDetails({
+        ...editDetails,
+        [field]: e.target.value, // Dynamically update the specific field
+      });
+    }
   };
   const closeEditPopup = () => {
     setEditDetails(null);
   }
+  // ADD NEW BOOK
+
+  const openAddNewBookPopup = () => {
+    setIsAddNewBookOpen(true);
+    setIsNewBookAdded(false);
+  };
+  const handleAddNewBook = () => {
+    setIsNewBookAdded(true);
+  };
+  const closeAddNewBookPopup = () => {
+    setIsAddNewBookOpen(false);
+  };
+
+  // DELETE 
   const handleDelete = (Book: BookProps) => {
     setDeleteSelected(Book);
   };
@@ -56,6 +78,7 @@ const BookTable = () => {
       if (event.key === "Escape") {
         closeEditPopup();
         closeDeletePopup();
+        closeAddNewBookPopup();
       }
     };
     if (deleteSelected) {
@@ -65,7 +88,7 @@ const BookTable = () => {
     return () => {
       window.removeEventListener("keydown", handleEscape);
     };
-  }, [deleteSelected]);
+  }, [deleteSelected, isAddNewBookOpen, editDetails]);
 
 
   // Function to filter Books based on selected filter (status, date range) and search query
@@ -77,25 +100,7 @@ const BookTable = () => {
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
 
-    //   const matchesDateRange =
-    //     filterDateRange === "All" ||
-    //     (filterDateRange === "Before 2010" &&
-    //       new Date(Book.date).getFullYear() < 2010) ||
-    //     (filterDateRange === "2011-2015" &&
-    //       new Date(Book.date).getFullYear() >= 2011 &&
-    //       new Date(Book.date).getFullYear() <= 2015) ||
-    //     (filterDateRange === "2016-2020" &&
-    //       new Date(Book.date).getFullYear() >= 2016 &&
-    //       new Date(Book.date).getFullYear() <= 2020) ||
-    //     (filterDateRange === "2021-2025" &&
-    //       new Date(Book.date).getFullYear() >= 2021 &&
-    //       new Date(Book.date).getFullYear() <= 2025) ||
-    //     (filterDateRange === "2026-2030" &&
-    //       new Date(Book.date).getFullYear() >= 2026 &&
-    //       new Date(Book.date).getFullYear() <= 2030);
-
     return matchesStatus && matchesSearch
-    //  && matchesDateRange;
   });
 
   const startIndex = (currentPage - 1) * pageSize;
@@ -181,12 +186,13 @@ const BookTable = () => {
         <div className="col-span-6 md:col-span-3 lg:col-span-1  relative">
           <button
             className="btn bg-black flex items-center justify-center px-4 py-2 border w-full"
-            onClick={() => handleEditDetails}
+            onClick={() => openAddNewBookPopup()}
           >
             <p className="font-bold text-base text-white">Add New Book</p>
 
           </button>
         </div>
+
       </div>
 
       {/* Table */}
@@ -199,7 +205,7 @@ const BookTable = () => {
               <th className="p-2 text-dark-inactive-title">Genre</th>
               <th className="p-2 text-dark-inactive-title">Price <span className="text-xs">( in Rs. )</span></th>
               <th className="p-2 text-dark-inactive-title">Status</th>
-              <th className="p-2 text-dark-inactive-title">No.of Books</th>
+              <th className="p-2 text-dark-inactive-title">Stock</th>
               <th className="p-2 text-dark-inactive-title">Actions</th>
             </tr>
           </thead>
@@ -280,44 +286,69 @@ const BookTable = () => {
 
       {/* Edit Details PopUp */}
 
-      {editDetails && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
-            <div className="flex bg-white items-center justify-between">
-              <h2 className="text-2xl font-bold  text-center">
-                Edit book
-              </h2>
-              <h2 className="text-2xl  text-center cursor-pointer justify-end flex text-inactive-title font-semibold" onClick={closeEditPopup}><X /></h2>
-            </div>
+      {editDetails &&
+        (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
+              <div className="flex bg-white items-center justify-between">
+                <h2 className="text-2xl font-bold  text-center">
+                  Edit book
+                </h2>
+                <h2 className="text-2xl  text-center cursor-pointer justify-end flex text-inactive-title font-semibold" onClick={closeEditPopup}><X /></h2>
+              </div>
 
-            <div className="flex flex-col">
-             <input type="text"  placeholder="Title" className="border-2 text-sm rounded-md p-2"></input>
-            </div>
-            <div className="flex flex-col">
-             <input type="text"  placeholder="Author" className="border-2 text-sm rounded-md p-2"></input>
-            </div>
-            <div className="flex flex-col">
-             <input type="number"  placeholder="Price" className="border-2 text-sm rounded-md p-2"></input>
-            </div>
-            <div className="flex flex-col">
-             <input type="text"  placeholder="Genre" className="border-2 text-sm rounded-md p-2"></input>
-            </div>
-            <div className="flex flex-col">
-             <input type="number"  placeholder="Quantity" className="border-2 text-sm rounded-md p-2"></input>
-            </div>
-            
-            <button
-              className="btn bg-black flex items-center justify-center px-4 py-2 border w-full"
-              onClick={() => handleEditDetails}
-            >
-              <p className="font-bold text-base text-white">Update Changes</p>
+              <div className="flex flex-col">
+                <input type="text"
+                  placeholder="Title"
+                  value={editDetails.title}
+                onChange={(e) => handleEditInputChange(e, 'title')}
+                  className="border-2 text-sm rounded-md p-2"></input>
+              </div>
+              <div
+                className="flex flex-col">
+                <input type="text"
+                  placeholder="Author"
+                  value={editDetails.author}
+                onChange={(e) => handleEditInputChange(e, 'author')}
+                  className="border-2 text-sm rounded-md p-2"></input>
+              </div>
+              <div
+                className="flex flex-col">
+                <input type="number"
+                  placeholder="Price"
+                  value={editDetails.price}
+                onChange={(e) => handleEditInputChange(e, 'price')}
+                  className="border-2 text-sm rounded-md p-2"></input>
+              </div>
+              <div
+                className="flex flex-col">
+                <input type="text"
+                  placeholder="Genre"
+                  value={editDetails.genre}
+                onChange={(e) => handleEditInputChange(e, 'genre')}
+                  className="border-2 text-sm rounded-md p-2"></input>
+              </div>
+              <div
+                className="flex flex-col">
+                <input type="number"
+                  placeholder="Quantity"
+                  value={editDetails.quantity}
+                onChange={(e) => handleEditInputChange(e, 'quantity')}
+                  className="border-2 text-sm rounded-md p-2"></input>
+              </div>
 
-            </button>
+              <button
+                className="btn bg-black flex items-center justify-center px-4 py-2 border w-full"
+                onClick={() => handleEditDetails}
+              >
+                <p className="font-bold text-base text-white">Update Changes</p>
 
-          </div>
-        </div>
-      )
+              </button>
+
+            </div>
+          </div>)
       }
+
       {/* Delete Popup */}
       {deleteSelected &&
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -335,6 +366,83 @@ const BookTable = () => {
           </div>
         </div>
       }
+      {/* ADD NEW BOOK */}
+      {isAddNewBookOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
+            {/* Check if new book has been added */}
+            {isNewBookAdded ? (
+              // Show  message after new book added
+              <>
+                <div className="flex flex-col bg-white items-center gap-2 justify-center">
+                  <h2 className="text-3xl font-bold text-center">
+                    Congratulations!
+                  </h2>
+                  <p className="w-full text-xl font-bold text-center">New Book Added Successfully.</p>
+                </div>
+
+                {/* Displays additional information like the book title or a button to add another book */}
+                <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+                  <button
+                    onClick={() => closeAddNewBookPopup()}
+                    className="Delbtn w-full bg-inactive-title text-white"
+                  >
+                    Close
+                  </button>
+                </div>
+              </>
+            ) : (
+              // Show form to add new book before it's added
+              <>
+                <div className="flex bg-white items-center justify-between">
+                  <h2 className="text-2xl font-bold text-center">
+                    Add New Book
+                  </h2>
+                  <h2
+                    className="text-2xl text-center cursor-pointer justify-end flex text-inactive-title font-semibold"
+                    onClick={() => closeAddNewBookPopup()}
+                  >
+                    <X />
+                  </h2>
+                </div>
+
+                <div className="flex flex-col">
+                  <input type="text" placeholder="Title" className="border-2 text-sm rounded-md p-2" />
+                </div>
+                <div className="flex flex-col">
+                  <input type="text" placeholder="Author" className="border-2 text-sm rounded-md p-2" />
+                </div>
+                <div className="flex flex-col">
+                  <input type="number" placeholder="Price" className="border-2 text-sm rounded-md p-2" />
+                </div>
+                <div className="flex flex-col">
+                  <input type="text" placeholder="Genre" className="border-2 text-sm rounded-md p-2" />
+                </div>
+                <div className="flex flex-col">
+                  <input type="number" placeholder="Quantity" className="border-2 text-sm rounded-md p-2" />
+                </div>
+
+                <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+                  <button
+                    onClick={() => handleAddNewBook()}
+                    className="Delbtn w-full bg-metricsGreen text-white"
+                  >
+                    Add Book
+                  </button>
+
+                  <button
+                    onClick={() => closeAddNewBookPopup()}
+                    className="Delbtn w-full bg-inactive-title text-white"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
 
     </div>
   );

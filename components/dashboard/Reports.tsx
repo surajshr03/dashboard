@@ -2,11 +2,12 @@
 import Breadcrumbs from "@/app/dashboard/Breadcrumbs/BreadCrumbs";
 import "@/components/dashboard/CSS/dashboard.css";
 import { addDays, format } from "date-fns";
-import { ClipboardCheck } from "lucide-react";
+import { ClipboardCheck, Eye, EyeClosed } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
 const Reports = () => {
+  const [viewReport, setViewReport] = useState(true)
   const [reportType, setReportType] = useState<string>("bookings");
   const [dateRange, setDateRange] = useState({
     from: new Date(),
@@ -18,6 +19,9 @@ const Reports = () => {
     // Simulated report generation logic
   };
 
+  const toggleView = () => {
+    setViewReport((prev) => !prev)
+  }
   return (
     <div className="space-y-6">
       <div className="flex flex-col lg:flex-row justify-end items-start lg:items-center gap-2 mb-6">
@@ -91,10 +95,14 @@ const Reports = () => {
         <p className="text-lg font-semibold">Your Report</p>
         <div className="flex justify-between gap-4 items-center">
           <div className="reportDownload w-full flex gap-2 p-2 bg-active-gray rounded-md">
-            <div className="flex justify-between items-center">
-              <ClipboardCheck />
-            <Link href='/'>1st Report.pdf</Link>
+            <div className="flex justify-between gap-2 items-center">
+              <ClipboardCheck size={20} />
+              <Link href='/'>1st Report.pdf</Link>
             </div>
+
+          </div>
+          <div onClick={toggleView} className="btn hover:scale-105 bg-metrics-gray rounded-md p-2">
+            {viewReport ? <Eye /> : <EyeClosed />}
           </div>
           <button className="btn bg-black text-white">Download </button>
         </div>
