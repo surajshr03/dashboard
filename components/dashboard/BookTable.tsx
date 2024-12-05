@@ -17,6 +17,7 @@ const BookTable = () => {
   const [isNewBookAdded, setIsNewBookAdded] = useState(false);
   const [editDetails, setEditDetails] = useState<BookProps | null>(null);
   const [deleteSelected, setDeleteSelected] = useState<BookProps | null>(null);
+  const [isBookUpdated, setIsBookUpdated] = useState(false);
 
   const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,6 +52,16 @@ const BookTable = () => {
   const closeEditPopup = () => {
     setEditDetails(null);
   }
+  // After UPDATED
+
+  const handleUpdated = () => {
+    setIsBookUpdated(true);
+  };
+  const closeUpdated = () => {
+    setIsBookUpdated(false);
+    setEditDetails(null);
+
+  };
   // ADD NEW BOOK
 
   const openAddNewBookPopup = () => {
@@ -285,65 +296,87 @@ const BookTable = () => {
       </div>
 
       {/* Edit Details PopUp */}
-
       {editDetails &&
         (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
-              <div className="flex bg-white items-center justify-between">
-                <h2 className="text-2xl font-bold  text-center">
-                  Edit book
-                </h2>
-                <h2 className="text-2xl  text-center cursor-pointer justify-end flex text-inactive-title font-semibold" onClick={closeEditPopup}><X /></h2>
-              </div>
+              {/* Check if new book has been added */}
+              {isBookUpdated ? (
+                // Show  message after new book added
+                <>
+                  <div className="flex flex-col bg-white items-center gap-2 justify-center">
+                    <p className="w-full text-xl font-bold text-center">Updated Successfully.</p>
+                  </div>
 
-              <div className="flex flex-col">
-                <input type="text"
-                  placeholder="Title"
-                  value={editDetails.title}
-                onChange={(e) => handleEditInputChange(e, 'title')}
-                  className="border-2 text-sm rounded-md p-2"></input>
-              </div>
-              <div
-                className="flex flex-col">
-                <input type="text"
-                  placeholder="Author"
-                  value={editDetails.author}
-                onChange={(e) => handleEditInputChange(e, 'author')}
-                  className="border-2 text-sm rounded-md p-2"></input>
-              </div>
-              <div
-                className="flex flex-col">
-                <input type="number"
-                  placeholder="Price"
-                  value={editDetails.price}
-                onChange={(e) => handleEditInputChange(e, 'price')}
-                  className="border-2 text-sm rounded-md p-2"></input>
-              </div>
-              <div
-                className="flex flex-col">
-                <input type="text"
-                  placeholder="Genre"
-                  value={editDetails.genre}
-                onChange={(e) => handleEditInputChange(e, 'genre')}
-                  className="border-2 text-sm rounded-md p-2"></input>
-              </div>
-              <div
-                className="flex flex-col">
-                <input type="number"
-                  placeholder="Quantity"
-                  value={editDetails.quantity}
-                onChange={(e) => handleEditInputChange(e, 'quantity')}
-                  className="border-2 text-sm rounded-md p-2"></input>
-              </div>
+                  {/* Displays additional information like the book title or a button to add another book */}
+                  <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+                    <button
+                      onClick={() => closeUpdated()}
+                      className="Delbtn w-full bg-inactive-title text-white"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </>
+              ) : (
+                // Show form to add new book before it's added
+                <>
+                  <div className="flex bg-white items-center justify-between">
+                    <h2 className="text-2xl font-bold  text-center">
+                      Edit book
+                    </h2>
+                    <h2 className="text-2xl  text-center cursor-pointer justify-end flex text-inactive-title font-semibold" onClick={closeEditPopup}><X /></h2>
+                  </div>
 
-              <button
-                className="btn bg-black flex items-center justify-center px-4 py-2 border w-full"
-                onClick={() => handleEditDetails}
-              >
-                <p className="font-bold text-base text-white">Update Changes</p>
+                  <div className="flex flex-col">
+                    <input type="text"
+                      placeholder="Title"
+                      value={editDetails.title}
+                      onChange={(e) => handleEditInputChange(e, 'title')}
+                      className="border-2 text-sm rounded-md p-2"></input>
+                  </div>
+                  <div
+                    className="flex flex-col">
+                    <input type="text"
+                      placeholder="Author"
+                      value={editDetails.author}
+                      onChange={(e) => handleEditInputChange(e, 'author')}
+                      className="border-2 text-sm rounded-md p-2"></input>
+                  </div>
+                  <div
+                    className="flex flex-col">
+                    <input type="number"
+                      placeholder="Price"
+                      value={editDetails.price}
+                      onChange={(e) => handleEditInputChange(e, 'price')}
+                      className="border-2 text-sm rounded-md p-2"></input>
+                  </div>
+                  <div
+                    className="flex flex-col">
+                    <input type="text"
+                      placeholder="Genre"
+                      value={editDetails.genre}
+                      onChange={(e) => handleEditInputChange(e, 'genre')}
+                      className="border-2 text-sm rounded-md p-2"></input>
+                  </div>
+                  <div
+                    className="flex flex-col">
+                    <input type="number"
+                      placeholder="Quantity"
+                      value={editDetails.quantity}
+                      onChange={(e) => handleEditInputChange(e, 'quantity')}
+                      className="border-2 text-sm rounded-md p-2"></input>
+                  </div>
 
-              </button>
+                  <button
+                    className="btn bg-metricsGreen flex items-center justify-center px-4 py-2 border w-full"
+                    onClick={() => handleUpdated()}
+                  >
+                    <p className="font-bold text-base text-white">Update Changes</p>
+
+                  </button>
+                </>
+              )}
 
             </div>
           </div>)
@@ -352,14 +385,14 @@ const BookTable = () => {
       {/* Delete Popup */}
       {deleteSelected &&
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4">
-
+          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-3">
+            <h2 className="text-2xl  text-center cursor-pointer justify-end flex text-inactive-title font-semibold" onClick={closeDeletePopup}><X /></h2>
             <h2 className="text-2xl font-bold mb-4 text-center">
               Are you sure you want to delete this entry?
             </h2>
-            <div className="flex flex-col md:flex-row justify-center items-center gap-8">
-              <button onClick={closeDeletePopup} className="Delbtn Delbtn-delete">Delete</button>
-              <button onClick={closeDeletePopup} className="Delbtn Delbtn-cancel">Cancel</button>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-5">
+              <button onClick={closeDeletePopup} className="Delbtn Delbtn-delete w-full text-base">Delete</button>
+              <button onClick={closeDeletePopup} className="Delbtn Delbtn-cancel w-full text-base">Cancel</button>
             </div>
 
 

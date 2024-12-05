@@ -94,7 +94,7 @@
 
 /* Add transition effects for buttons */
 button:hover {
-  transform: scale(1.05);
+  transform: scale(1.025);
 }
 
 button:disabled {
@@ -103,7 +103,7 @@ button:disabled {
 }
 /* DELETE */
 .Delbtn {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 0.25rem;
   text-align: center;
   cursor: pointer;
