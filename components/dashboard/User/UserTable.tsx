@@ -1,7 +1,7 @@
 "use client";
 import "@/components/dashboard/CSS/dashboard.css";
-import { Eye, Search, Trash2, UserRoundPen } from "lucide-react"; // Import the Search icon
-import { SetStateAction, useState } from "react";
+import { Eye, Search, Trash2, UserRoundPen, X } from "lucide-react"; // Import the Search icon
+import { ChangeEvent, SetStateAction, useState } from "react";
 
 import { Users } from "@/data/data";
 import { UserProps } from "@/data/type";
@@ -21,6 +21,52 @@ const UserTable = () => {
 
   const [selectedUser, setSelectedUser] = useState<UserProps | null>(null);
 
+  //when user clicks edit btn -----------------
+  const [editDetails, setEditDetails] = useState<UserProps | null>(null);
+  const [isUserUpdated, setIsUserUpdated] = useState(false);
+
+  const handleEditDetails = (user: UserProps) => {
+    setEditDetails(user);
+  };
+  // close pop when user clicks X
+  const closeEditPopup = () => {
+    setEditDetails(null);
+  };
+
+  const handleEditInputChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>,
+    field: string
+  ) => {
+    if (editDetails) {
+      setEditDetails({
+        ...editDetails,
+        [field]: e.target.value,
+      });
+    }
+  };
+
+  //save changes btn clicked
+  const handleUpdated = () => {
+    // Perform update logic here (e.g., API call or state update)
+    setIsUserUpdated(true);
+  };
+
+  const closeUpdated = () => {
+    setIsUserUpdated(false);
+    setEditDetails(null);
+  };
+
+  //-----------------------
+  //delete btn
+  const [deleteSelected,setDeleteSelected]=useState<UserProps | null>(null);
+  const handleDelete = (user: UserProps)=>{
+    setDeleteSelected(user);
+  }
+  const closeDeletePopup = () => {
+    setDeleteSelected(null);
+  }
+ 
+  //-----------------
 
   // Toggle filter dropdown
   const toggleFilter = () => {
@@ -51,13 +97,13 @@ const UserTable = () => {
     return matchesRole && matchesSearch;
   });
 
-  //function to show popUp overlay for user details and close it 
+  //function to show popUp overlay for user details and close it
   const handleViewDetails = (user: UserProps) => {
-    setSelectedUser(user)
+    setSelectedUser(user);
   };
   const closePopup = () => {
     setSelectedUser(null);
-  }
+  };
 
   const startIndex = (currentPage - 1) * pageSize;
   const currentItems = filteredUsers.slice(startIndex, startIndex + pageSize);
@@ -136,7 +182,8 @@ const UserTable = () => {
                     onClick={() => handleFilterChange("customer")}
                   >
                     Customer
-                  </li>a
+                  </li>
+                  a
                 </ul>
               </div>
             )}
@@ -164,25 +211,36 @@ const UserTable = () => {
                     <td className="p-2">{user.email}</td>
                     <td className="p-2">
                       <span
-                        className={`rounded-full ${user.role.toLowerCase() === "superadmin"
-                          ? "bg-btn-confirmed"
-                          : user.role.toLowerCase() === "admin"
+                        className={`rounded-full ${
+                          user.role.toLowerCase() === "superadmin"
+                            ? "bg-btn-confirmed"
+                            : user.role.toLowerCase() === "admin"
                             ? "bg-btn-pending"
                             : "bg-btn-canceled"
-                          }`}
+                        }`}
                       >
                         {user.role}
                       </span>
                     </td>
 
                     <td className="p-2 flex space-x-2 justify-between">
-                      <button onClick={() => { handleViewDetails(user) }} className="hover:cursor-pointer text-gray-500 group flex items-center space-x-1">
+                      <button
+                        onClick={() => {
+                          handleViewDetails(user);
+                        }}
+                        className="hover:cursor-pointer text-gray-500 group flex items-center space-x-1"
+                        title="Detail"
+                      >
                         <Eye className="group-hover:text-gray-700 group-hover:scale-125 transition-transform duration-200 ease-in-out" />
                         {/* <span className="group-hover:text-gray-700 hidden lg:block">
                         Detail
                       </span> */}
                       </button>
-                      <button className="hover:cursor-pointer text-green-500 group flex items-center space-x-1">
+                      <button
+                        className="hover:cursor-pointer text-green-500 group flex items-center space-x-1"
+                        title="Edit"
+                        onClick={() => handleEditDetails(user)}
+                      >
                         <UserRoundPen className="group-hover:text-green-700 group-hover:scale-125 transition-transform duration-200 ease-in-out" />
                         {/* <span className="group-hover:text-green-700 hidden lg:block">
                         Edit
@@ -190,12 +248,14 @@ const UserTable = () => {
                       </button>
 
                       <button
-                        className={`group flex items-center space-x-1 ${user.role.toLowerCase() === "superadmin"
-                          ? "cursor-not-allowed opacity-50"
-                          : "hover:cursor-pointer text-red-500"
-                          }`}
+                        className={`group flex items-center space-x-1 ${
+                          user.role.toLowerCase() === "superadmin"
+                            ? "cursor-not-allowed opacity-50"
+                            : "hover:cursor-pointer text-red-500"
+                        }`}
                         title="Delete"
                         disabled={user.role.toLowerCase() === "superadmin"}
+                        onClick={()=>{handleDelete(user)}}
                       >
                         <Trash2 className="group-hover:text-red-700 group-hover:scale-125 transition-transform duration-200 ease-in-out" />
                         {/* <span
@@ -213,9 +273,7 @@ const UserTable = () => {
                 ))
               ) : (
                 <tr>
-                  <td className="p-2 text-center">
-                    No users found
-                  </td>
+                  <td className="p-2 text-center">No users found</td>
                 </tr>
               )}
             </tbody>
@@ -270,6 +328,121 @@ const UserTable = () => {
             </div>
           </div>
         )}
+
+        {/* Edit Popup */}
+        {editDetails && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-4 mx-2">
+              {isUserUpdated ? (
+                <>
+                  <div className="flex flex-col bg-white items-center gap-2 justify-center">
+                    <p className="w-full text-xl font-bold text-center">
+                      Updated Successfully.
+                    </p>
+                  </div>
+
+                  {/* Displays additional information like the book title or a button to add another book */}
+                  <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+                    <button
+                      onClick={() => closeUpdated()}
+                      className="Delbtn w-full bg-inactive-title text-white"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex bg-white items-center justify-between">
+                    <h2 className="text-2xl font-bold  text-center">
+                      Edit User
+                    </h2>
+                    <h2
+                      className="text-2xl  text-center cursor-pointer justify-end flex text-inactive-title font-semibold"
+                      onClick={closeEditPopup}
+                    >
+                      <X />
+                    </h2>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="p-2 text-sm"> User Name :</label>
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      value={editDetails.name}
+                      onChange={(e) => {
+                        handleEditInputChange(e, "name");
+                      }} //'name': It tells the function that we want to update the name field of editDetails based on this new input value.
+                      className="border-2 text-sm rounded-md p-2"
+                    ></input>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="p-2 text-sm"> User Email :</label>
+                    <input
+                      type="text"
+                      placeholder="Book"
+                      value={editDetails.email}
+                      onChange={(e) => handleEditInputChange(e, "email")}
+                      className="border-2 text-sm rounded-md p-2"
+                    ></input>
+                  </div>
+
+                  <div className="flex flex-col">
+                    <label className="p-2 text-sm">User Role :</label>
+                    <select
+                      value={editDetails.role}
+                      onChange={(e) => handleEditInputChange(e, "role")}
+                      className="border-2 text-sm rounded-md p-2"
+                    >
+                      <option value={editDetails.role}>
+                        {editDetails.role}
+                      </option>
+                      {editDetails.role !== "customer" && (
+                        <option value="customer">customer</option>
+                      )}
+                      {editDetails.role !== "admin" && (
+                        <option value="admin">admin</option>
+                      )}
+                      {editDetails.role !== "superadmin" && (
+                        <option value="superadmin">superadmin</option>
+                      )}
+                    </select>
+                  </div>
+
+                  <button
+                    className="btn bg-metricsGreen flex items-center justify-center px-4 py-2 border w-full"
+                    onClick={() => {}}
+                  >
+                    <p
+                      className="font-bold text-base text-white"
+                      onClick={() => handleUpdated()}
+                    >
+                      Update Changes
+                    </p>
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+         {/* Delete Popup */}
+      {deleteSelected &&
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-3">
+            <h2 className="text-2xl  text-center cursor-pointer justify-end flex text-inactive-title font-semibold" onClick={closeDeletePopup}><X /></h2>
+            <h2 className="text-2xl font-bold mb-4 text-center">
+              Are you sure you want to delete this entry?
+            </h2>
+            <div className="flex flex-col md:flex-row justify-center items-center mb-2 gap-5">
+              <button onClick={closeDeletePopup} className="Delbtn Delbtn-delete w-full text-base">Delete</button>
+              <button onClick={closeDeletePopup} className="Delbtn Delbtn-cancel w-full text-base">Cancel</button>
+            </div>
+
+
+          </div>
+        </div>
+      }
       </div>
     </>
   );
