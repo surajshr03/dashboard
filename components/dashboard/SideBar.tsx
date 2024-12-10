@@ -26,6 +26,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
 
   const [isBookingsOpen, setIsBookingsOpen] = useState(false);
   const [isUserManagementOpen, setIsUserManagementOpen] = useState(false);
+  const [isBooksOpen,setIsBookOpen]=useState(false);
 
   const toggleBookings = () => {
     setIsBookingsOpen(!isBookingsOpen);
@@ -33,6 +34,10 @@ const SideBar = ({ isVisible }: SideBarProps) => {
 
   const toggleUserManagement = () => {
     setIsUserManagementOpen(!isUserManagementOpen);
+  };
+
+  const toggleBooks =()=>{
+    setIsBookOpen(!isBookingsOpen);
   };
 
   return (
@@ -94,17 +99,7 @@ const SideBar = ({ isVisible }: SideBarProps) => {
             )}
           </li>
 
-          {/* Other Menu Items */}
           {/* <li
-            className={`flex items-center p-2 rounded text-sm ${pathname === "/dashboard/e-books" ? "bg-active-gray" : "hover:bg-active-gray"
-              }`}
-          >
-            <Computer className="mr-2" />
-            <Link href="/dashboard/e-books" className="block w-full">
-              E-Books
-            </Link>
-          </li> */}
-          <li
             className={`flex items-center p-2 rounded text-base ${pathname === "/dashboard/books" ? "bg-active-gray" : "hover:bg-active-gray"
               }`}
           >
@@ -112,7 +107,68 @@ const SideBar = ({ isVisible }: SideBarProps) => {
             <Link href="/dashboard/books" className="block w-full">
               Manage Books
             </Link>
+          </li> */}
+          
+           {/* Manage Bookings Dropdown */}
+           <li className="cursor-pointer">
+            <div
+              onClick={toggleBooks}
+              className="flex items-center justify-between w-full p-2 rounded text-base hover:bg-active-gray"
+            >
+              <div className="flex items-center">
+                <Calendar size={20} className="mr-2" />
+                <span>Manage Books</span>
+              </div>
+              <ChevronDown
+                className={`transition-transform duration-300 ${isBooksOpen ? "rotate-180" : "rotate-0"
+                  }`}
+                size={18}
+              />
+            </div>
+            {isBooksOpen && (
+              <ul className="pl-8 mt-2 space-y-2">
+                <li
+                  className={`flex items-center px-2 rounded text-base ${pathname === "/dashboard/normal-book" ? "bg-active-gray" : "hover:bg-active-gray"
+                    }`}
+                >
+                  <ClipboardCopy size={20} className="mr-2" />
+                  <Link
+                    href="/dashboard//books/normal-books"
+                    className="block p-2 rounded text-sm grow"
+                  >
+                    Normal Book
+                  </Link>
+                </li>
+                <li
+                  className={`flex items-center px-2 rounded text-base ${pathname === "/dashboard/ebook" ? "bg-active-gray" : "hover:bg-active-gray"
+                    }`}
+                >
+                  <ClipboardCopy size={20} className="mr-2" />
+                  <Link
+                    href="/dashboard/books/ebook"
+                    className="block p-2 rounded text-sm grow"
+                  >
+                    Ebook
+                  </Link>
+                </li>
+                <li
+                  className={`flex items-center px-2 rounded text-base ${pathname === "/dashboard/audio-book" ? "bg-active-gray" : "hover:bg-active-gray"
+                    }`}
+                >
+                  <ClipboardCopy size={20} className="mr-2" />
+                  <Link
+                    href="/dashboard//books/audio-books"
+                    className="block p-2 rounded text-sm grow"
+                  >
+                    Audio Book
+                  </Link>
+                </li>
+              </ul>
+            )}
           </li>
+
+          
+            {/* other  */}
           <li
             className={`flex items-center p-2 rounded text-base ${pathname === "/dashboard/transactions" ? "bg-active-gray" : "hover:bg-active-gray"
               }`}
