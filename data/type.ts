@@ -9,11 +9,12 @@ export type TransactionProps = {
 };
 
 export type UserProps = {
-  id: number;
+  device_id: number;
   name: string;
   email: string;
-  date: string;
-  role: string;
+  created: string;
+  disable: boolean;
+  user_status:boolean;
 };
 
 export type BookingProps = {
