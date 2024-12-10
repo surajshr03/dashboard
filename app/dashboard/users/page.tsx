@@ -4,7 +4,7 @@ import Breadcrumbs from '../Breadcrumbs/BreadCrumbs'
 const page = () => {
   return (
     <div>
-      <Breadcrumbs />
+      {/* <Breadcrumbs /> */}
       <UserTable />
     </div>
   )
