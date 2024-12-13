@@ -6,6 +6,9 @@ import TransactionsRequest from "@/components/dashboard/User/UserDetails/Transac
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import "@/components/dashboard/CSS/dashboard.css";
+import { Users } from "@/data/data";
+import { UserProps } from "@/data/type";
+
 
 const UserDetails = () => {
   const params = useParams();
@@ -13,19 +16,29 @@ const UserDetails = () => {
   console.log(`Device Id : ${device_id}`);
 
   const [selectedTab, setSelectedTab] = useState("personalInfo");
+  const userProps: UserProps = {
+    device_id: Number(device_id), // Ensure it's a number
+    // Add other user information if available
+    //get data via api in futute and replace below data with actaul data
+    name: "John Doe", 
+    email: "john.doe@example.com", 
+    created: "2024-01-01", 
+    disable: false, 
+    user_status: true, 
+  };
 
   const renderContent = () => {
     switch (selectedTab) {
       case "personalInfo":
-        return <PersonalInfo />;
+        return <PersonalInfo  {...userProps} />;
       case "transactions":
-        return <Transactions />;
+        return <Transactions {...userProps}  />;
       case "transactionsRequest":
-        return <TransactionsRequest />;
+        return <TransactionsRequest {...userProps} />;
       case "loadRequests":
-        return <LoadRequests />;
+        return <LoadRequests {...userProps}  />;
       default:
-        return <PersonalInfo />;
+        return <PersonalInfo {...userProps}  />;
     }
   };
 
