@@ -1,59 +1,84 @@
 "use client";
-// import { useParams } from "next/navigation";
-import { useState } from "react";
+import LoadRequests from "@/components/dashboard/User/UserDetails/LoadRequests";
+import PersonalInfo from "@/components/dashboard/User/UserDetails/PersonalInfo";
+import Transactions from "@/components/dashboard/User/UserDetails/Transactions";
+import TransactionsRequest from "@/components/dashboard/User/UserDetails/TransactionsRequest";
+import { useParams } from "next/navigation";
+import { useState, useEffect } from "react";
 import "@/components/dashboard/CSS/dashboard.css";
 
-import PersonalInfo from "./PersonalInfo";
-import Transactions from "./Transactions";
-import TransactionsRequest from "./TransactionsRequest";
-import LoadRequests from "./LoadRequests";
+const UserDetails = () => {
+  const params = useParams();
+  const device_id = params.device_id;
+  console.log(`Device Id : ${device_id}`);
 
-type UserDetailsProps = {
-    device_id: number;
-  };
-
-const UserDetails: React.FC<UserDetailsProps> = ({ device_id }) =>  {
-  const [selectedTab, setSelectedTab] = useState(1);
-  console.log(device_id);
+  const [selectedTab, setSelectedTab] = useState("personalInfo");
 
   const renderContent = () => {
     switch (selectedTab) {
-      case 1:
+      case "personalInfo":
         return <PersonalInfo />;
-      case 2:
+      case "transactions":
         return <Transactions />;
-      case 3:
+      case "transactionsRequest":
         return <TransactionsRequest />;
-      case 4:
+      case "loadRequests":
         return <LoadRequests />;
       default:
         return <PersonalInfo />;
     }
   };
 
+  const capitalizeWords = (str: string) => {
+    return str
+      .split(/(?=[A-Z])/)
+      .join(" ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+
   return (
-    <div className="p-20">
-      <h1>User Detail </h1>
-      <div className="flex gap-10 mb-20">
-        {[1, 2, 3, 4].map((current_tab) => (
-          <button
-            key={current_tab}
-            onClick={() => {
-              setSelectedTab(current_tab);
-            }}
-            className={`tab-button ${
-              selectedTab === current_tab ? "active" : ""
-            } `}
-          >
-            Component {current_tab}
-          </button>
-        ))}
+    <>
+      <div className="wrapper my-4">
+        <h5 className="title">User Details</h5>
+        <h6 className="sub-title">View User Details and Transactions</h6>
+
+        <div className="overflow-x-auto max-w-full custom-scrollbar my-6">
+          <table className="table-auto w-full p-4">
+            <thead className="bg-gray-100 text-left">
+              <tr className="">
+                {[
+                  "personalInfo",
+                  "transactions",
+                  "transactionsRequest",
+                  "loadRequests",
+                ].map((tab, index, arr) => (
+                  <th
+                    key={tab}
+                    onClick={() => setSelectedTab(tab)}
+                    className={`tab-button ${
+                      selectedTab === tab ? "active" : ""
+                    } p-2 text-dark-inactive-title ${
+                      index !== 0 && index !== arr.length - 1
+                        ? "border-x-4"
+                        : ""
+                    } text-center cursor-default`}
+                  >
+                    {capitalizeWords(tab)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="border border-gray-300">
+              <tr>
+                <td className="text-center" colSpan={4}>
+                  {renderContent()}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      {/* Display the Selected Component */}
-      <div style={{ border: "1px solid #ccc", padding: "20px" }}>
-        {renderContent()}
-      </div>
-    </div>
+    </>
   );
 };
 
