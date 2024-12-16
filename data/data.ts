@@ -231,6 +231,14 @@ export const Users: UserProps[] = [
     user_status: true,
   },
   {
+    device_id: 203,
+    name: "Suraj Shrestha",
+    email: "suraj.shr@gmail.com",
+    created: "2023-05-01",
+    disable: false,
+    user_status: false,
+  },
+  {
     device_id: 2,
     name: "Bob Smith",
     email: "bob.smith@gmail.com",
