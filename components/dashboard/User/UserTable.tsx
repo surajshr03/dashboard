@@ -19,6 +19,23 @@ const UserTable = () => {
       // Handle the error appropriately (e.g., show a toast notification)
     }
   };
+  
+  //pagination page change
+  const onPageChange = (page: React.SetStateAction<number>) => {
+    setCurrentPage(page);
+  };
+
+ //filter data before pagination (future) in api call
+
+
+  
+  // pagination 
+  
+  const pageSize = 15;
+  const [currentPage, setCurrentPage] = useState(1);
+  const startIndex = (currentPage - 1) * pageSize;
+  const currentItems = Users.slice(startIndex, startIndex + pageSize);
+
 
   return (
     <>
@@ -37,8 +54,8 @@ const UserTable = () => {
           </thead>
 
           <tbody>
-            {Users.length > 0 ? (
-              Users.map((user) => (
+            {currentItems.length > 0 ? (
+              currentItems.map((user) => (
                 <tr key={user.device_id} className="border-b">
                   {/* Render user-specific content here */}
                   <td className="p-2 text-dark-inactive-title">{user.name}</td>
@@ -80,6 +97,18 @@ const UserTable = () => {
             )}
           </tbody>
         </table>
+
+        <div className="w-full">
+         
+        <Pagination
+            items={Users.length} // 100
+            currentPage={currentPage} // 1
+            pageSize={pageSize} // 10
+            onPageChange={onPageChange}
+          />
+
+        </div>
+        
       </div>
     </>
   );
