@@ -7,10 +7,8 @@ const PersonalInfo: React.FC<UserProps> = ({ device_id, ...rest }) => {
   return (
     <div className="personalInfoBg">
       <div className="inner-wrpper m-4 wfull">
-        <h2 className="text-2xl mb-2  hover:scale-125 transition-transform duration-300 ease-in-out cursor-default">
-          <span className="underline mt-2">
+        <h2 className="md:text-2xl mb-2 cursor-default hover:underline ">
             Personal Info for Device {device_id}
-          </span>
         </h2>
         <div className="text-left">
        
