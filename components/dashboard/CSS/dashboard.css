@@ -139,4 +139,30 @@ button:disabled {
   background-color: #12192015; /* Highlight the active tab */
   color: black;
 }
+
+.personalInfoBg {
+  background: var(--background); 
+  padding: 16px; 
+  position: relative;
+  overflow: hidden; 
+  max-width: 100%; 
+}
+
+.inner-wrpper{
+  margin: 0 auto; /* Center the content horizontally */
+  max-width: 100%; /* Keep the content within the parent’s width */
+  box-sizing: border-box; /* Include padding and border in width/height */
+  width: 100%; /* Ensure it takes full width of the container */
+  background-color: #ffffff;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.75rem;
+  /* Equivalent to rounded-lg */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-width: 2px;
+  border-color: #e8e9e9; 
+}
 /* ----------------- */
