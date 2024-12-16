@@ -23,7 +23,7 @@ const UserDetails = () => {
     name: "John Doe", 
     email: "john.doe@example.com", 
     created: "2024-01-01", 
-    disable: false, 
+    disable: true, 
     user_status: true, 
   };
 
@@ -52,11 +52,11 @@ const UserDetails = () => {
   return (
     <>
       <div className="wrapper my-4">
-        <h5 className="title">User Details</h5>
+        <h5 className="title">User Details : {device_id} </h5>
         <h6 className="sub-title">View User Details and Transactions</h6>
 
         <div className="overflow-x-auto max-w-full custom-scrollbar my-6">
-          <table className="table-auto w-full p-4">
+          <table className="table-auto w-full p-4 border border-gray-300">
             <thead className="bg-gray-100 text-left">
               <tr className="">
                 {[
@@ -68,20 +68,20 @@ const UserDetails = () => {
                   <th
                     key={tab}
                     onClick={() => setSelectedTab(tab)}
-                    className={`tab-button ${
+                    className={`tab-button tracking-wide ${
                       selectedTab === tab ? "active" : ""
                     } p-2 text-dark-inactive-title ${
                       index !== 0 && index !== arr.length - 1
                         ? "border-x-4"
                         : ""
-                    } text-center cursor-default`}
+                    } cursor-default `}
                   >
                     {capitalizeWords(tab)}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="border border-gray-300">
+            <tbody className="">
               <tr>
                 <td className="text-center" colSpan={4}>
                   {renderContent()}
