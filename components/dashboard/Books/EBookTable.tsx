@@ -1,12 +1,12 @@
 "use client";
 
+import "@/components/dashboard/CSS/dashboard.css";
+import { EBooks } from "@/data/data";
+import { EBookProps } from "@/data/type";
+import { Eye } from 'lucide-react';
 import { useRouter } from "next/navigation";
-import { Eye, Search, Trash2, UserRoundIcon as UserRoundPen, X } from 'lucide-react';
 import { useState } from "react";
 import Pagination from "../Pagination";
-import { EBookProps } from "@/data/type";
-import { EBooks } from "@/data/data";
-import "@/components/dashboard/CSS/dashboard.css";
 
 
 const EBookTable = () => {
