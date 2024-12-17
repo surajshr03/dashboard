@@ -1,8 +1,11 @@
+import NormalBookTable from '@/components/dashboard/Books/NormalBookTable'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <NormalBookTable/>
+    </div>
   )
 }
 

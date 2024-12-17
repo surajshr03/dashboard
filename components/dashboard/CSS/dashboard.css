@@ -137,7 +137,7 @@ button:disabled {
 /*user-detail tab-button*/
 .tab-button.active {
   background-color: #12192015; /* Highlight the active tab */
-  color: black;
+  color: rgb(11, 185, 11);
 }
 
 .personalInfoBg {

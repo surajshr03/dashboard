@@ -1,8 +1,11 @@
+import AudioBooksTable from '@/components/dashboard/Books/AudioBooksTable'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <AudioBooksTable/>
+    </div>
   )
 }
 
