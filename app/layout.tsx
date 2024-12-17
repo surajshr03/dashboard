@@ -5,8 +5,8 @@ import SideBar from "@/components/dashboard/SideBar";
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Metadata } from "@/components/Metadata";
 import "./globals.css";
+import { AuthProvider } from "@/context/AuthContext";
 
 const inter = Inter({
   weight: ["400", "700"],
@@ -34,33 +34,43 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-        <div className="flex w-full h-screen overflow-auto">
-          {/* Sidebar */}
-          <SideBar isVisible={isSidebarVisible} />
-
-          {/* Main Content Area */}
-          <div
-            className={`flex-1 overflow-x-hidden transition-all duration-300 ${isSidebarVisible ? "ml-64" : "ml-0"
-              }`}
-          >
-            {/* Navbar */}
-            <NavBar
-              isSearchOpen={isSearchOpen}
-              onSearchClick={toggleSearch}
-              onHamburgerClick={toggleSidebar}
-              isSidebarVisible={isSidebarVisible}
-            />
-
-            {/* Page Content */}
-            <div className="flex-1 w-screen md:w-full overflow-hidden p-4 md:p-8">
-              {isLoading ? (
-                <Loading isSidebarVisible={isSidebarVisible} isLoading={isLoading} />
-              ) : (
-                children
-              )}
+        <AuthProvider>
+          {pathName === '/auth/login' || pathName === '/auth/register' || pathName === '/auth/forgot-password' ? (
+            // Authentication pages without dashboard layout
+            <div className="flex items-center justify-center min-h-screen">
+              {children}
             </div>
-          </div>
-        </div>
+          ) : (
+            // Dashboard layout with protected routes
+            <div className="flex w-full h-screen overflow-auto">
+              {/* Sidebar */}
+              <SideBar isVisible={isSidebarVisible} />
+              {/* Main Content Area */}
+              <div
+                className={`flex-1 overflow-x-hidden transition-all duration-300 ${isSidebarVisible ? "ml-64" : "ml-0"
+                  }`}
+              >
+                {/* Navbar */}
+                <NavBar
+                  isSearchOpen={isSearchOpen}
+                  onSearchClick={toggleSearch}
+                  onHamburgerClick={toggleSidebar}
+                  isSidebarVisible={isSidebarVisible}
+                />
+                {/* Page Content */}
+                <div className="flex-1 w-screen md:w-full overflow-hidden p-4 md:p-8">
+                  {isLoading ? (
+                    <Loading isSidebarVisible={isSidebarVisible} isLoading={isLoading} />
+                  ) : (
+                    children
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+        </AuthProvider>
+
+
       </body>
     </html>
   );

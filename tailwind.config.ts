@@ -21,6 +21,7 @@ export default {
         metricsRed: "var(--MetricsRed)",
         "bg-red": "var(--BgRed)",
         brand: "var(--Brand)",
+        darkBrand: "var(--DarkBrand)",
         "bg-green": "var(--BgGreen)",
         "nav-icon": "var(--NavIcon)",
         "metrics-icon": "var(--MetricsIcon)",
