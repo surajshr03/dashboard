@@ -60,3 +60,14 @@ export type NormalBookProps = {
   page_count: number;
   status: "Available" | "Borrowed";
 };
+
+export type EBookProps = {
+  id: string;
+  title: string;
+  author: string;
+  isbn: string;
+  published_date: string;
+  file_size: string;
+  format: string;
+  status: "Available" | "Borrowed";
+}
