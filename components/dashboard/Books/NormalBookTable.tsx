@@ -1,13 +1,13 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { Eye, Search, Trash2, UserRoundIcon as UserRoundPen, X } from 'lucide-react';
-import { useState } from "react";
 import "@/components/dashboard/CSS/dashboard.css";
+import { Eye } from 'lucide-react';
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-import Pagination from "../Pagination";
-import { NormalBookProps } from "@/data/type";
 import { NormalBooks } from "@/data/data";
+import { NormalBookProps } from "@/data/type";
+import Pagination from "../Pagination";
 
 const NormalBookTable = () => {
   const router = useRouter();

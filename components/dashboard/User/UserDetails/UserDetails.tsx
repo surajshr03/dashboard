@@ -1,13 +1,12 @@
 "use client";
+import "@/components/dashboard/CSS/dashboard.css";
 import LoadRequests from "@/components/dashboard/User/UserDetails/LoadRequests";
 import PersonalInfo from "@/components/dashboard/User/UserDetails/PersonalInfo";
 import Transactions from "@/components/dashboard/User/UserDetails/Transactions";
 import TransactionsRequest from "@/components/dashboard/User/UserDetails/TransactionsRequest";
-import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
-import "@/components/dashboard/CSS/dashboard.css";
-import { Users } from "@/data/data";
 import { UserProps } from "@/data/type";
+import { useParams } from "next/navigation";
+import { useState } from "react";
 
 
 const UserDetails = () => {
