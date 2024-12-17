@@ -1,8 +1,13 @@
+import AudioBooksTable from '@/components/dashboard/Books/AudioBooksTable'
 import React from 'react'
+import Breadcrumbs from '../../Breadcrumbs/BreadCrumbs'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <Breadcrumbs/>
+      <AudioBooksTable/>
+    </div>
   )
 }
 

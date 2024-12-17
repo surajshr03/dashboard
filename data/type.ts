@@ -14,7 +14,7 @@ export type UserProps = {
   email: string;
   created: string;
   disable: boolean;
-  user_status:boolean;
+  user_status: boolean;
 };
 
 export type BookingProps = {
@@ -40,3 +40,34 @@ export type PaginationProps = {
   currentPage: number;
   onPageChange: (page: number) => void;
 };
+
+export type AudioBookProps = {
+  id: string;
+  title: string;
+  author: string;
+  narrator: string;
+  duration: string;
+  release_date: string;
+  format: string;
+  status: "Available" | "Borrowed";
+};
+export type NormalBookProps = {
+  id: string;
+  title: string;
+  author: string;
+  isbn: string;
+  published_date: string;
+  page_count: number;
+  status: "Available" | "Borrowed";
+};
+
+export type EBookProps = {
+  id: string;
+  title: string;
+  author: string;
+  isbn: string;
+  published_date: string;
+  file_size: string;
+  format: string;
+  status: "Available" | "Borrowed";
+}
