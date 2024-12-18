@@ -1,15 +1,15 @@
 'use client';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { useAuth } from '@/context/AuthContext'; // Adjust the import path as needed
-import { useRouter } from 'next/navigation';
+import { useAuth } from '@/hooks/useAuth'; // Adjust the import path as needed
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
 const RegisterForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [phone, setPhone] = useState<number>('');//Argument of type 'string' is not assignable to parameter of type 'number | (() => number)'.ts(2345)
+    const [phone, setPhone] = useState('');//Argument of type 'string' is not assignable to parameter of type 'number | (() => number)'.ts(2345)
     const [fullName, setFullName] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -20,8 +20,6 @@ const RegisterForm = () => {
     const validatePassword = (password: string) => {
         // Password validation rules
         const minLength = 8;
-        const hasUpperCase = /[A-Z]/.test(password);
-        const hasLowerCase = /[a-z]/.test(password);
         const hasNumbers = /[0-9]/.test(password);
         const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
@@ -29,12 +27,6 @@ const RegisterForm = () => {
 
         if (password.length < minLength) {
             errors.push(`Password must be at least ${minLength} characters long`);
-        }
-        if (!hasUpperCase) {
-            errors.push('Password must contain at least one uppercase letter');
-        }
-        if (!hasLowerCase) {
-            errors.push('Password must contain at least one lowercase letter');
         }
         if (!hasNumbers) {
             errors.push('Password must contain at least one number');
@@ -91,13 +83,13 @@ const RegisterForm = () => {
                 <div className=" max-w-full p-6 sm:p-10">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <p className='text-3xl text-center font-bold'>Register</p>
-
                         {/* Error Message */}
                         {error && (
-                            <div className="bg-red-50 border border-red-300 text-red-800 px-4 py-3 rounded-xl text-center">
+                            <div className="bg-red-50 border max-w-96 border-red-300 text-red-800 px-4 py-3 rounded-xl text-center">
                                 {error}
                             </div>
                         )}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label htmlFor="FullName" className="text-base font-medium text-gray-900">
                                 Full Name
@@ -121,18 +113,18 @@ const RegisterForm = () => {
                             </label>
                             <div className="mt-2">
                                 <input
-                                    type="number"
+                                    type="string"
                                     name="phone"
                                     id="phone"
                                     value={phone}
-                                    onChange={(e) => setPhone(Number(e.target.value))}
+                                    onChange={(e) => setPhone((e.target.value))}
                                     placeholder="Enter your phone number"
                                     required
                                     className="block w-full px-4 py-4 text-base text-gray-900 bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-darkBrand focus:ring-1 focus:ring-darkBrand"
                                 />
                             </div>
                         </div>
-                        <div>
+                        <div className='col-span-2'>
                             <label htmlFor="email" className="text-base font-medium text-gray-900">
                                 Email address
                             </label>
@@ -185,7 +177,7 @@ const RegisterForm = () => {
                                 />
                             </div>
                         </div>
-
+                        </div>
 
 
                         <div className="flex flex-col gap-4 justify-center items-center">
