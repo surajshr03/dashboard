@@ -9,6 +9,8 @@ const RegisterForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [phone, setPhone] = useState<number>('');//Argument of type 'string' is not assignable to parameter of type 'number | (() => number)'.ts(2345)
+    const [fullName, setFullName] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -72,9 +74,10 @@ const RegisterForm = () => {
         }
 
         try {
-            await register(email, password);
+            await register(email, password, phone, fullName);
             // Redirect to dashboard or login page after successful registration
-            router.push('/dashboard');
+            setTimeout(() =>
+                router.push('/auth/login'), 200);
         } catch (err) {
             // Type-safe error handling
             setError(err instanceof Error ? err.message : 'Registration failed. Please try again.');
@@ -83,9 +86,9 @@ const RegisterForm = () => {
     };
 
     return (
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-            <div className="flex bg-white shadow-xl rounded-2xl">
-                <div className="p-6 sm:p-10">
+        <div className=" my-24 max-w-full">
+            <div className="flex  max-w-full  bg-white shadow-xl rounded-2xl">
+                <div className=" max-w-full p-6 sm:p-10">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <p className='text-3xl text-center font-bold'>Register</p>
 
@@ -95,7 +98,40 @@ const RegisterForm = () => {
                                 {error}
                             </div>
                         )}
-
+                        <div>
+                            <label htmlFor="FullName" className="text-base font-medium text-gray-900">
+                                Full Name
+                            </label>
+                            <div className="mt-2">
+                                <input
+                                    type="text"
+                                    name="fullName"
+                                    id="fullName"
+                                    value={fullName}
+                                    onChange={(e) => setFullName(e.target.value)}
+                                    placeholder="Enter your Full Name"
+                                    required
+                                    className="block w-full px-4 py-4 text-base text-gray-900 bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-darkBrand focus:ring-1 focus:ring-darkBrand"
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <label htmlFor="phone" className="text-base font-medium text-gray-900">
+                                Phone Number
+                            </label>
+                            <div className="mt-2">
+                                <input
+                                    type="number"
+                                    name="phone"
+                                    id="phone"
+                                    value={phone}
+                                    onChange={(e) => setPhone(Number(e.target.value))}
+                                    placeholder="Enter your phone number"
+                                    required
+                                    className="block w-full px-4 py-4 text-base text-gray-900 bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-darkBrand focus:ring-1 focus:ring-darkBrand"
+                                />
+                            </div>
+                        </div>
                         <div>
                             <label htmlFor="email" className="text-base font-medium text-gray-900">
                                 Email address
@@ -150,6 +186,8 @@ const RegisterForm = () => {
                             </div>
                         </div>
 
+
+
                         <div className="flex flex-col gap-4 justify-center items-center">
                             <button
                                 type="submit"
@@ -173,8 +211,8 @@ const RegisterForm = () => {
                         </div>
                     </form>
                 </div>
-                <div className='max-w-xl'>
-                    <Image className='object-cover w-full h-full' alt='' src='/inaki-del-olmo-NIJuEQw0RKg-unsplash.jpg' height={1000} width={1000} />
+                <div className='max-w-sm hidden lg:block'>
+                    <Image loading='lazy' className='object-cover w-full h-full' alt='' src='/inaki-del-olmo-NIJuEQw0RKg-unsplash.jpg' height={1000} width={1000} />
                 </div>
             </div>
         </div>

@@ -88,7 +88,7 @@ const ChangePasswordForm = () => {
     };
 
     return (
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-5xl ">
+        <div className="px-4 my-24 sm:my-20 mx-auto sm:px-6 lg:px-8 max-w-5xl ">
             <div className="flex bg-white shadow-xl rounded-2xl">
                 <div className="max-h-full p-6 sm:p-10">
                     <form
@@ -183,8 +183,8 @@ const ChangePasswordForm = () => {
                         </div>
                     </form>
                 </div>
-                <div className='max-w-xl'>
-                    <Image className='object-cover w-full h-full' alt=''
+                <div className='max-w-xl hidden lg:block'>
+                    <Image loading='lazy' className='object-cover w-full h-full' alt=''
                         src='/inaki-del-olmo-NIJuEQw0RKg-unsplash.jpg' height={500} width={500} />
                 </div>
             </div>
