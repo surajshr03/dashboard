@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { useAuth } from '@/context/AuthContext'; // Adjust the import path as needed
+import { useAuth } from '@/hooks/useAuth'; // Adjust the import path as needed
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
@@ -39,7 +39,7 @@ const LoginForm = () => {
 
                         {/* Error Message */}
                         {error && (
-                            <div className="bg-red-50 border border-red-300 text-red-800 px-4 py-3 rounded-xl text-center">
+                            <div className="bg-red-50 border max-w-96 border-red-300 text-red-800 px-4 py-3 rounded-xl text-center">
                                 {error}
                             </div>
                         )}

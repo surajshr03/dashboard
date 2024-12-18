@@ -1,4 +1,77 @@
-// import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+
+// Define the shape of the authentication context
+interface AuthContextType {
+    user: User | null;
+    login: (email: string, password: string) => Promise<void>;
+    logout: () => void;
+    register: (email: string, password: string, phone: string, fullName: string) => Promise<void>;
+}
+
+interface User {
+    id: string;
+    email: string;
+    password: string;
+    phone: string;
+    fullName: string;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [user, setUser] = useState<User | null>(null);
+
+    // Check authentication on initial load
+    useEffect(() => {
+        const storedUser = localStorage.getItem('authUser');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
+    const login = async (email: string, password: string) => {
+        const storedUser = localStorage.getItem('authUser');
+
+        if (storedUser) {
+            const user: User = JSON.parse(storedUser);
+            if (user.email === email && user.password === password) {
+                setUser(user);
+            } else {
+                throw new Error('Login failed');
+            }
+        } else {
+            throw new Error('User not found');
+        }
+    };
+
+    const logout = () => {
+        localStorage.removeItem('authUser');
+        setUser(null);
+    };
+
+    const register = async (email: string, password: string, phone: string, fullName: string) => {
+        const newUser: User = {
+            id: crypto.randomUUID(),
+            email,
+            password,
+            phone,
+            fullName
+        };
+        localStorage.setItem('authUser', JSON.stringify(newUser));
+        setUser(newUser);
+    };
+
+    return (
+        <AuthContext.Provider value={{ user, login, logout, register }}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
+
+export default AuthContext;
+
+
+// import React, { createContext, useState, useEffect } from 'react';
 
 // // Define the shape of the authentication context
 // interface AuthContextType {
@@ -117,89 +190,4 @@
 //         </AuthContext.Provider>
 //     );
 // };
-
-// // Custom hook to use the auth context
-// export const useAuth = () => {
-//     const context = useContext(AuthContext);
-//     if (context === undefined) {
-//         throw new Error('useAuth must be used within an AuthProvider');
-//     }
-//     return context;
-// };
-import React, { createContext, useState, useContext, useEffect } from 'react';
-
-// Define the shape of the authentication context
-interface AuthContextType {
-    user: User | null;
-    login: (email: string, password: string) => Promise<void>;
-    logout: () => void;
-    register: (email: string, password: string, phone: number, fullName: string) => Promise<void>;
-}
-
-interface User {
-    id: string;
-    email: string;
-    password: string;
-    phone: number;
-    fullName: string;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [user, setUser] = useState<User | null>(null);
-
-    // Check authentication on initial load
-    useEffect(() => {
-        const storedUser = localStorage.getItem('authUser');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
-    }, []);
-
-    const login = async (email: string, password: string) => {
-        const storedUser = localStorage.getItem('authUser');
-        if (storedUser) {
-            const user: User = JSON.parse(storedUser);
-            if (user.email === email && user.password === password) {
-                setUser(user);
-            } else {
-                throw new Error('Login failed');
-            }
-        } else {
-            throw new Error('User not found');
-        }
-    };
-
-    const logout = () => {
-        localStorage.removeItem('authUser');
-        setUser(null);
-    };
-
-    const register = async (email: string, password: string, phone: number, fullName: string) => {
-        const newUser: User = {
-            id: crypto.randomUUID(),
-            email,
-            password,
-            phone,
-            fullName
-        };
-        localStorage.setItem('authUser', JSON.stringify(newUser));
-        setUser(newUser);
-    };
-
-    return (
-        <AuthContext.Provider value={{ user, login, logout, register }}>
-            {children}
-        </AuthContext.Provider>
-    );
-};
-
-// Custom hook to use the auth context
-export const useAuth = () => {
-    const context = useContext(AuthContext);
-    if (context === undefined) {
-        throw new Error('useAuth must be used within an AuthProvider');
-    }
-    return context;
-};
+// export default AuthContext;
