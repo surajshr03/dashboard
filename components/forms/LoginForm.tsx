@@ -31,7 +31,7 @@ const LoginForm = () => {
     };
 
     return (
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 mt-8 max-w-7xl ">
+        <div className="px-4 mx-auto sm:px-6 lg:px-8 mt-16 md:my-8 max-w-7xl ">
             <div className="flex bg-white shadow-xl rounded-2xl">
                 <div className="p-6 sm:p-10">
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -106,8 +106,8 @@ const LoginForm = () => {
                         </div>
                     </form>
                 </div>
-                <div className='max-w-xl'>
-                    <Image className='object-cover w-full h-full' alt='' src='/inaki-del-olmo-NIJuEQw0RKg-unsplash.jpg' height={1000} width={1000} />
+                <div className='max-w-lg hidden lg:block'>
+                    <Image loading='lazy' className='object-cover w-full h-full' alt='' src='/inaki-del-olmo-NIJuEQw0RKg-unsplash.jpg' height={1000} width={1000} />
                 </div>
             </div>
         </div>

@@ -1,8 +1,8 @@
 "use client";
 import "@/components/dashboard/CSS/dashboard.css";
+import { Eye } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Eye, Search, Trash2, UserRoundPen, X } from "lucide-react";
-import { ChangeEvent, SetStateAction, useState } from "react";
+import { useState } from "react";
 
 import { Users } from "@/data/data";
 import { UserProps } from "@/data/type";

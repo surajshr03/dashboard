@@ -1,13 +1,12 @@
 "use client";
+import "@/components/dashboard/CSS/dashboard.css";
 import LoadRequests from "@/components/dashboard/User/UserDetails/LoadRequests";
 import PersonalInfo from "@/components/dashboard/User/UserDetails/PersonalInfo";
 import Transactions from "@/components/dashboard/User/UserDetails/Transactions";
 import TransactionsRequest from "@/components/dashboard/User/UserDetails/TransactionsRequest";
-import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
-import "@/components/dashboard/CSS/dashboard.css";
-import { Users } from "@/data/data";
 import { UserProps } from "@/data/type";
+import { useParams } from "next/navigation";
+import { useState } from "react";
 
 
 const UserDetails = () => {
@@ -17,9 +16,8 @@ const UserDetails = () => {
 
   const [selectedTab, setSelectedTab] = useState("personalInfo");
   const userProps: UserProps = {
-    device_id: Number(device_id), // Ensure it's a number
-    // Add other user information if available
-    //get data via api in futute and replace below data with actaul data
+    // Ensure it's a number// Add other user information if available//get data via api in futute and replace below data with actaul data
+    device_id: Number(device_id), 
     name: "John Doe", 
     email: "john.doe@example.com", 
     created: "2024-01-01", 
