@@ -1,4 +1,4 @@
-import EBookTable from '@/components/dashboard/Books/EBookTable'
+import EBookTable from '@/components/dashboard/Books/EBooksTable'
 import React from 'react'
 import Breadcrumbs from '../../Breadcrumbs/BreadCrumbs'
 

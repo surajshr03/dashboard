@@ -1,7 +1,7 @@
 'use client';
 import Loading from "@/components/dashboard/Loading";
 import NavBar from "@/components/dashboard/NavBar";
-import SideBar from "@/components/dashboard/SideBar";
+import SideBar from "@/components/dashboard/Sidebar/SideBar";
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -31,6 +31,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const toggleSearch = () => setIsSearchOpen((prev) => !prev);
   const toggleSidebar = () => setSidebarVisible((prev) => !prev);
 
+  const user_role = 'superadmin';
+  // const user_role = 'admin';
+
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
@@ -44,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             // Dashboard layout with protected routes
             <div className="flex w-full h-screen overflow-auto">
               {/* Sidebar */}
-              <SideBar isVisible={isSidebarVisible} />
+              <SideBar isVisible={isSidebarVisible} user_role = {user_role}/>
               {/* Main Content Area */}
               <div
                 className={`flex-1 overflow-x-hidden transition-all duration-300 ${isSidebarVisible ? "ml-64" : "ml-0"
@@ -56,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   onSearchClick={toggleSearch}
                   onHamburgerClick={toggleSidebar}
                   isSidebarVisible={isSidebarVisible}
+                  user_role = {user_role}
                 />
                 {/* Page Content */}
                 <div className="flex-1 w-screen md:w-full overflow-hidden p-4 md:p-8">

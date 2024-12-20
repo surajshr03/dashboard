@@ -1,4 +1,4 @@
-import NormalBookTable from '@/components/dashboard/Books/NormalBookTable'
+import NormalBookTable from '@/components/dashboard/Books/NormalBooksTable'
 import React from 'react'
 import Breadcrumbs from '../../Breadcrumbs/BreadCrumbs'
 

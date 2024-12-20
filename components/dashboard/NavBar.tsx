@@ -9,9 +9,10 @@ type NavBarProps = {
     isSidebarVisible: boolean;
     isSearchOpen: boolean;
     onSearchClick: () => void;
+    user_role : string;
 };
 
-const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisible }: NavBarProps) => {
+const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisible,user_role }: NavBarProps) => {
     const [isThemeToggled, setIsThemeToggled] = useState(false);
     const [isUserToggled, setIsUserToggled] = useState(false);
     const [isNotificationsToggled, setIsNotificationsToggled] = useState(false);
@@ -60,6 +61,7 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
 
     return (
         <header className={`sticky top-0 z-50 flex items-center justify-between px-4 md:px-6 py-4 bg-white border-b ${isSidebarVisible ? "ml-0" : "ml-0"
@@ -272,7 +274,7 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                         className="flex relative items-center px-2 space-x-2 border-none hover:rounded-full hover:bg-active-gray focus:scale-50 cursor-pointer">
                         <div className="flex  py-2 gap-1">
                             <User className='text-nav-icon ' size={20} />
-                            <span className='hidden md:block text-nav-icon text-base prevent-select'>Username</span>
+                            <span className='hidden md:block text-nav-icon text-base prevent-select'>{user_role}</span>
                         </div>
                     </div>
                     {isUserToggled &&
