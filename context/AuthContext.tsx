@@ -5,7 +5,7 @@ interface AuthContextType {
     user: User | null;
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
-    register: (email: string, password: string, phone: string, fullName: string) => Promise<void>;
+    register: (email: string, password: string, phone: string, firstName: string, lastName: string) => Promise<void>;
 }
 
 interface User {
@@ -13,7 +13,8 @@ interface User {
     email: string;
     password: string;
     phone: string;
-    fullName: string;
+    firstName: string;
+    lastName: string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -49,13 +50,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(null);
     };
 
-    const register = async (email: string, password: string, phone: string, fullName: string) => {
+    const register = async (email: string, password: string, phone: string, firstName: string, lastName: string) => {
         const newUser: User = {
             id: crypto.randomUUID(),
             email,
             password,
             phone,
-            fullName
+            firstName,
+            lastName
         };
         localStorage.setItem('authUser', JSON.stringify(newUser));
         setUser(newUser);
@@ -79,7 +81,7 @@ export default AuthContext;
 //     login: (email: string, password: string) => Promise<void>;
 //     logout: () => void;
 //     register: (email: string, password: string, phone: number,
-//         fullName: string) => Promise<void>;
+//         firstName: string) => Promise<void>;
 // }
 
 // interface User {
@@ -87,7 +89,7 @@ export default AuthContext;
 //     email: string;
 //     password: string;
 //     phone: number;
-//     fullName: string;
+//     firstName: string;
 // }
 
 // const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -145,13 +147,13 @@ export default AuthContext;
 //         setUser(null);
 //     };
 
-//     const register = async (email: string, password: string, phone: number, fullName: string) => {
+//     const register = async (email: string, password: string, phone: number, firstName: string) => {
 //         try {
 //             // Implement your registration API call
 //             const response = await fetch('/api/register', {
 //                 method: 'POST',
 //                 headers: { 'Content-Type': 'application/json' },
-//                 body: JSON.stringify({ email, password, phone, fullName })
+//                 body: JSON.stringify({ email, password, phone, firstName })
 //             });
 
 //             if (!response.ok) {
