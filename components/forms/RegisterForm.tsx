@@ -79,7 +79,7 @@ const RegisterForm = () => {
     };
 
     return (
-        <div className=" my-24 max-w-full">
+        <div className=" mt-20 max-w-full">
             <div className="flex  max-w-full  bg-white shadow-xl rounded-2xl">
                 <div className=" max-w-full p-6 sm:p-10">
                     <form onSubmit={handleSubmit} className="space-y-6">
