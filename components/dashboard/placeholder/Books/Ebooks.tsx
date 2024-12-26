@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import "@/components/dashboard/CSS/dashboard.css";
+import axios from "axios";
+import { API_BASE_URL } from "@/data/data";
 
 const Ebooks = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +13,6 @@ const Ebooks = () => {
     thumbnail: null,
     tags: [],
   });
-
   const [availableTags, setAvailableTags] = useState([
     "Fiction",
     "Science",
@@ -19,6 +20,8 @@ const Ebooks = () => {
     "Biography",
   ]);
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
     setFormData({
@@ -50,19 +53,46 @@ const Ebooks = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
 
     console.log("Form Submitted", formData);
 
     // Reset form fields to initial state
-    setFormData({
-      title: "",
-      author: "",
-      description: "",
-      thumbnail: null,
-      tags: [],
-    });
+    const payload = new FormData();
+    payload.append("title", formData.title);
+    payload.append("author", formData.author);
+    payload.append("description", formData.description);
+    if (formData.thumbnail) {
+      payload.append("thumbnail", formData.thumbnail);
+    }
+    formData.tags.forEach((tag) => payload.append("tags[]", tag));
+
+    try {
+      const response = await axios.post(`${API_BASE_URL}/ebooks/books/create/`, payload, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (response.status === 201) {
+        setFormData({
+          title: "",
+          author: "",
+          description: "",
+          thumbnail: null,
+          tags: [],
+        });
+      } else {
+        setError("Failed to upload e-book.");
+      }
+    } catch (err: any) {
+      setError(err.response?.data?.message || "An error occurred while uploading.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -121,8 +151,7 @@ const Ebooks = () => {
             ></textarea>
           </div>
           {/* thumbnail */}
-          <div className="flex flex-col justify-center items-center">
-            <div>
+          <div className="flex flex-col">
             <label htmlFor="thumbnail" className="text-sm font-medium mb-1">
               Thumbnail
             </label>
@@ -135,9 +164,8 @@ const Ebooks = () => {
               onChange={handleFileChange}
               required
             />
-            </div>
-            
           </div>
+
           {/* tags */}
           <div className="flex flex-col">
             <label htmlFor="tags" className="text-sm font-medium mb-1">
@@ -147,14 +175,9 @@ const Ebooks = () => {
               id="tags"
               name="tags"
               className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-brand focus:outline-none"
-              value={formData.tags[0] || ""} // Selects the first tag or empty
-              onChange={
-                (e) => setFormData({ ...formData, tags: [e.target.value] }) // Updates as single tag
-              }
+              multiple
+              onChange={handleTagsChange}
             >
-              <option value="" disabled>
-                Select a tag
-              </option>
               {availableTags.map((tag) => (
                 <option key={tag} value={tag}>
                   {tag}
@@ -162,21 +185,21 @@ const Ebooks = () => {
               ))}
             </select>
           </div>
-          
-        </div>
+
+
+        </div >
 
         {/* submit */}
-        <div className="">
-        <button
-          type="submit"
-          className="bg-brand text-white px-6 py-2 rounded-lg hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand "
-        >
-          Submit
-        </button>
+        < div className="" >
+          <button
+            type="submit"
+            className="bg-brand text-white px-6 py-2 rounded-lg hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand "
+          >
+            Submit
+          </button>
         </div>
-       
       </form>
-    </div>
+    </div >
   );
 };
 
