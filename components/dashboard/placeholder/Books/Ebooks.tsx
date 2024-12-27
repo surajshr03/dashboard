@@ -10,18 +10,17 @@ const Ebooks = () => {
     title: "",
     author: "",
     description: "",
-    thumbnail: null,
+    // thumbnail: null,
     tags: [],
   });
   const [availableTags, setAvailableTags] = useState([
-    "Fiction",
-    "Science",
-    "History",
-    "Biography",
+    "Comedy",
+    "Thrill",
   ]);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
   const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
     setFormData({
@@ -30,12 +29,12 @@ const Ebooks = () => {
     });
   };
 
-  const handleFileChange = (e: { target: { files: FileList } }) => {
-    setFormData({
-      ...formData,
-      thumbnail: e.target.files[0],
-    });
-  };
+  // const handleFileChange = (e: { target: { files: FileList } }) => {
+  //   setFormData({
+  //     ...formData,
+  //     thumbnail: e.target.files[0],
+  //   });
+  // };
 
   const handleTagsChange = (e: {
     target: { options: HTMLCollectionOf<HTMLOptionElement> };
@@ -52,37 +51,32 @@ const Ebooks = () => {
       tags: selectedTags,
     });
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    console.log("Form Submitted", formData);
-
-    // Reset form fields to initial state
     const payload = new FormData();
     payload.append("title", formData.title);
     payload.append("author", formData.author);
     payload.append("description", formData.description);
-    if (formData.thumbnail) {
-      payload.append("thumbnail", formData.thumbnail);
-    }
-    formData.tags.forEach((tag) => payload.append("tags[]", tag));
+
+    // if (formData.thumbnail) {
+    //   payload.append("thumbnail", formData.thumbnail);
+    // }
+
+    // Ensure tags are being sent as an array of strings
+    formData.tags.forEach((tag) => payload.append("tags", tag));
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/ebooks/books/create/`, payload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(`${API_BASE_URL}/ebooks/books/create/`, payload);
 
       if (response.status === 201) {
         setFormData({
           title: "",
           author: "",
           description: "",
-          thumbnail: null,
+          // thumbnail: null,
           tags: [],
         });
       } else {
@@ -151,7 +145,7 @@ const Ebooks = () => {
             ></textarea>
           </div>
           {/* thumbnail */}
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <label htmlFor="thumbnail" className="text-sm font-medium mb-1">
               Thumbnail
             </label>
@@ -164,7 +158,7 @@ const Ebooks = () => {
               onChange={handleFileChange}
               required
             />
-          </div>
+          </div> */}
 
           {/* tags */}
           <div className="flex flex-col">
