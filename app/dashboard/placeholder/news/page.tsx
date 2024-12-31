@@ -1,12 +1,11 @@
-import NewsGet from "@/components/dashboard/placeholder/News/NewsGet";
-import React from "react";
+import NewsCreate from "@/components/dashboard/placeholder/News/NewsCreate";
 
 const page = () => {
   return (
     <div>
-      <NewsGet />
+      <NewsCreate />
     </div>
   );
 };
 
-export default page;
+export default page;  
