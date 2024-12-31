@@ -30,9 +30,14 @@ const SideBar = ({ isVisible ,user_role}: SideBarProps) => {
   const [isBookingsOpen, setIsBookingsOpen] = useState(false);
   const [isUserManagementOpen, setIsUserManagementOpen] = useState(false);
   const [isBooksOpen,setIsBookOpen]=useState(false);
+  const [isNewsOpen,setIsNewsOpen]=useState(false);
+
 
   const toggleBookings = () => {
     setIsBookingsOpen(!isBookingsOpen);
+  };
+  const toggleNews = () => {
+    setIsNewsOpen(!isNewsOpen);
   };
 
   const toggleUserManagement = () => {
@@ -135,39 +140,39 @@ const SideBar = ({ isVisible ,user_role}: SideBarProps) => {
 
             {/* other  */}
             
-          {/* User Management Dropdown */}
-          {/* <li className="cursor-pointer">
+          {/* News Management Dropdown */}
+          <li className="cursor-pointer">
             <div
-              onClick={toggleUserManagement}
+              onClick={toggleNews}
               className="flex items-center justify-between w-full p-2 rounded text-base hover:bg-active-gray"
             >
               <div className="flex items-center">
                 <Users size={20} className="mr-2" />
-                <span>User Management</span>
+                <span>News Management</span>
               </div>
               <ChevronDown
-                className={`transition-transform duration-300 ${isUserManagementOpen ? "rotate-180" : "rotate-0"
+                className={`transition-transform duration-300 ${isNewsOpen ? "rotate-180" : "rotate-0"
                   }`}
                 size={18}
               />
             </div>
-            {isUserManagementOpen && (
+            {isNewsOpen && (
               <ul className="pl-8 mt-2 space-y-2">
                 <li
-                  className={`flex items-center px-2 rounded text-base ${pathname === "/dashboard/users" ? "bg-active-gray" : "hover:bg-active-gray"
+                  className={`flex items-center px-2 rounded text-base ${pathname === "/dashboard/placeholder/news" ? "bg-active-gray" : "hover:bg-active-gray"
                     }`}
                 >
                   <List size={20} className="mr-2" />
                   <Link
-                    href="/dashboard/users"
+                    href="/dashboard/placeholder/news"
                     className="block p-2 rounded text-base grow"
                   >
-                    User List
+                    Add News
                   </Link>
                 </li>
               </ul>
             )}
-          </li> */}
+          </li>
 
           </>
 
@@ -324,6 +329,41 @@ const SideBar = ({ isVisible ,user_role}: SideBarProps) => {
               //   </>
               // )
            }
+
+
+           {/* News Management Dropdown */}
+          <li className="cursor-pointer">
+            <div
+              onClick={toggleNews}
+              className="flex items-center justify-between w-full p-2 rounded text-base hover:bg-active-gray"
+            >
+              <div className="flex items-center">
+                <Users size={20} className="mr-2" />
+                <span>News Management</span>
+              </div>
+              <ChevronDown
+                className={`transition-transform duration-300 ${isNewsOpen ? "rotate-180" : "rotate-0"
+                  }`}
+                size={18}
+              />
+            </div>
+            {isNewsOpen && (
+              <ul className="pl-8 mt-2 space-y-2">
+                <li
+                  className={`flex items-center px-2 rounded text-base ${pathname === "/dashboard/news" ? "bg-active-gray" : "hover:bg-active-gray"
+                    }`}
+                >
+                  <List size={20} className="mr-2" />
+                  <Link
+                    href="/dashboard/news"
+                    className="block p-2 rounded text-base grow"
+                  >
+                    View News
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </li>
           
 
           <li
