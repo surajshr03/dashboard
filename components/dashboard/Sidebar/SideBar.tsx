@@ -39,6 +39,7 @@ const SideBar = ({ isVisible ,user_role}: SideBarProps) => {
   const toggleNews = () => {
     setIsNewsOpen(!isNewsOpen);
   };
+ 
 
   const toggleUserManagement = () => {
     setIsUserManagementOpen(!isUserManagementOpen);
@@ -317,21 +318,8 @@ const SideBar = ({ isVisible ,user_role}: SideBarProps) => {
                   </ul>
                 )}
               </li>
-    
-              </>
-            ):null
-              // (
-              //   <>
-              //     {/* Fallback for Other Roles or Unauthorized Access */}
-              //     <li className="flex items-center p-2 rounded text-base text-gray-500">
-              //       Access Restricted
-              //     </li>
-              //   </>
-              // )
-           }
-
-
-           {/* News Management Dropdown */}
+              
+              {/* News Management Dropdown */}
           <li className="cursor-pointer">
             <div
               onClick={toggleNews}
@@ -364,6 +352,22 @@ const SideBar = ({ isVisible ,user_role}: SideBarProps) => {
               </ul>
             )}
           </li>
+
+    
+              </>
+            ):null
+              // (
+              //   <>
+              //     {/* Fallback for Other Roles or Unauthorized Access */}
+              //     <li className="flex items-center p-2 rounded text-base text-gray-500">
+              //       Access Restricted
+              //     </li>
+              //   </>
+              // )
+           }
+
+
+           
           
 
           <li
