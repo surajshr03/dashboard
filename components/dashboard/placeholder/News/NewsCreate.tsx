@@ -6,12 +6,13 @@ import { API_BASE_URL } from "@/data/data";
 import axios from "axios";
 
 const NewsCreate = () => {
+    // console.log(API_BASE_URL);
   const [formData, setFormData] = useState({
     title: "",
     summary: "",
     content: "",
-    categories: [],  // Now it's an array to store selected categories
-    url: "",  // Added URL field
+    categories: [],
+    url: "",
   });
 
   const availableCategories = [
@@ -27,7 +28,10 @@ const NewsCreate = () => {
     "Art & Culture",
   ];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -44,7 +48,9 @@ const NewsCreate = () => {
     // Merge and deduplicate categories in the form data
     setFormData((prevFormData) => ({
       ...prevFormData,
-      categories: Array.from(new Set([...prevFormData.categories, ...selectedOptions])), // Merge and deduplicate
+      categories: Array.from(
+        new Set([...prevFormData.categories, ...selectedOptions])
+      ), // Merge and deduplicate
     }));
   };
 
@@ -52,7 +58,9 @@ const NewsCreate = () => {
   const handleCategoryRemove = (categoryToRemove: string) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      categories: prevFormData.categories.filter((category) => category !== categoryToRemove),
+      categories: prevFormData.categories.filter(
+        (category) => category !== categoryToRemove
+      ),
     }));
   };
 
@@ -60,29 +68,47 @@ const NewsCreate = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log(formData);
+  
+    const payload = new FormData();
+  
+    payload.append("title", formData.title);
+    payload.append("summary", formData.summary);
+    payload.append("url", formData.url);
+    payload.append("content", formData.content);
+    payload.append("category", "1"); // Passing a static value "1" for now
+  
+    try {
+      const response = await axios.post(`${API_BASE_URL}/news/news/create/`, payload);
+      console.log(payload);
+      // console.log(payload.status);
+      console.log(response);
 
-    // Reset form after submission
-    setFormData({
-      title: "",
-      summary: "",
-      content: "",
-      categories: [],
-      url: "",
-    });
 
-    // Here you could add code to send the data to an API, like so:
-    // try {
-    //   const response = await axios.post(`${API_BASE_URL}/your-endpoint`, formData);
-    //   // Handle response...
-    // } catch (error) {
-    //   console.error('Error submitting form:', error);
-    // }
+      if (response.status === 201) {
+             // Optionally reset form after submission
+      setFormData({
+        title: "",
+        summary: "",
+        content: "",
+        categories: [],
+        url: "",
+      });
+      } else {
+        console.log("Failed to upload e-book.");
+      }
+
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
+  
 
   return (
     <div className="wrapper my-8">
       <h5 className="text-xl font-semibold mb-2">Upload News</h5>
-      <h6 className="text-lg text-gray-600 mb-6">Manage and Upload News Content</h6>
+      <h6 className="text-lg text-gray-600 mb-6">
+        Manage and Upload News Content
+      </h6>
 
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div className="grid md:grid-cols-2 gap-4 overflow-hidden w-full">
@@ -120,21 +146,20 @@ const NewsCreate = () => {
             />
           </div>
 
-          {/* Content */}
+          {/* URL */}
           <div className="flex flex-col w-full">
-            <label htmlFor="content" className="text-sm font-medium mb-1">
-              Content
+            <label htmlFor="url" className="text-sm font-medium mb-1">
+              URL
             </label>
-            <textarea
-              id="content"
-              name="content"
+            <input
+              type="url"
+              id="url"
+              name="url"
               className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-brand focus:outline-none w-full"
-              placeholder="Enter content"
-              value={formData.content}
+              placeholder="Enter news URL"
+              value={formData.url}
               onChange={handleChange}
-              rows={4}
-              required
-            ></textarea>
+            />
           </div>
 
           {/* Categories */}
@@ -182,21 +207,21 @@ const NewsCreate = () => {
             </div>
           </div>
 
-          {/* URL */}
+          {/* Content */}
           <div className="flex flex-col w-full">
-            <label htmlFor="url" className="text-sm font-medium mb-1">
-              URL
+            <label htmlFor="content" className="text-sm font-medium mb-1">
+              Content
             </label>
-            <input
-              type="url"
-              id="url"
-              name="url"
+            <textarea
+              id="content"
+              name="content"
               className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-brand focus:outline-none w-full"
-              placeholder="Enter news URL"
-              value={formData.url}
+              placeholder="Enter content"
+              value={formData.content}
               onChange={handleChange}
-            //   required
-            />
+              rows={4}
+              required
+            ></textarea>
           </div>
         </div>
 
