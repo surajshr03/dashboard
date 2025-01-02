@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
 import "@/components/dashboard/CSS/dashboard.css";
-import axios from "axios";
 import { API_BASE_URL } from "@/data/data";
+import axios from "axios";
+import React, { useState } from "react";
 
 const Ebooks = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +16,8 @@ const Ebooks = () => {
   const [availableTags, setAvailableTags] = useState([
     "Comedy",
     "Thrill",
+    "Horror",
+    "Action",
   ]);
 
   const [loading, setLoading] = useState(false);
@@ -28,14 +30,12 @@ const Ebooks = () => {
       [name]: value,
     });
   };
-if(loading)
-{
-  return<div>loading......</div>
-}
-if(error)
-{
-  return<div>Error occurred.</div>
-}
+  if (loading) {
+    return <div>loading......</div>
+  }
+  if (error) {
+    return <div>Error occurred.</div>
+  }
   // const handleFileChange = (e: { target: { files: FileList } }) => {
   //   setFormData({
   //     ...formData,

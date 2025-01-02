@@ -1,13 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import { API_BASE_URL } from '@/data/data';
+import { useState } from 'react';
 
 const AudioBooks = () => {
   const [formData, setFormData] = useState({
     title: '',
     author: '',
     description: '',
-    thumbnail: null,
+    // thumbnail: null,
     tags: [],
   });
 
@@ -18,6 +19,10 @@ const AudioBooks = () => {
     'Biography',
   ]);
 
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -26,12 +31,18 @@ const AudioBooks = () => {
     });
   };
 
-  const handleFileChange = (e) => {
-    setFormData({
-      ...formData,
-      thumbnail: e.target.files[0],
-    });
-  };
+  if (loading) {
+    return <div>loading......</div>
+  }
+  if (error) {
+    return <div>Error occurred.</div>
+  }
+  // const handleFileChange = (e) => {
+  //   setFormData({
+  //     ...formData,
+  //     thumbnail: e.target.files[0],
+  //   });
+  // };
 
   // Handle changes in the tags dropdown (allowing multi-selection)
   const handleTagsChange = (e) => {
@@ -42,27 +53,57 @@ const AudioBooks = () => {
       tags: Array.from(new Set([...prevFormData.tags, ...selectedOptions])), // Merge and deduplicate
     }));
   };
-
-   // Handle removing a tag
-   const handleTagRemove = (tagToRemove) => {
+  // Handle removing a tag
+  const handleTagRemove = (tagToRemove) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       tags: prevFormData.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
-
+  // 404 error dk why
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     console.log(formData);
 
-    setFormData({
-      title: '',
-      author: '',
-      description: '',
-      thumbnail: null,
-      tags: [],
-    });
+    try {
+      const response = await fetch(`${API_BASE_URL}/audiobooks/books/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('AudioBook successfully uploaded!');
+        // Reset form after successful submission
+        setFormData({
+          title: '',
+          author: '',
+          description: '',
+          tags: [],
+        });
+      } else {
+        const errorData = await response.json();
+        console.log(`Error: ${errorData.message || 'Failed to upload audiobook.'}`);
+      }
+    } catch (error) {
+      console.log(`Error: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  //   setFormData({
+  //     title: '',
+  //     author: '',
+  //     description: '',
+  //     // thumbnail: null,
+  //     tags: [],
+  //   });
+  // };
 
   return (
     <div className="wrapper my-8">
@@ -123,7 +164,7 @@ const AudioBooks = () => {
           </div>
 
           {/* Thumbnail */}
-          <div className="flex flex-col w-full">
+          {/* <div className="flex flex-col w-full">
             <label htmlFor="thumbnail" className="text-sm font-medium mb-1">
               Thumbnail
             </label>
@@ -136,52 +177,52 @@ const AudioBooks = () => {
               onChange={handleFileChange}
               required
             />
-          </div>
+          </div> */}
 
           {/* Tags */}
           <div className="flex flex-col w-full">
-      <label htmlFor="tags" className="text-sm font-medium mb-1">
-        Tags
-      </label>
+            <label htmlFor="tags" className="text-sm font-medium mb-1">
+              Tags
+            </label>
 
-      {/* Display selected tags */}
-      {formData.tags.length > 0 && (
-        <div className="mt-2 flex flex-wrap gap-2">
-          {formData.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="flex items-center bg-gray-200 text-sm text-gray-800 px-3 py-1 rounded-lg"
-            >
-              {tag}
-              <button
-                type="button"
-                onClick={() => handleTagRemove(tag)}
-                className="ml-2 text-gray-600 hover:text-gray-800"
+            {/* Display selected tags */}
+            {formData.tags.length > 0 && (
+              <div className="mt-2 flex flex-wrap gap-2">
+                {formData.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="flex items-center bg-gray-200 text-sm text-gray-800 px-3 py-1 rounded-lg"
+                  >
+                    {tag}
+                    <button
+                      type="button"
+                      onClick={() => handleTagRemove(tag)}
+                      className="ml-2 text-gray-600 hover:text-gray-800"
+                    >
+                      &times; {/* Cross button */}
+                    </button>
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Tags dropdown */}
+            <div className="flex items-center mt-2">
+              <select
+                id="tags"
+                name="tags"
+                className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-brand focus:outline-none w-full"
+                onChange={handleTagsChange}
+              // multiple 
               >
-                &times; {/* Cross button */}
-              </button>
-            </span>
-          ))}
-        </div>
-      )}
-
-      {/* Tags dropdown */}
-      <div className="flex items-center mt-2">
-        <select
-          id="tags"
-          name="tags"
-          className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-brand focus:outline-none w-full"
-          onChange={handleTagsChange}
-          // multiple 
-        >
-          {availableTags.map((tag) => (
-            <option key={tag} value={tag}>
-              {tag}
-            </option>
-          ))}
-        </select>
-      </div>
-    </div>
+                {availableTags.map((tag) => (
+                  <option key={tag} value={tag}>
+                    {tag}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
         </div>
 
         {/* Submit button */}
@@ -195,7 +236,7 @@ const AudioBooks = () => {
         </div>
       </form>
     </div>
-  );
+  )
 };
 
 export default AudioBooks;
