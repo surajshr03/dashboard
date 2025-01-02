@@ -1036,6 +1036,7 @@ export const NormalBooks: NormalBookProps[] = [
     status: "Available",
   },
 ];
+
 // export const EBooks: EBookProps[] = [
 //   {
 //     id: "1",
@@ -1240,6 +1241,20 @@ export const NormalBooks: NormalBookProps[] = [
 // ];
 
 export const API_BASE_URL = "http://192.168.1.77:8000";
+
+export const getNormalbooks = async (): Promise<NormalBookProps[]> => {
+  const response = await fetch(`${API_BASE_URL}/normalbooks/books/`);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Normalbooks: ${response.statusText}`);
+  }
+  const data = await response.json();
+  return data;
+};
+
+export const PostNormalBook = async () => {
+  const response = await axios.post(`${API_BASE_URL}/normalbooks/books/create/`);
+ 
+};
 
 export const getEbooks = async (): Promise<EBookProps[]> => {
   const response = await fetch(`${API_BASE_URL}/ebooks/books/`);

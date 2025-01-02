@@ -28,7 +28,14 @@ const Ebooks = () => {
       [name]: value,
     });
   };
-
+if(loading)
+{
+  return<div>loading......</div>
+}
+if(error)
+{
+  return<div>Error occurred.</div>
+}
   // const handleFileChange = (e: { target: { files: FileList } }) => {
   //   setFormData({
   //     ...formData,
