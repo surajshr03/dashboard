@@ -31,8 +31,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const toggleSearch = () => setIsSearchOpen((prev) => !prev);
   const toggleSidebar = () => setSidebarVisible((prev) => !prev);
 
-  // const user_role = 'superadmin';
-  const user_role = 'admin';
+  const user_role = 'superadmin';
+  // const user_role = 'admin';
 
   return (
     <html lang="en">

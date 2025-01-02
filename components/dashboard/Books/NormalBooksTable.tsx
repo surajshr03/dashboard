@@ -2,10 +2,9 @@
 
 import "@/components/dashboard/CSS/dashboard.css";
 import { Eye } from 'lucide-react';
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { getNormalbooks, NormalBooks } from "@/data/data";
+import { getNormalbooks } from "@/data/data";
 import { NormalBookProps } from "@/data/type";
 import Pagination from "../Pagination";
 

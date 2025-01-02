@@ -1243,7 +1243,7 @@ export const Books: BookProps[] = [
 export const API_BASE_URL = "http://192.168.1.77:8000";
 
 export const getAudiobooks = async (): Promise<AudioBookProps[]> => {
-  const response = await fetch(`${API_BASE_URL}/audiobooks/books/`);
+  const response = await fetch(`${API_BASE_URL}/ebooks/audiobooks/`);
   if (!response.ok) {
     throw new Error(`Failed to fetch Audiobooks: ${response.statusText}`);
   }
