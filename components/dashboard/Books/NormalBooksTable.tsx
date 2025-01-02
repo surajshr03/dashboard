@@ -14,7 +14,7 @@ const NormalBookTable = () => {
   const [NormalBooks, setNormalBooks] = useState<NormalBookProps[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedBooking, setSelectedBooking] = useState<NormalBookProps | null>(null);
+  const [selectedBook, setSelectedBook] = useState<NormalBookProps | null>(null);
 
   useEffect(() => {
     const fetchNormalBooks = async () => {
@@ -34,10 +34,10 @@ const NormalBookTable = () => {
   }, []);
 
   const handleViewDetails = (booking: NormalBookProps) => {
-    setSelectedBooking(booking);
+    setSelectedBook(booking);
   };
   const closePopup = () => {
-    setSelectedBooking(null);
+    setSelectedBook(null);
   }
 
   const pageSize = 12;
@@ -123,7 +123,7 @@ const NormalBookTable = () => {
                 onPageChange={onPageChange}
               />
             </div>
-            {selectedBooking && (
+            {selectedBook && (
               <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                 <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-2">
                   <h2 className="text-2xl font-bold mb-3 text-left">
@@ -131,28 +131,28 @@ const NormalBookTable = () => {
                   </h2>
                   <div className="flex flex-col">
                     <strong className="text-lg">Title:</strong>
-                    <p> {selectedBooking.title}</p>
+                    <p> {selectedBook.title}</p>
                   </div>
 
                   <div className="flex flex-col">
                     <strong className="text-lg">Author:</strong>
-                    <p>{selectedBooking.author}</p>
+                    <p>{selectedBook.author}</p>
                   </div>
                   <div className="flex flex-col">
                     <strong className="text-lg">Published date:</strong>
-                    <p>{selectedBooking.published_date}</p>
+                    <p>{selectedBook.published_date}</p>
                   </div>
                   <div className="flex flex-col">
                     <strong className="text-lg">Page Count:</strong>
-                    <p>{selectedBooking.page_count}</p>
+                    <p>{selectedBook.page_count}</p>
                   </div>
                   <div className="flex flex-col">
                     <strong className="text-lg">ISBN:</strong>
-                    <p>{selectedBooking.isbn}</p>
+                    <p>{selectedBook.isbn}</p>
                   </div>
                   <div className="flex flex-col">
                     <strong className="text-lg">Status:</strong>
-                    <p>{selectedBooking.status}</p>
+                    <p>{selectedBook.status}</p>
                   </div>
 
                   <div className="mt-3 flex flex-col justify-center items-center">
