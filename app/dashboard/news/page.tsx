@@ -1,4 +1,4 @@
-import NewsGet from '@/components/dashboard/placeholder/News/NewsGet'
+import NewsGet from '@/components/dashboard/News/NewsGet'
 import React from 'react'
 
 const page = () => {

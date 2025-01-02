@@ -68,3 +68,13 @@ export type EBookProps = {
   description: string;
   tags: string;
 };
+
+export type NewsProps={
+  id: number;
+  title: string;
+  content: string;
+  category: string;
+  url: string;
+  created_at: string;
+  summary: string;
+}
