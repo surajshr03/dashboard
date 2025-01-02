@@ -4,7 +4,6 @@ import "@/components/dashboard/CSS/dashboard.css";
 import { getEbooks } from "@/data/data";
 import { EBookProps } from "@/data/type";
 import { Eye } from 'lucide-react';
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination";
 
@@ -13,18 +12,16 @@ const EBookTable = () => {
   const [Ebooks, setEbooks] = useState<EBookProps[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedBooking, setSelectedBooking] = useState<EBookProps | null>(
+    null
+  );
 
-
-  const router = useRouter();
-
-  const handleViewDetails = (book: EBookProps) => {
-    try {
-      router.push(`/dashboard/ebooks/${book.id}`);
-    } catch (error) {
-      console.error("Error navigating:", error);
-    }
+  const handleViewDetails = (booking: EBookProps) => {
+    setSelectedBooking(booking);
   };
-
+  const closePopup = () => {
+    setSelectedBooking(null);
+  }
 
   useEffect(() => {
     const fetchEbooks = async () => {
@@ -33,8 +30,8 @@ const EBookTable = () => {
       try {
         const data = await getEbooks();
         setEbooks(data);
-      } catch (err) {
-        setError(err.message || "Failed to fetch e-books");
+      } catch (error) {
+        setError(error.message || "Failed to fetch e-books");
       } finally {
         setLoading(false);
       }
@@ -68,11 +65,10 @@ const EBookTable = () => {
                 <tr>
                   <th className="p-2 text-dark-inactive-title">Title</th>
                   <th className="p-2 text-dark-inactive-title">Author</th>
-                  <th className="p-2 text-dark-inactive-title">ISBN</th>
-                  <th className="p-2 text-dark-inactive-title">Published Date</th>
-                  <th className="p-2 text-dark-inactive-title">File Size</th>
-                  <th className="p-2 text-dark-inactive-title">Status</th>
-                  <th className="p-2 text-dark-inactive-title">Format</th>
+                  <th className="p-2 text-dark-inactive-title">Description</th>
+                  <th className="p-2 text-dark-inactive-title">Tags</th>
+                  <th className="p-2 text-dark-inactive-title">Quantity</th>
+                  {/* <th className="p-2 text-dark-inactive-title">Status</th> */}
                   <th className="p-2 text-dark-inactive-title">Actions</th>
                 </tr>
               </thead>
@@ -86,15 +82,14 @@ const EBookTable = () => {
                       <td className="p-2 text-dark-inactive-title">{book.description}</td>
                       <td className="p-2 text-dark-inactive-title">{book.tags}</td>
                       <td className="p-2 text-dark-inactive-title">{book.id}</td>
-                      <td className="p-2 text-dark-inactive-title">
+                      {/* <td className="p-2 text-dark-inactive-title">
                         <span
                           className={`rounded-full w-full text-sm ${book.status === "Available" ? "bg-btn-confirmed" : "bg-btn-pending"
                             }`}
                         >
                           {book.status}
                         </span>
-                      </td>
-                      <td className="p-2 text-dark-inactive-title">{book.format}</td>
+                      </td> */}
                       <td className="p-2 text-dark-inactive-title view-detail">
                         <button
                           onClick={() => handleViewDetails(book)}
@@ -127,6 +122,43 @@ const EBookTable = () => {
                 onPageChange={onPageChange}
               />
             </div>
+            {selectedBooking && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div className="flex flex-col bg-white p-6 rounded-md shadow-lg w-96 gap-2">
+                  <h2 className="text-2xl font-bold mb-3 text-left">
+                    Ebook Details
+                  </h2>
+                  <div className="flex flex-col">
+                    <strong className="text-lg">Title:</strong>
+                    <p> {selectedBooking.title}</p>
+                  </div>
+
+                  <div className="flex flex-col">
+                    <strong className="text-lg">Author:</strong>
+                    <p>{selectedBooking.author}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <strong className="text-lg">Tags:</strong>
+                    <p>{selectedBooking.tags}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <strong className="text-lg">Description:</strong>
+                    <p>{selectedBooking.description}</p>
+                  </div>
+                  
+                 
+
+                  <div className="mt-3 flex flex-col justify-center items-center">
+                    <button
+                      className=" px-4 py-2 w-full bg-gray-300 text-gray-800 rounded-md"
+                      onClick={closePopup}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
