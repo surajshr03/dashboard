@@ -67,7 +67,9 @@ export type EBookProps = {
   author: string;
   description: string;
   tags: string;
+  quantity: number;
 };
+
 
 export type NewsProps={
   id: number;
