@@ -171,7 +171,7 @@ const BookingTable = () => {
         <div className="col-span-6 lg:col-span-4 relative">
           <input
             type="text"
-            placeholder="Search bookings..."
+            placeholder="Search Book Title ..."
             value={searchQuery}
             onChange={handleSearchChange}
             className="p-2 pl-10 pr-4 border rounded-md w-full bg-gray-100"

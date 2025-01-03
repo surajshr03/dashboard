@@ -1,9 +1,10 @@
 'use client';
+
 import Loading from "@/components/dashboard/Loading";
 import NavBar from "@/components/dashboard/NavBar";
 import SideBar from "@/components/dashboard/Sidebar/SideBar";
 import { Inter } from "next/font/google";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
@@ -19,20 +20,42 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);  // State to store the role
   const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // Get the 'role' from query params
+  const roleFromUrl = searchParams.get("role");
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 300); // Smooth loading delay
-    setIsLoading(true); // Trigger loading state on path change
+    // Only run this on the client-side (since `localStorage` is a browser-only API)
+    if (typeof window !== 'undefined') {
+      const storedRole = localStorage.getItem('role');
+      // If no role in query params or localStorage, redirect to login
+      if (!roleFromUrl && !storedRole) {
+        router.push("/auth/login");
+      } else {
+        // If role exists in URL, store it in localStorage
+        if (roleFromUrl) {
+          localStorage.setItem('role', roleFromUrl);
+          setUserRole(roleFromUrl); // Update state with role from URL
+        } else if (storedRole) {
+          setUserRole(storedRole); // Update state with role from localStorage
+        }
 
-    return () => clearTimeout(timer);
-  }, [pathName]);
+        setIsLoading(true);
+        const timer = setTimeout(() => setIsLoading(false), 300);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, []); // This effect runs only once on component mount
 
   const toggleSearch = () => setIsSearchOpen((prev) => !prev);
   const toggleSidebar = () => setSidebarVisible((prev) => !prev);
 
-  const user_role = 'superadmin';
-  // const user_role = 'admin';
+  // Fallback to 'guest' if userRole is still null
+  const currentUserRole = userRole || 'guest';
 
   return (
     <html lang="en">
@@ -47,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             // Dashboard layout with protected routes
             <div className="flex w-full h-screen overflow-auto">
               {/* Sidebar */}
-              <SideBar isVisible={isSidebarVisible} user_role={user_role} />
+              <SideBar isVisible={isSidebarVisible} user_role={currentUserRole} />
               {/* Main Content Area */}
               <div
                 className={`flex-1 overflow-x-hidden transition-all duration-300 ${isSidebarVisible ? "ml-64" : "ml-0"
@@ -59,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   onSearchClick={toggleSearch}
                   onHamburgerClick={toggleSidebar}
                   isSidebarVisible={isSidebarVisible}
-                  user_role={user_role}
+                  user_role={currentUserRole}
                 />
                 {/* Page Content */}
                 <div className="flex-1 w-screen md:w-full overflow-hidden p-4 md:p-8">
@@ -73,8 +96,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           )}
         </AuthProvider>
-
-
       </body>
     </html>
   );

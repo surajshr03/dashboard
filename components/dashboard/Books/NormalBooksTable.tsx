@@ -4,45 +4,41 @@ import "@/components/dashboard/CSS/dashboard.css";
 import { Eye } from 'lucide-react';
 import { useEffect, useState } from "react";
 
-import { getNormalbooks } from "@/data/data";
+import { NormalBooks } from "@/data/data";  // Import NormalBooks from your data
 import { NormalBookProps } from "@/data/type";
 import Pagination from "../Pagination";
 
-
 const NormalBookTable = () => {
-  const [NormalBooks, setNormalBooks] = useState<NormalBookProps[]>([]);
+  const [normalBooks, setNormalBooks] = useState<NormalBookProps[]>([]);  // Changed variable name to lowercase
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedBook, setSelectedBook] = useState<NormalBookProps | null>(null);
 
   useEffect(() => {
-    const fetchNormalBooks = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const data = await getNormalbooks();
-        setNormalBooks(data);
-      } catch (error) {
-        setError(error.message || "Failed to fetch books");
-      } finally {
-        setLoading(false);
-      }
-    };
+    // Set loading to true while setting the data
+    setLoading(true);
+    try {
+      // Use the imported NormalBooks data
+      setNormalBooks(NormalBooks);
+    } catch (error) {
+      setError(error.message || "Failed to load books data");
+    } finally {
+      setLoading(false);
+    }
+  }, []);  // Empty dependency array ensures this runs once when the component mounts
 
-    fetchNormalBooks();
-  }, []);
-
-  const handleViewDetails = (booking: NormalBookProps) => {
-    setSelectedBook(booking);
+  const handleViewDetails = (book: NormalBookProps) => {
+    setSelectedBook(book);
   };
+
   const closePopup = () => {
     setSelectedBook(null);
-  }
+  };
 
   const pageSize = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const startIndex = (currentPage - 1) * pageSize;
-  const currentItems = NormalBooks.slice(startIndex, startIndex + pageSize);
+  const currentItems = normalBooks.slice(startIndex, startIndex + pageSize);
 
   const onPageChange = (page: React.SetStateAction<number>) => {
     setCurrentPage(page);
@@ -82,8 +78,7 @@ const NormalBookTable = () => {
                       <td className="p-2 text-dark-inactive-title">{book.published_date}</td>
                       <td className="p-2 text-dark-inactive-title">
                         <span
-                          className={`rounded-full w-full text-sm ${book.status === "Available" ? "bg-btn-confirmed" : "bg-btn-pending"
-                            }`}
+                          className={`rounded-full w-full text-sm ${book.status === "Available" ? "bg-btn-confirmed" : "bg-btn-pending"}`}
                         >
                           {book.status}
                         </span>
@@ -116,7 +111,7 @@ const NormalBookTable = () => {
 
             <div className="w-full">
               <Pagination
-                items={NormalBooks.length}
+                items={normalBooks.length}
                 currentPage={currentPage}
                 pageSize={pageSize}
                 onPageChange={onPageChange}
@@ -173,4 +168,3 @@ const NormalBookTable = () => {
 };
 
 export default NormalBookTable;
-
