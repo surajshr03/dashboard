@@ -1,9 +1,10 @@
 'use client';
+
 import Loading from "@/components/dashboard/Loading";
 import NavBar from "@/components/dashboard/NavBar";
 import SideBar from "@/components/dashboard/Sidebar/SideBar";
 import { Inter } from "next/font/google";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
@@ -20,19 +21,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // Get the 'role' from query params
+  const role = searchParams.get("role");
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 300); // Smooth loading delay
-    setIsLoading(true); // Trigger loading state on path change
-
-    return () => clearTimeout(timer);
-  }, [pathName]);
+    // If 'role' is not in query params, redirect to login
+    if (!role) {
+      router.push("/auth/login");
+    } else {
+      // If role is present, set the loading state
+      setIsLoading(true);
+      const timer = setTimeout(() => setIsLoading(false), 300); // Smooth loading delay
+      return () => clearTimeout(timer);
+    }
+  }, []); // Empty dependency array ensures this runs only on the initial mount
 
   const toggleSearch = () => setIsSearchOpen((prev) => !prev);
   const toggleSidebar = () => setSidebarVisible((prev) => !prev);
 
-  const user_role = 'superadmin';
-  // const user_role = 'admin';
+  // Use the 'role' from query params as the user role
+  const user_role = role ? role : 'guest'; // Default to 'guest' if no role is provided
 
   return (
     <html lang="en">
@@ -73,8 +84,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           )}
         </AuthProvider>
-
-
       </body>
     </html>
   );
