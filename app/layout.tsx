@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [userRole, setUserRole] = useState<string | null>(null);  // State to store the role
+  const [userRole, setUserRole] = useState<string | null>(null);  // 'admin' | 'user' | 'guest'
   const pathName = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -32,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // Only run this on the client-side (since `localStorage` is a browser-only API)
     if (typeof window !== 'undefined') {
       const storedRole = localStorage.getItem('role');
+  
       // If no role in query params or localStorage, redirect to login
       if (!roleFromUrl && !storedRole) {
         router.push("/auth/login");
@@ -39,17 +40,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         // If role exists in URL, store it in localStorage
         if (roleFromUrl) {
           localStorage.setItem('role', roleFromUrl);
-          setUserRole(roleFromUrl); // Update state with role from URL
+          setUserRole(roleFromUrl); 
         } else if (storedRole) {
-          setUserRole(storedRole); // Update state with role from localStorage
+          setUserRole(storedRole); 
         }
-
+  
         setIsLoading(true);
         const timer = setTimeout(() => setIsLoading(false), 300);
+  
         return () => clearTimeout(timer);
       }
     }
-  }, []); // This effect runs only once on component mount
+  }, [roleFromUrl]); 
+  
 
   const toggleSearch = () => setIsSearchOpen((prev) => !prev);
   const toggleSidebar = () => setSidebarVisible((prev) => !prev);
@@ -61,7 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${inter.className}`}>
         <AuthProvider>
-          {pathName === '/auth/login' || pathName === '/auth/register' || pathName === '/auth/forgot-password' ? (
+          {pathName === '/auth/login' ? (
             // Authentication pages without dashboard layout
             <div className="flex items-center justify-center min-h-screen">
               {children}

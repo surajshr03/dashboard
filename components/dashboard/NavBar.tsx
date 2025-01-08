@@ -61,7 +61,11 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
-
+    
+    const handleLogout = () => {
+        localStorage.removeItem('role');
+        window.location.href = '/auth/login';
+    };
 
     return (
         <header className={`sticky top-0 z-50 flex items-center justify-between px-4 md:px-6 py-4 bg-white border-b ${isSidebarVisible ? "ml-0" : "ml-0"
@@ -291,7 +295,7 @@ const NavBar = ({ onSearchClick, onHamburgerClick, isSearchOpen, isSidebarVisibl
                                 <li>
                                     <Link href="/dashboard/settings" className="block  py-2 px-2 text-black rounded-md  hover:bg-active-gray">Settings</Link>
                                 </li>
-                                <li>
+                                <li onClick={handleLogout}>
                                     <Link
                                         className="flex py-2 px-2  rounded-md text-black items-center border-t-2 border-active-gray gap-2 hover:bg-active-gray"
                                         role="menuitem" href={''}>

@@ -1,6 +1,11 @@
+"use client";
 import { ChevronRight, LogOutIcon } from "lucide-react"
 
 const Setting = () => {
+  const handleLogout = () => {
+    localStorage.removeItem('role');
+    window.location.href = '/auth/login';
+};
   return (
     <>
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-2 mb-6">
@@ -64,7 +69,8 @@ const Setting = () => {
                 <ChevronRight size={20} />
               </div>
             </div>
-            <div className="flex gap-2 cursor-pointer items-center border-t-2 py-3 border-active-gray   p-3 rounded-md  hover:bg-active-gray hover:text-black">
+            <div className="flex gap-2 cursor-pointer items-center border-t-2 py-3 border-active-gray   p-3 rounded-md  hover:bg-active-gray hover:text-black"
+            onClick={handleLogout}>
               <LogOutIcon size={20} />
               <p className=' text-sm '>Logout</p>
             </div>

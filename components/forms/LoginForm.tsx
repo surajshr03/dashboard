@@ -37,7 +37,7 @@ const LoginForm = () => {
 
     if (role) {
       // If valid credentials, store the role in localStorage and redirect to the dashboard
-      localStorage.setItem('role', role);
+      // localStorage.setItem('role', role);
       router.push(`/dashboard?role=${role}`);
     } else {
       // Show an error message if the credentials are incorrect
@@ -145,7 +145,7 @@ const LoginForm = () => {
                     </div>
                 </div> */}
 
-        <div className="flex justify-center items-center flex-col p-6 bg-gray-100 lg:block ">
+        <div className="hidden justify-center items-center flex-col p-6 bg-gray-100 md:block ">
           <div className=" flex flex-col text-left">
             <p className="text-lg font-semibold mb-4">For admin role choose:</p>
             <ul className="list-inside mb-6 border-b">

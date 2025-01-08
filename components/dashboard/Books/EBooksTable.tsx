@@ -3,13 +3,15 @@
 import "@/components/dashboard/CSS/dashboard.css";
 import { EBooks } from "@/data/data";
 import { EBookProps } from "@/data/type";
-import { Eye } from 'lucide-react';
+import { Eye } from "lucide-react";
 import { useState } from "react";
 import Pagination from "../Pagination";
 
 const EBookTable = () => {
-  const [Ebooks, setEbooks] = useState<EBookProps[]>(EBooks); 
-  const [selectedBooking, setSelectedBooking] = useState<EBookProps | null>(null);
+  const [Ebooks, setEbooks] = useState<EBookProps[]>(EBooks);
+  const [selectedBooking, setSelectedBooking] = useState<EBookProps | null>(
+    null
+  );
 
   const handleViewDetails = (booking: EBookProps) => {
     setSelectedBooking(booking);
@@ -49,10 +51,18 @@ const EBookTable = () => {
               {currentItems.length > 0 ? (
                 currentItems.map((book) => (
                   <tr key={book.id} className="border-b">
-                    <td className="p-2 text-dark-inactive-title">{book.title}</td>
-                    <td className="p-2 text-dark-inactive-title">{book.author}</td>
-                    <td className="p-2 text-dark-inactive-title truncate w-48">{book.description}</td> {/* Added truncate class here */}
-                    <td className="p-2 text-dark-inactive-title">{book.tags}</td>
+                    <td className="p-2 text-dark-inactive-title">
+                      {book.title}
+                    </td>
+                    <td className="p-2 text-dark-inactive-title">
+                      {book.author}
+                    </td>
+                    <td className="p-2 text-dark-inactive-title truncate w-48">
+                      {book.description}
+                    </td>
+                    <td className="p-2 text-dark-inactive-title">
+                      {book.tags}
+                    </td>
                     <td className="p-2 text-dark-inactive-title">{book.id}</td>
                     <td className="p-2 text-dark-inactive-title view-detail">
                       <button
@@ -72,7 +82,9 @@ const EBookTable = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={6} className="p-2 text-center">No E-Books found.</td>
+                  <td colSpan={6} className="p-2 text-center">
+                    No E-Books found.
+                  </td>
                 </tr>
               )}
             </tbody>

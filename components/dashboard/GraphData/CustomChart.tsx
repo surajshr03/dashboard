@@ -10,13 +10,13 @@ const Chart = () => {
         <div className="bg-white p-4 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4">Revenue Statistics</h2>
           <CustomBarChart />
-          Chart will be shown here
+          {/* Chart will be shown here */}
         </div>
 
         <div className="bg-white p-4 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4">Customer Acquisition</h2>
           <CustomLineChart />
-          Chart will be shown here
+          {/* Chart will be shown here */}
         </div>
       </div>
     </div>
